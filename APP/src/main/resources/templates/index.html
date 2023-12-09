@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Isotropic tenor</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/index.css" th:href="@{css/index.css}">
+</head>
+<body>
+    <div class="work-in-progress">
+        <p>Work in Progress</p>
+        <form enctype="multipart/form-data" method="post">
+            <p><input type="file" name="fileCsv" accept=".csv">
+            <input type="submit" value="Отправить"></p>
+        </form>
+        <table>
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>probability</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="person: ${persons}">
+                    <td th:text="${person.id}"></td>
+                    <td th:text="${person.probability}">%</td>
+                </tr>
+            </tbody>
+        </table>
+        <div>
+            <div th:each="person: ${persons}">
+                <span th:text="${person.id}"></span>
+            </div>
+            <p>1231</p>
+            
+        </div>
+    </div>
+</body>
+</html>
