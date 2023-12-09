@@ -1,5 +1,6 @@
 import json
 
+import joblib
 from fastapi import FastAPI, Body
 from fastapi.responses import JSONResponse
 from utils.data_structures import Score
@@ -33,15 +34,17 @@ def index() -> dict[str, str]:
 def predict_prob(request: Any = Body(None)) -> JSONResponse:
     X = convert_json_to_dataframe(request)
     # Проверка на то, имеет ли полученный датасет все нужные столбцы для обработки
-    if model.check_df_columns(X):
-        # Конструирование признаков
-        X_test = feature_construct(X)
-        # Предикт
-        pred = model.predict(X_test)
-        response = convert_dataframe_to_json(pred)
-        return response  # Если нужна строка с json форматом, то напиши: return json.dumps(response)
-    else:
-        return {'text': 'Недостаточно признаков в датасете'}
+    # if model.check_df_columns(X):
+    # Конструирование признаков
+    X_test = feature_construct(X)
+    # Предикт
+    pred = model.predict(X_test)
+    # Конвертируем в json
+    response = convert_dataframe_to_json(pred)
+    print(response)
+    return response  # Если нужна строка с json форматом, то напиши: return json.dumps(response)
+    # else:
+    #     return {'text': 'Недостаточно признаков в датасете'}
 
 
 # GET запрос для конструирования признаков
