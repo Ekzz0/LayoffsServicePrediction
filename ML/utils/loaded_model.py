@@ -13,19 +13,24 @@ class MLModel:
     count_f = ['age', 'month', 'day_of_week']
     num_f = ['duration', 'campaign', 'previous', 'emp.var.rate', 'cons.price.idx', 'cons.conf.idx', 'euribor3m',
              'nr.employed']
-
+    # Загрузим список столбцов, которые не нужны для предикта, но нужны для отчета
+    cols_to_drop = joblib.load(f'./data/cols_to_drop')
     def __init__(self, path: str):
         # Загрузка модель из файла
         self.model = joblib.load(path)
         self.path = path
 
     def predict(self, X: pd.DataFrame) -> pd.DataFrame:
-        pred = pd.DataFrame(self.model.predict_proba(X.values),
+        # Предикт
+        pred = pd.DataFrame(self.model.predict_proba(X.drop(columns=self.cols_to_drop).values),
                             index=X.index,
                             columns=['probability_false', 'probability'])
-
         pred['id'] = pred.index
-        return pred[['id', 'probability']]
+        # Восстановим значение удаленных столбцов
+        for col in self.cols_to_drop:
+            pred[col] = X[col]
+
+        return pred[['id', 'probability'] + self.cols_to_drop]
 
     def fit(self, X: pd.DataFrame, y: pd.Series) -> Score:
         # Разделение на train и test выборки

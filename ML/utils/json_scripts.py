@@ -8,7 +8,10 @@ def convert_dataframe_to_json(df: pd.DataFrame | pd.Series) -> json:
 
 
 def convert_json_to_dataframe(json_file):
-    df = pd.DataFrame(json_file)
+    try:
+        df = pd.DataFrame(eval(json_file))
+    except:
+        df = pd.DataFrame(json_file)
     df.index = df['id']
     df = df.drop(columns='id')
     return df.dropna().sort_index()
