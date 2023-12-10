@@ -2,20 +2,12 @@ button = document.getElementById('processCsv')
 button.addEventListener('click', handleCSV)
 
 function handleCSV() {
-//    let date = new Date();
-//    nowDay = date.getDay();
-//    nowMonth = date.getMonth();
-//    nowFullYear = date.getFullYear()
-//    let nowDate = `${nowDay}.${nowMonth}.${nowFullYear}`
     const input = document.getElementById('csvFileInput');
     const file = input.files[0];
     const reader = new FileReader();
     reader.onload = function(file) {
       const csv = file.target.result;
       const json = Papa.parse(csv, { header: true }).data
-      console.log(json)
-      alert('Ваш файл загружен')
-      
       postRequest(json)
     }
 
@@ -34,9 +26,11 @@ function postRequest(json){
     })
     .then(response => {
         if(response.ok){
+            alert('Ваш файл загружен')
             return response.json()
         }
         else{
+            alert('Файл не был загружен')
             throw('Failed in post fetch')
         }
     })

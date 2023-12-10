@@ -13,29 +13,36 @@
     <title>Title</title>
 </head>
 <body>
-    <h1>Логотип</h1>
-    <div class="logo">
-        <img class="logo__img" src="../static/images/atom.svg" th:src="@{images/atom.svg}" alt="atom">
-        <h2 class="logo__title">Isotropic<span class="logo__title-accent">Tensor</span></h2>
-    </div>
-    <h1>diagram</h1>
-    <div class="diagram">
-        <canvas id="myChart"></canvas>
-    </div>
-    <input type="file" name="fileCsv" accept=".csv" id="csvFileInput">
-    <button id="processCsv">Обработать</button>
-    <h1>table</h1>
-    <table id="table" class="table">
-        <thead class="table__head">
-            <tr class="table__head-container">
-                <th class="table__head-id">Id</th>
-                <th class="table__head-prob">Probability</th>
-                <th class="table__head-group">Group</th>
-            </tr>
-        </thead>
-        <tbody class="table__body" id="table-body">
-        </tbody>
-    </table>
+    <section>
+        <div class="wrapper">
+            <h1>Логотип</h1>
+            <div class="logo">
+                <img class="logo__img" src="../static/images/atom.svg" th:src="@{images/atom.svg}" alt="atom">
+                <h2 class="logo__title">Isotropic<span class="logo__title-accent">Tensor</span></h2>
+            </div>
+            <h1>diagram</h1>
+            <div class="diagram">
+                <canvas id="myChart"></canvas>
+            </div>
+            <input type="file" name="fileCsv" accept=".csv" id="csvFileInput">
+            <button id="processCsv">Обработать</button>
+            <h1>table</h1>
+            <table id="table" class="table">
+                <thead class="table__head">
+                    <tr class="table__head-container">
+                        <th class="table__head-id">Id</th>
+                        <th class="table__head-prob">Probability</th>
+                        <th class="table__head-group">Group</th>
+                    </tr>
+                </thead>
+                <tbody class="table__body" id="table-body">
+
+                </tbody>
+            </table>
+        </div>
+        
+    </section>
+    
     
 
 </body>
