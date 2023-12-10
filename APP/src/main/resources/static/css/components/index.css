@@ -1,4 +1,35 @@
 .diagram {
   width: 300px;
   height: 300px;
+}
+
+.table {
+  width: 30rem;
+  border-collapse: collapse;
+  border-radius: 50px;
+  text-align: center;
+}
+.table__head {
+  width: 100%;
+}
+.table__head-id {
+  width: 50%;
+  height: 30px;
+}
+.table__head-prob {
+  width: 50%;
+  height: 30px;
+}
+.table__body-id {
+  height: 30px;
+}
+.table__body-prob {
+  height: 30px;
+}
+
+.logo {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 200px;
 }/*# sourceMappingURL=index.css.map */

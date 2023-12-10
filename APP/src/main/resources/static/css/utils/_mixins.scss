@@ -1,0 +1,25 @@
+@mixin t-title{
+    font-size: 4rem;
+    font-family: $titleFont;
+    color: $textDark;
+    &-accent{
+        color: $textAccent;
+        font-family: $titleAccent;
+    }
+}
+
+@mixin table-design{
+    background-color: $headerColor;
+    border-bottom: $borderColor;
+    &-id{
+        border-bottom: $borderColor;
+        
+    }
+    &-prob{
+        border-bottom: $borderColor;
+        
+    }
+    &-group{
+        border-bottom: $borderColor;
+    }
+}

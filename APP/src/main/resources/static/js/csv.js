@@ -40,7 +40,10 @@ function postRequest(json){
             throw('Failed in post fetch')
         }
     })
-    .then(setTimeout(getRequest, 5000))
+    .then(data =>{
+        data = JSON.parse(data)
+        setTable(data)
+    })
     .catch(console.error)
 
 }

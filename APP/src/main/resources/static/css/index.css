@@ -1,8 +1,78 @@
+@font-face {
+  font-family: "boldMonserat";
+  src: url(../../fonts/Montserrat-ExtraBold.ttf);
+}
+@font-face {
+  font-family: "boldItalic";
+  src: url(../../fonts/Montserrat-ExtraBoldItalic.ttf);
+}
+@font-face {
+  font-family: "ligthMonserat";
+  src: url(../../fonts/Montserrat-Light.ttf);
+}
+@font-face {
+  font-family: "lightItalic";
+  src: url(../../fonts/Montserrat-LightItalic.ttf);
+}
 .diagram {
   width: 300px;
   height: 300px;
 }
 
+.table {
+  width: 30rem;
+  border-collapse: collapse;
+  border-radius: 50px;
+  text-align: center;
+}
+.table__head {
+  width: 100%;
+}
+.table__head-id {
+  width: 50%;
+  height: 30px;
+}
+.table__head-prob {
+  width: 50%;
+  height: 30px;
+}
+.table__body-id {
+  height: 30px;
+}
+.table__body-prob {
+  height: 30px;
+}
+
+.logo {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 200px;
+}
 body {
   width: 200px;
+}
+
+.table-design {
+  background-color: #fafafa;
+  border-bottom: 1px solid #f0f0f0;
+}
+.table-design-id {
+  border-bottom: 1px solid #f0f0f0;
+}
+.table-design-prob {
+  border-bottom: 1px solid #f0f0f0;
+}
+.table-design-group {
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.t-title {
+  font-size: 4rem;
+  font-family: boldMonserat, sans-serif;
+  color: #403F3D;
+}
+.t-title-accent {
+  color: #ffd700;
+  font-family: boldItalic, sans-serif;
 }/*# sourceMappingURL=index.css.map */
