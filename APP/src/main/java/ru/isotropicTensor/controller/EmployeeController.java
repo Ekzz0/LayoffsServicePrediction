@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.isotropicTensor.entity.Person;
 import ru.isotropicTensor.service.EmployeeService;
 
 @RestController
@@ -18,8 +17,7 @@ public class EmployeeController {
     }
 
     @PostMapping("/send-data")
-    public ResponseEntity<Person> getPredict(@RequestBody String jsonData) {
-        System.out.println("Данные пришли: " + "\n" + jsonData);
+    public ResponseEntity<String> getPredict(@RequestBody String jsonData) {
         return employeeService.getEmployeePredict(jsonData);
     }
 }
