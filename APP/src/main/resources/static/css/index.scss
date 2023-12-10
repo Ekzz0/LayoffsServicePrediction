@@ -6,3 +6,9 @@ body{
     width: 200px;
 }
 
+.table-design{
+    @include table-design();
+}
+.t-title{
+    @include t-title();
+}

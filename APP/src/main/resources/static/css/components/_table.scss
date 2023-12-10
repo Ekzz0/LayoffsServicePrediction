@@ -1,0 +1,26 @@
+.table{
+    width: 30rem;
+    border-collapse: collapse;
+    border-radius: 50px;
+    text-align: center;
+    
+    &__head{
+        width: 100%;       
+        &-id{
+            width: 50%;
+            height: 30px;
+        }
+        &-prob{
+            width: 50%;
+            height: 30px;
+        }
+    }
+    &__body{
+        &-id{
+            height: 30px;
+        }
+        &-prob{
+            height: 30px;
+        }
+    }
+}

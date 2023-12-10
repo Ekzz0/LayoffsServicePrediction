@@ -9,42 +9,34 @@
     <script async src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
     <script async src="/static/js/csv.js" th:src="@{js/csv.js}"></script>
     <script async src="/static/js/getData.js" th:src="@{js/getData.js}"></script>
+    <script async src="/static/js/table.js" th:src="@{js/table.js}"></script>
     <title>Title</title>
 </head>
 <body>
+    <h1>Логотип</h1>
+    <div class="logo">
+        <img class="logo__img" src="../static/images/atom.svg" th:src="@{images/atom.svg}" alt="atom">
+        <h2 class="logo__title">Isotropic<span class="logo__title-accent">Tensor</span></h2>
+    </div>
     <h1>diagram</h1>
     <div class="diagram">
         <canvas id="myChart"></canvas>
     </div>
-    <h1>table</h1>
-    <table id="table">
-        <thead>
-            <tr>
-                <th>id</th>
-                <th>probability</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>2</td>
-                <td>10</td>
-            </tr>
-            <tr>
-                <td>5</td>
-                <td>15</td>
-            </tr>
-            <tr>
-                <td>8</td>
-                <td>20</td>
-            </tr>
-            <tr>
-                <td>10</td>
-                <td>30</td>
-            </tr>
-        </tbody>
-    </table>
     <input type="file" name="fileCsv" accept=".csv" id="csvFileInput">
     <button id="processCsv">Обработать</button>
+    <h1>table</h1>
+    <table id="table" class="table">
+        <thead class="table__head">
+            <tr class="table__head-container">
+                <th class="table__head-id">Id</th>
+                <th class="table__head-prob">Probability</th>
+                <th class="table__head-group">Group</th>
+            </tr>
+        </thead>
+        <tbody class="table__body" id="table-body">
+        </tbody>
+    </table>
+    
 
 </body>
 

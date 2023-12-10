@@ -27,7 +27,7 @@ function handleCSV() {
 }
 
 function postRequest(json){
-    fetch('http://localhost:8081/' ,{
+    fetch('http://localhost:8081/api/send-data' ,{
         method: 'POST',
         body: JSON.stringify(json),
         headers: {"Content-Type": 'application/json'}
@@ -40,7 +40,10 @@ function postRequest(json){
             throw('Failed in post fetch')
         }
     })
-    .then(setTimeout(getRequest, 5000))
+    .then(data =>{
+        data = JSON.parse(data)
+        setTable(data)
+    })
     .catch(console.error)
 
 }
