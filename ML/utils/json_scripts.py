@@ -14,4 +14,9 @@ def convert_json_to_dataframe(json_file):
         df = pd.DataFrame(json_file)
     df.index = df['id']
     df = df.drop(columns='id')
+
+    for col in df.columns:
+        if col == '':
+            df = df.drop(columns=col)
+
     return df.dropna().sort_index()

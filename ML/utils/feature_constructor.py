@@ -3,11 +3,16 @@ import pandas as pd
 from joblib import Parallel, delayed
 
 
+def numeric_transform(df, col):
+    df[f"{col}"] = pd.to_numeric(df[f"{col}"])
+    return df
+
+
 def feature_constructor(calc_type='simple'):
     def feature_construct(df: pd.DataFrame) -> pd.DataFrame:
+        df.index = df.index.astype('int')
         for col in df.columns:
-            if col == '':
-                df = df.drop(columns=col)
+            df = numeric_transform(df, col)
         return df.dropna()
 
     def multi_feature_construct(df: pd.DataFrame, chunk_size: int = 1000) -> pd.DataFrame:
