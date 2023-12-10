@@ -27,7 +27,7 @@ function handleCSV() {
 }
 
 function postRequest(json){
-    fetch('http://localhost:8081/' ,{
+    fetch('http://localhost:8081/api/send-data' ,{
         method: 'POST',
         body: JSON.stringify(json),
         headers: {"Content-Type": 'application/json'}
