@@ -1,5 +1,4 @@
-persons = [{"id":"1014","probability":0.0003883827,"Group":"Quality Assurance"},{"id":"1044","probability":0.0001027473,"Group":"Sales and Marketing"}];
-setTable(persons)
+
 
 function setTable(persons){
     table = document.getElementById('table-body')
