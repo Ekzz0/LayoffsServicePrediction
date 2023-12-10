@@ -23,21 +23,37 @@ if __name__ == '__main__':
     X = convert_json_to_dataframe(X)
     # 2) Импортируем конструктор признаков
     feature_construct = ut.load_feature_constructor()
-    # 3) Получаем обработанный pd.DataFrame
-    X_test = feature_construct(X)
     # 4) Загружаем модель
     path = "./models/XGBoost.pkl"
     model = ut.load_model(path)
-    # 5) Получаем предикт
-    clf_report = model.predict(X_test)
-    # 6) Конвертируем в json и отдаем обратно
-    response = convert_dataframe_to_json(clf_report)
+
+    # Проверка на то, имеет ли полученный датасет все нужные столбцы для обработки
+    if model.check_df_columns(X):
+        # Конструирование признаков
+        X_test = feature_construct(X.drop(columns=model.files['cols_to_drop']))
+
+        # Получение предикта
+        pred = model.predict(X_test)
+
+        # Добавим названия ТОП 7-х признаков, которые повлияли на прогноз для каждого пользователя:
+        pred['top_features'] = 0
+        for ID in X_test.index:
+            ID = int(ID)
+            features = model.get_feature_importance(X_test, ID)
+            pred['top_features'].loc[ID] = str(features[::-1])[1:-1]
+
+        # Восстановим значение удаленных столбцов
+        for col in model.files['cols_to_drop']:
+            pred[col] = X[col].values
+
+        # Конвертируем в json
+        response = convert_dataframe_to_json(pred)
     print(response)
 
     # # Получим топ фич, которые повлияли на ответ
-    # ID = 37202
+    # ID = 1296
     # print(model.get_feature_importance(X_test, ID))
-    #
+
     # # Обучение модели на каких-то новых данных:
     # path = "./data/train.csv"
     # train_data = pd.read_csv(path, index_col=0)

@@ -1,4 +1,3 @@
-import joblib
 from sklearn.metrics import recall_score, f1_score, precision_score
 from sklearn.model_selection import train_test_split
 from .data_processing import get_feature_indexes, get_importance
@@ -6,15 +5,17 @@ from .data_structures import FeatureImportance, Score
 import pandas as pd
 import numpy as np
 import traceback
+import joblib
+import os
 
 
 class MLModel:
-    bin_f = ['job', 'marital', 'education', 'default', 'housing', 'loan', 'contact', 'pdays']
-    count_f = ['age', 'month', 'day_of_week']
-    num_f = ['duration', 'campaign', 'previous', 'emp.var.rate', 'cons.price.idx', 'cons.conf.idx', 'euribor3m',
-             'nr.employed']
-    # Загрузим список столбцов, которые не нужны для предикта, но нужны для отчета
-    cols_to_drop = joblib.load(f'./data/cols_to_drop')
+    # Загрузим все необходимые файлы в словарь, чтобы потом к ним обращаться по именам
+    files = {}
+    file_names = ['bin_f', 'count_f', 'num_f', 'cols_to_drop']
+    for name in file_names:
+        files[name] = joblib.load(os.path.abspath('data/' + name))
+
     def __init__(self, path: str):
         # Загрузка модель из файла
         self.model = joblib.load(path)
@@ -22,15 +23,12 @@ class MLModel:
 
     def predict(self, X: pd.DataFrame) -> pd.DataFrame:
         # Предикт
-        pred = pd.DataFrame(self.model.predict_proba(X.drop(columns=self.cols_to_drop).values),
+        pred = pd.DataFrame(self.model.predict_proba(X.values),
                             index=X.index,
                             columns=['probability_false', 'probability'])
-        pred['id'] = pred.index
-        # Восстановим значение удаленных столбцов
-        for col in self.cols_to_drop:
-            pred[col] = X[col]
+        pred['id'] = pred.index.astype('int')
 
-        return pred[['id', 'probability'] + self.cols_to_drop]
+        return pred[['id', 'probability']]
 
     def fit(self, X: pd.DataFrame, y: pd.Series) -> Score:
         # Разделение на train и test выборки
@@ -54,18 +52,19 @@ class MLModel:
         joblib.dump(self.model, path)
 
     def check_df_columns(self, df: pd.DataFrame) -> bool:
-        return sorted(list(df.columns)) == sorted(self.bin_f + self.num_f + self.count_f)
+        return sorted(list(df.columns)) == sorted(self.files['bin_f'] + self.files['num_f'] + self.files['count_f'] +
+                                                  self.files['cols_to_drop'])
 
-    def get_feature_importance(self, df: pd.DataFrame, ID: int) -> FeatureImportance:
+    def get_feature_importance(self, df: pd.DataFrame, ID: int) -> list[str]:
         try:
             fi = self.model.feature_importances_
         except Exception as e:
             print('Модель еще не обучена.')
         else:
             # Получим индексы для всех типов признаков
-            bin_f_ind = get_feature_indexes(df.columns, self.bin_f)
-            count_f_ind = get_feature_indexes(df.columns, self.count_f)
-            num_f_ind = get_feature_indexes(df.columns, self.num_f)
+            bin_f_ind = get_feature_indexes(df.columns, self.files['bin_f'])
+            count_f_ind = get_feature_indexes(df.columns, self.files['num_f'])
+            num_f_ind = get_feature_indexes(df.columns, self.files['count_f'])
             try:
                 # Получим влияние признаков для конкретного пользователя
                 bin_f_imp = get_importance(df, fi, ID, bin_f_ind)
@@ -77,21 +76,21 @@ class MLModel:
                 print(e)
                 print(traceback.format_exc())
             else:
-                # Индекс конца датасета
-                last_ind_b = len(bin_f_imp)
-                last_ind_c = len(count_f_imp)
-                last_ind_n = len(num_f_imp)
-
-                # Топ 2 признака для каждого типа
-                top_bin = bin_f_imp.iloc[last_ind_b - 2:last_ind_b]
-                top_count = count_f_imp.iloc[last_ind_c - 2:last_ind_c]
-                to_num = num_f_imp.iloc[last_ind_n - 2:last_ind_n]
-
-                # Формируем отчет
-                feature_names = list(top_bin.index) + list(top_count.index) + list(to_num.index)
-                feature_importance = list(top_bin.values.ravel()) + list(top_count.values.ravel()) + list(
-                    to_num.values.ravel())
-
-                return FeatureImportance(features=feature_names, importance=feature_importance)
-
-
+                features = pd.concat([bin_f_imp, count_f_imp, num_f_imp]).sort_values(by=['importance'])
+                return list(features.tail(6).index)
+                # # Индекс конца датасета
+                # last_ind_b = len(bin_f_imp)
+                # last_ind_c = len(count_f_imp)
+                # last_ind_n = len(num_f_imp)
+                #
+                # # Топ 2 признака для каждого типа
+                # top_bin = bin_f_imp.iloc[last_ind_b - 2:last_ind_b]
+                # top_count = count_f_imp.iloc[last_ind_c - 2:last_ind_c]
+                # to_num = num_f_imp.iloc[last_ind_n - 2:last_ind_n]
+                #
+                # # Формируем отчет
+                # feature_names = list(top_bin.index) + list(top_count.index) + list(to_num.index)
+                # feature_importance = list(top_bin.values.ravel()) + list(top_count.values.ravel()) + list(
+                #     to_num.values.ravel())
+                #
+                # return FeatureImportance(features=feature_names, importance=feature_importance)
