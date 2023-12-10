@@ -1,5 +1,3 @@
-
-
 function setTable(persons){
     table = document.getElementById('table-body')
     for (let person of persons){
@@ -11,10 +9,9 @@ function setTable(persons){
         }{
             table.insertAdjacentHTML('beforeend', `<tr>
             <td class="table__body-id">${info[0]}</td>
-            <td class="table__body-prob">${info[1].toFixed(2)*100}</td>
+            <td class="table__body-prob">${(info[1]*100).toFixed(1)}%</td>
             <td class="table__body-group">${info[2]}</td>
             </tr>`)
         }
-
     }
 }

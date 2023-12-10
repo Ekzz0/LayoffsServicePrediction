@@ -3,23 +3,37 @@
     border-collapse: collapse;
     border-radius: 50px;
     text-align: center;
-    
+    margin: 0 auto;
     &__head{
-        width: 100%;       
+
+        width: 100%;
+        @include table-design();    
+        @include t-table-header();   
         &-id{
-            width: 50%;
-            height: 30px;
+            
+            width: 20%;
+            height: 60px;
         }
         &-prob{
+            width: 30%;
+            height: 60px;
+        }
+        &-group{
             width: 50%;
-            height: 30px;
+            height: 60px;
         }
     }
     &__body{
+        @include table-design();
+        background-color: white;
+        @include t-table-body();
         &-id{
             height: 30px;
         }
         &-prob{
+            height: 30px;
+        }
+        &-group{
             height: 30px;
         }
     }

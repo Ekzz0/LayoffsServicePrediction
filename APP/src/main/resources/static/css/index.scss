@@ -3,12 +3,21 @@
 @import './layout';
 
 body{
-    width: 200px;
+    width: 100%;
+    height: 100%;
 }
-
-.table-design{
-    @include table-design();
+// .table-design{
+//     @include table-design();
+// }
+// .t-title{
+//     @include t-title();
+// }
+section{
+    width: 100%;
+    margin: auto;
+    
 }
-.t-title{
-    @include t-title();
+.wrapper{
+    width: 80%;
+    margin: 0 auto;
 }

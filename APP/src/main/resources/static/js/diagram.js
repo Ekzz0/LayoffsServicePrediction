@@ -1,6 +1,6 @@
 function diagram(dates, probability){
   const ctx = document.getElementById('myChart');
-  const dates = dates;
+  
   const probability = probability;
 
   chart =  new Chart(ctx, {
