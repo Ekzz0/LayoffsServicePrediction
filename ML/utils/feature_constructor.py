@@ -5,8 +5,10 @@ from joblib import Parallel, delayed
 
 def feature_constructor(calc_type='simple'):
     def feature_construct(df: pd.DataFrame) -> pd.DataFrame:
-        pass
-        return df
+        for col in df.columns:
+            if col == '':
+                df = df.drop(columns=col)
+        return df.dropna()
 
     def multi_feature_construct(df: pd.DataFrame, chunk_size: int = 1000) -> pd.DataFrame:
         dfs = [df[i:i + chunk_size] for i in range(0, len(df), chunk_size)]

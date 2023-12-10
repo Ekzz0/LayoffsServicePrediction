@@ -1,6 +1,5 @@
 import json
 
-import joblib
 from fastapi import FastAPI, Body
 from fastapi.responses import JSONResponse
 from utils.data_structures import Score
@@ -17,7 +16,7 @@ app = FastAPI()
 
 # Загрузка модели при старте приложение
 @app.on_event("startup")
-def startup_event(model_path: str = './models/RandomForest.pkl'):
+def startup_event(model_path: str = './models/XGBoost.pkl'):
     global model, feature_construct
     model = load_model(model_path)
     feature_construct = load_feature_constructor()
@@ -37,11 +36,9 @@ def predict_prob(request: Any = Body(None)) -> JSONResponse:
     # if model.check_df_columns(X):
     # Конструирование признаков
     X_test = feature_construct(X)
-    # Предикт
     pred = model.predict(X_test)
     # Конвертируем в json
     response = convert_dataframe_to_json(pred)
-    print(response)
     return response  # Если нужна строка с json форматом, то напиши: return json.dumps(response)
     # else:
     #     return {'text': 'Недостаточно признаков в датасете'}
@@ -49,7 +46,7 @@ def predict_prob(request: Any = Body(None)) -> JSONResponse:
 
 # GET запрос для конструирования признаков
 @app.get("/fit")
-def model_fit(X, y) -> Score:
+def model_fit(X: Any = Body(None), y:  Any = Body(None)) -> Score:
     X = convert_json_to_dataframe(X)
     y = convert_json_to_dataframe(y)
     score = model.fit(X, y)
