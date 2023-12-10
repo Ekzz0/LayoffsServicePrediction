@@ -5,12 +5,10 @@
     text-align: center;
     margin: 0 auto;
     &__head{
-
         width: 100%;
         @include table-design();    
         @include t-table-header();   
         &-id{
-            
             width: 20%;
             height: 60px;
         }
@@ -25,16 +23,21 @@
     }
     &__body{
         @include table-design();
-        background-color: white;
+        background-color: $textDark;
         @include t-table-body();
         &-id{
             height: 30px;
+            cursor: pointer;
         }
         &-prob{
             height: 30px;
         }
         &-group{
             height: 30px;
+        }
+        &-id:hover{
+            background-color: $textAccent;
+            color: $textDark;
         }
     }
 }

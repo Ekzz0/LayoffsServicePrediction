@@ -10,6 +10,7 @@
     <script async src="/static/js/csv.js" th:src="@{js/csv.js}"></script>
     <script async src="/static/js/getData.js" th:src="@{js/getData.js}"></script>
     <script async src="/static/js/table.js" th:src="@{js/table.js}"></script>
+    <script async src="/static/js/search.js" th:src="@{js/search.js}"></script>
     <title>Title</title>
 </head>
 <body>
@@ -24,8 +25,15 @@
             <div class="diagram">
                 <canvas id="myChart"></canvas>
             </div>
-            <input type="file" name="fileCsv" accept=".csv" id="csvFileInput">
-            <button id="processCsv">Обработать</button>
+            <h1>Input-data</h1>
+            <div class="input-data">
+                <label class="input-data__block" id="label-input">
+                    <input class="input-data__search" type="file" name="fileCsv" accept=".csv" id="csvFileInput" >
+                    <span class="input-data__value" id="csv-value">Search file</span>
+                </label>
+                <button class="input-data__submit" id="processCsv">Submit</button>
+            </div>
+            
             <h1>table</h1>
             <table id="table" class="table">
                 <thead class="table__head">
@@ -36,7 +44,31 @@
                     </tr>
                 </thead>
                 <tbody class="table__body" id="table-body">
-
+                    <tr>
+                        <td class="table__body-id">1</td>
+                        <td class="table__body-prob">2%</td>
+                        <td class="table__body-group">IT something</td>
+                        </tr>
+                    <tr>
+                        <td class="table__body-id">1</td>
+                        <td class="table__body-prob">2%</td>
+                        <td class="table__body-group">IT something</td>
+                    </tr>
+                    <tr>
+                        <td class="table__body-id">1</td>
+                        <td class="table__body-prob">2%</td>
+                        <td class="table__body-group">IT something</td>
+                    </tr>
+                    <tr>
+                        <td class="table__body-id">1</td>
+                        <td class="table__body-prob">2%</td>
+                        <td class="table__body-group">IT something</td>
+                    </tr>
+                    <tr>
+                        <td class="table__body-id">1</td>
+                        <td class="table__body-prob">2%</td>
+                        <td class="table__body-group">IT something</td>
+                    </tr>
                 </tbody>
             </table>
         </div>
