@@ -52,10 +52,10 @@ function modal_person(){
     }
     function get_feature(card){
         feature = card.querySelector('.table__body-feature');
-        feature = _feature.textContent;
-        setTitleModal(feature)
+        feature = feature.textContent;
+        set_feature(feature)
     }
-    function setTitleModal(feature){
+    function set_feature(feature){
         feature_modal = document.getElementById('person-feature')
         feature_modal.textContent = feature
     }
