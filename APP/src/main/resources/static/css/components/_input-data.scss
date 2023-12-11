@@ -1,0 +1,33 @@
+.input-data{
+    width: 20rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    &__block{
+        display: block;
+        @include button();
+        width: 14rem;
+        position: relative;
+        cursor: pointer;
+    }
+    &__value{
+        position: absolute;
+        top: 12%;
+        left: 8%;
+    }
+    &__submit{
+        @include button();
+    }
+    &__search{
+        display: none;
+    }
+    &__block:hover{
+        background-color: $textDark;
+        color: $textAccent;
+    }
+    &__submit:hover{
+        background-color: $textDark;
+        color: $textAccent;
+    }
+
+}

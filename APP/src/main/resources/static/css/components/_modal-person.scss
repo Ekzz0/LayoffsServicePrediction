@@ -1,0 +1,67 @@
+.modal-person{
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: scroll; /* Enable scroll if needed */
+    overscroll-behavior: contain;
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4);
+    &__content{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border-radius: 30px;
+        background-color: #fefefe;
+        margin: 15% auto; /* 15% from the top and centered */
+        padding: 60px;
+        border: 1px solid #888;
+        // @media (min-width:700px) {
+        //     flex-direction: column;
+        //     padding: 40px;
+            
+
+        // }
+        &-back:hover{
+            // color: $red;
+        }
+        
+    }
+    &__card{
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        
+        &-text{
+            
+            display: block;
+        }
+    }
+    &__close{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    &__info{
+        display: flex;
+        margin: 0 auto;
+        flex-direction: column;
+        // @media ($tablet) {
+        //     flex-direction: row;
+        // }
+        &-img{
+            width: 100%;
+            max-width: 20rem;
+            
+            // @media ($tablet) {
+            //     margin-right: 15rem;
+            // }
+        }
+        &-desc{
+            margin-top: 0;
+        }
+    }
+}

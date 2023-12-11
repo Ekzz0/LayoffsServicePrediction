@@ -9,18 +9,18 @@
 }
 
 @mixin table-design{
-    background-color: $headerColor;
-    border-bottom: $borderColor;
+    background-color: $textAccent;
+    
     &-id{
-        border-bottom: $borderColor;
+        border-bottom: 1px solid $textAccent;
         
     }
     &-prob{
-        border-bottom: $borderColor;
+        border-bottom: 1px solid $textAccent;
         
     }
     &-group{
-        border-bottom: $borderColor;
+        border-bottom: 1px solid $textAccent;
     }
 }
 @mixin t-table-header{
@@ -30,6 +30,21 @@
 }
 @mixin t-table-body{
     font-size: 1rem;
-    font-family: $mainFont;
+    font-family: $titleFont;
+    color: $textAccent;
+}
+@mixin button{
+    width: 5rem;
+    height: 1.5rem;
+    border-radius: 5px;
+    background-color: $textAccent;
     color: $textDark;
+    border: none;
+    font-size: 0.9rem;
+    font-family: $titleFont;
+    
+}
+@mixin oninput-button{
+    background-color: $textDark;
+    color: $textAccent;
 }

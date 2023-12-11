@@ -10,6 +10,8 @@
     <script async src="/static/js/csv.js" th:src="@{js/csv.js}"></script>
     <script async src="/static/js/getData.js" th:src="@{js/getData.js}"></script>
     <script async src="/static/js/table.js" th:src="@{js/table.js}"></script>
+    <script async src="/static/js/search.js" th:src="@{js/search.js}"></script>
+    <script async src="/static/js/modal-person.js" th:src="@{js/modal-person.js}"></script>
     <title>Title</title>
 </head>
 <body>
@@ -24,8 +26,15 @@
             <div class="diagram">
                 <canvas id="myChart"></canvas>
             </div>
-            <input type="file" name="fileCsv" accept=".csv" id="csvFileInput">
-            <button id="processCsv">Обработать</button>
+            <h1>Input-data</h1>
+            <div class="input-data">
+                <label class="input-data__block" id="label-input">
+                    <input class="input-data__search" type="file" name="fileCsv" accept=".csv" id="csvFileInput" >
+                    <span class="input-data__value" id="csv-value">Search file</span>
+                </label>
+                <button class="input-data__submit" id="processCsv">Submit</button>
+            </div>
+            
             <h1>table</h1>
             <table id="table" class="table">
                 <thead class="table__head">
@@ -36,11 +45,27 @@
                     </tr>
                 </thead>
                 <tbody class="table__body" id="table-body">
-
                 </tbody>
             </table>
         </div>
-        
+    </section>
+    <section>
+        <div class="modal-person" id="modal-id">
+            <div class="modal-person__content">
+                <div class="modal-person__close">
+                    <p class="modal-person__content-back">&#60; вернуться к товарам</p>
+                    <span class="modal__close">&times;</span>
+                </div>
+                <div class="modal-person__info">
+                    <div class="">
+                        <h2 class="" id="person-id">id</h2>
+                        <p class="" id="person-variable">variable</p>
+                        <span class=""  id="person-group" >group</span>
+                        <p id="person-feature">feauture</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
     
     
