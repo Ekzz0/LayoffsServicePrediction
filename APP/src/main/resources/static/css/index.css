@@ -133,6 +133,9 @@
   background-color: #f4c430;
   color: #403F3D;
 }
+.table__body-feature {
+  display: none;
+}
 
 .logo {
   display: flex;
