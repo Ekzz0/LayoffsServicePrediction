@@ -27,7 +27,6 @@ class MLModel:
                             index=X.index,
                             columns=['probability_false', 'probability'])
         pred['id'] = pred.index.astype('int')
-
         return pred[['id', 'probability']]
 
     def fit(self, X: pd.DataFrame, y: pd.Series) -> Score:
@@ -77,7 +76,7 @@ class MLModel:
                 print(traceback.format_exc())
             else:
                 features = pd.concat([bin_f_imp, count_f_imp, num_f_imp]).sort_values(by=['importance'])
-                return list(features.tail(6).index)
+                return list(features.tail(7).index)
                 # # Индекс конца датасета
                 # last_ind_b = len(bin_f_imp)
                 # last_ind_c = len(count_f_imp)
