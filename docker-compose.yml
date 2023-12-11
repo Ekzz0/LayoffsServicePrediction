@@ -1,0 +1,10 @@
+version: '3'
+services:
+  postgres:
+    build:
+      context: ./DATABASE
+      dockerfile: Dockerfile
+    container_name: employee_db_container
+    ports:
+      - "5433:5432"
+
