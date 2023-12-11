@@ -3,13 +3,15 @@ import os
 from http import HTTPStatus
 
 from fastapi import FastAPI, Body
-from fastapi.responses import JSONResponse
-from utils.data_structures import Score
+from utils.data_structures import Score, PersonData, ResponsePredict
 from utils.feature_constructor import feature_constructor
 from utils.loaded_model import MLModel
 from utils.ml_api import load_model, load_feature_constructor
 from utils.json_scripts import convert_dataframe_to_json, convert_json_to_dataframe
-from typing import Any
+from utils.data_processing import create_feature_importance_columns
+from typing import Any, List
+
+
 
 model: MLModel
 feature_construct: feature_constructor
@@ -30,40 +32,34 @@ def index() -> dict[str, str]:
     return {"text": "Probability predict"}
 
 
-# GET запрос для предикта
-@app.post("/predict")
-def predict_prob(request: Any = Body(None)):
+# GET запрос для предикта Any = Body(None)
+@app.post("/predict", response_model=ResponsePredict)
+def predict_prob(request: List[PersonData]) -> ResponsePredict:
+    # Конвертируем List[PersonData] в pd.DataFrame
     X = convert_json_to_dataframe(request)
 
-    # Проверка на то, имеет ли полученный датасет все нужные столбцы для обработки
-    if model.check_df_columns(X):
-        # Конструирование признаков
-        X_test = feature_construct(X.drop(columns=model.files['cols_to_drop']))
+    # Конструирование признаков
+    X_test = feature_construct(X.drop(columns=model.files['cols_to_drop']))
 
-        # Получение предикта
-        pred = model.predict(X_test)
+    # Получение предикта
+    pred = model.predict(X_test)
 
-        # Добавим названия ТОП 7-х признаков, которые повлияли на прогноз для каждого пользователя:
-        pred['top_features'] = 0
-        for ID in X_test.index:
-            ID = int(ID)
-            features = model.get_feature_importance(X_test, ID)
-            pred['top_features'].loc[ID] = str(features[::-1])[1:-1]
+    # Восстановим значение удаленных столбцов
+    for col in model.files['cols_to_drop']:
+        pred[col] = X[col].values
 
-        # Восстановим значение удаленных столбцов
-        for col in model.files['cols_to_drop']:
-            pred[col] = X[col].values
+    # Добавим названия ТОП 7-х признаков, которые повлияли на прогноз для каждого пользователя:
+    pred = create_feature_importance_columns(pred, X_test, model)
 
-        # Конвертируем в json
-        response = convert_dataframe_to_json(pred)
-        return response  # Если нужна строка с json форматом, то напиши: return json.dumps(response)
-    else:
-        return {'cod': HTTPStatus.BAD_REQUEST, 'message': 'В загруженном датасете недостаточно признаков'}
+    # Конвертируем pd.DataFrame в List[UsersProbability]
+    response = convert_dataframe_to_json(pred)
+
+    return {'status': HTTPStatus.OK, 'data': response}
 
 
 # GET запрос для конструирования признаков
 @app.get("/fit")
-def model_fit(X: Any = Body(None), y: Any = Body(None)) -> Score:
+def model_fit(X: List[PersonData], y: Any = Body(None)) -> Score:
     X = convert_json_to_dataframe(X)
     y = convert_json_to_dataframe(y)
     score = model.fit(X, y)
