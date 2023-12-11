@@ -1,10 +1,8 @@
 function setTable(persons){
     table = document.getElementById('table-body')
     for (let person of persons){
-        console.log(person)
         info = []
         for (let data in person){
-            console.log(person[data])
             info.push(person[data])
         }{
             table.insertAdjacentHTML('beforeend', `<tr>
@@ -15,4 +13,5 @@ function setTable(persons){
             </tr>`)
         }
     }
+    modal_person();
 }
