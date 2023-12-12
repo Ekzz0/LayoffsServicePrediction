@@ -1,8 +1,8 @@
 package ru.isotropicTensor.service;
 
 import org.springframework.http.ResponseEntity;
-import ru.isotropicTensor.entity.Person;
+import ru.isotropicTensor.model.ApiResponse;
 
 public interface EmployeeService {
-    ResponseEntity<String> getEmployeePredict(String personData);
+    ApiResponse getEmployeePredict(String personData);
 }
