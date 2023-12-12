@@ -3,6 +3,12 @@ from typing import List
 
 from pydantic import BaseModel, Field
 
+# Класс для response после fit
+class Score(BaseModel):
+    precision: float
+    recall: float
+    f1: float
+
 
 class PersonData(BaseModel):
     id: int = Field(..., title="ID")
@@ -33,6 +39,10 @@ class PersonData(BaseModel):
     Group: str = Field(..., title="Group")
 
 
+class PersonDataTrain(PersonData):
+    Resigned: int = Field(..., title="Resigned")
+
+
 class UsersProbability(BaseModel):
     id: int = Field(..., title="ID")
     probability: float = Field(..., title="Probability")
@@ -40,19 +50,16 @@ class UsersProbability(BaseModel):
     TopFeatures: List[str] = Field(..., title="TopFeatures")
 
 
+class ResponseFit(BaseModel):
+    status: int
+    data: Score
+
+
 class ResponsePredict(BaseModel):
     status: int
     data: List[UsersProbability]
 
 
-# Класс для response после fit
-class Score(BaseModel):
-    precision: float
-    recall: float
-    f1: float
-
-
-@dataclass
-class FeatureImportance:
-    features: list[str]
-    importance: list[float]
+class BaseResponse(BaseModel):
+    status: int
+    data: str
