@@ -1,4 +1,5 @@
-from .schemas import Score, PersonData, ResponsePredict
+from .data_processing import split_to_x_y
+from .schemas import PersonData, ResponsePredict, PersonDataTrain, ResponseFit
 from .ml_service import load_model, load_feature_constructor
 from .converters import convert_dataframe_to_json, convert_json_to_dataframe
 from .processing import create_feature_importance_columns
@@ -53,13 +54,20 @@ def predict_prob(request: List[PersonData]):
 
 
 # GET запрос для конструирования признаков
-@router.post("/fit")
-def model_fit(request: List[PersonData]):
-    pass
-    # X = convert_json_to_dataframe(X)
-    # y = convert_json_to_dataframe(y)
-    # score = model.fit(X, y)
-    # return score
+@router.post("/fit", response_model=ResponseFit)
+def model_fit(request: List[PersonDataTrain]):
+    # Конвертируем List[PersonDataTrain] в pd.DataFrame
+    df = convert_json_to_dataframe(request)
+
+    # Конструирование признаков
+    df = feature_construct(df.drop(columns=model.files['cols_to_drop']))
+
+    # Разделим на X, y
+    X, y = split_to_x_y(df, 'Resigned')
+    print(X)
+    print(y)
+    score = model.fit(X, y)
+    return {'status': HTTPStatus.OK, 'data': score}
 
 
 # GET запрос для сохранения обученной модели

@@ -50,10 +50,6 @@ class MLModel:
     def save_model(self, path: str):
         joblib.dump(self.model, path)
 
-    def check_df_columns(self, df: pd.DataFrame) -> bool:
-        return sorted(list(df.columns)) == sorted(self.files['bin_f'] + self.files['num_f'] + self.files['count_f'] +
-                                                  self.files['cols_to_drop'])
-
     def get_feature_importance(self, df: pd.DataFrame, ID: int) -> list[str]:
         try:
             fi = self.model.feature_importances_
