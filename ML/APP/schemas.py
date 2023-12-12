@@ -60,4 +60,6 @@ class ResponsePredict(BaseModel):
     data: List[UsersProbability]
 
 
-
+class BaseResponse(BaseModel):
+    status: int
+    data: str

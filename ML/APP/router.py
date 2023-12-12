@@ -1,5 +1,5 @@
 from .data_processing import split_to_x_y
-from .schemas import PersonData, ResponsePredict, PersonDataTrain, ResponseFit
+from .schemas import PersonData, ResponsePredict, PersonDataTrain, ResponseFit, BaseResponse
 from .ml_service import load_model, load_feature_constructor
 from .converters import convert_dataframe_to_json, convert_json_to_dataframe
 from .processing import create_feature_importance_columns
@@ -74,7 +74,7 @@ def model_fit(request: List[PersonDataTrain]):
 
 
 # Запрос для сохранения обученной модели
-@router.post("/save_model")
+@router.post("/save_model", response_model=BaseResponse)
 def save_model(path: str):
     global model, feature_construct
     model.save_model(path)
@@ -82,7 +82,7 @@ def save_model(path: str):
 
 
 # Запрос для загрузки обученной модели
-@router.post("/load_model")
+@router.post("/load_model", response_model=BaseResponse)
 def load_model(path: str):
     global model, feature_construct
     model = load_model(path)
