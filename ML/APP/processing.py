@@ -27,12 +27,7 @@ def get_importance(df, feature_importance_, ID, feature_ind):
     return res.sort_values(by=['importance'])
 
 
-def create_feature_importance_columns(pred, X_test, model):
-    pred['TopFeatures'] = ''
-    for i, ID in enumerate(X_test.index):
-        ID = int(ID)
-        features = model.get_feature_importance(X_test, ID)[::-1]
-        str_features = str(features)[1:-1]
-        pred.loc[ID, 'TopFeatures'] = str_features
+def create_feature_importance_columns(ID, X_test, model):
+    features = model.get_feature_importance(X_test, ID)[::-1]
+    yield features
 
-    return pred

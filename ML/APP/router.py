@@ -42,11 +42,12 @@ def predict_prob(request: List[PersonData]):
     for col in model.files['cols_to_drop']:
         pred[col] = X[col].values
 
-    # Добавим названия ТОП 7-х признаков, которые повлияли на прогноз для каждого пользователя:
-    pred = create_feature_importance_columns(pred, X_test, model)
-
     # Конвертируем pd.DataFrame в List[UsersProbability]
     response = convert_dataframe_to_json(pred)
+
+    # Добавим названия ТОП 7-х признаков, которые повлияли на прогноз для каждого пользователя:
+    for user_dict in response:
+        user_dict['TopFeatures'] = next(create_feature_importance_columns(user_dict['id'], X_test, model))
 
     return {'status': HTTPStatus.OK, 'data': response}
 

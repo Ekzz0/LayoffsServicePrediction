@@ -37,7 +37,7 @@ class UsersProbability(BaseModel):
     id: int = Field(..., title="ID")
     probability: float = Field(..., title="Probability")
     Group: str = Field(..., title="Group")
-    TopFeatures: str = Field(..., title="TopFeatures")
+    TopFeatures: List[str] = Field(..., title="TopFeatures")
 
 
 class ResponsePredict(BaseModel):
