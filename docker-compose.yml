@@ -7,4 +7,13 @@ services:
     container_name: employee_db_container
     ports:
       - "5433:5432"
+  fastapi_app:
+    build:
+      context: ./ML
+      dockerfile: Dockerfile
+    container_name: fastapi_app_container
+    ports:
+      - "8889:8889"
+    depends_on:
+      - postgres
 

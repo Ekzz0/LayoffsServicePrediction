@@ -1,4 +1,3 @@
-import json
 import os
 from http import HTTPStatus
 
@@ -10,8 +9,6 @@ from utils.ml_api import load_model, load_feature_constructor
 from utils.json_scripts import convert_dataframe_to_json, convert_json_to_dataframe
 from utils.data_processing import create_feature_importance_columns
 from typing import Any, List
-
-
 
 model: MLModel
 feature_construct: feature_constructor
