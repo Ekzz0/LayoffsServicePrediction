@@ -8,7 +8,7 @@ import ru.isotropicTensor.service.EmployeeService;
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
-    private final String mlApiURL = "http://localhost:8889";
+    private final String mlApiURL = "http://localhost:8889/api";
 
     @Override
     public ApiResponse getEmployeePredict(String personData) {
