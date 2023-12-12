@@ -16,34 +16,56 @@
         justify-content: center;
         border-radius: 30px;
         background-color: #fefefe;
-        margin: 15% auto; /* 15% from the top and centered */
+        margin: 15% auto 15% auto; /* 15% from the top and centered */
         padding: 60px;
         border: 1px solid #888;
-        // @media (min-width:700px) {
-        //     flex-direction: column;
-        //     padding: 40px;
-            
-
-        // }
+        width: 60%;
+        height: 25rem;
         &-back:hover{
             color: $textDark;
         }
         
-    }
-    }
+    } 
+
     &__close{
         display: flex;
         flex-direction: row;
         justify-content: space-between;
     }
+
     &__info{
         display: flex;
         margin: 0 auto;
         flex-direction: column;
+        justify-content: space-between;
         width: 80%;
+        @include t-table-header();
+        margin-top: 2rem;
         @media ($tablet) {
             flex-direction: row;
         }
         
+    }
+    &__back{
+        @include t-table-header();
+        margin-top: 0;
+        cursor: pointer;
+    }
+    &__title{
+        @include t-table-header();
+        margin-top: 0;
+        font-size: 2rem;
+    }
+    &__cross{
+        margin-top: 0;
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+    }
+    &__back:hover{
+        color: $textAccent;
+    }
+    &__cross:hover{
+        color: $textAccent;
     }
 }

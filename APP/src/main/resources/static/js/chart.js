@@ -1,11 +1,7 @@
-
-
-function set_diagram(dates, probability, chart){
-  console.log(chart)
-  const ctx = document.getElementById(chart);
+function diagram(dates, probability, id){
+  console.log(id)
   
-  const probability = probability;
-
+  const ctx = document.getElementById(id);
   chart =  new Chart(ctx, {
       type: 'line',
       data: {
@@ -13,8 +9,8 @@ function set_diagram(dates, probability, chart){
         datasets: [{
           label: '% вероятность увольнения',
           data: probability,
-          borderColor: '#36A2EB',
-          backgroundColor: '#9BD0F5',
+          borderColor: '#403F3D',
+          backgroundColor: '#f4c430',
           borderWidth: 1
         }]
       },

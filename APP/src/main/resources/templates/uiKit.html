@@ -5,13 +5,15 @@
     <link rel="stylesheet" type="text/css" href="/static/css/index.css" th:href="@{css/index.css}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
-    <script async src="/static/js/diagram.js" th:src="@{js/diagram.js}"></script>
-    <script async src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
-    <script async src="/static/js/csv.js" th:src="@{js/csv.js}"></script>
-    <script async src="/static/js/getData.js" th:src="@{js/getData.js}"></script>
-    <script async src="/static/js/table.js" th:src="@{js/table.js}"></script>
-    <script async src="/static/js/search.js" th:src="@{js/search.js}"></script>
-    <script async src="/static/js/modal-person.js" th:src="@{js/modal-person.js}"></script>
+    <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <script async type="text/javascript" src="/static/js/chart.js" th:src="@{js/chart.js}"></script>
+    <script async type="text/javascript" src="/static/js/csv.js" th:src="@{js/csv.js}"></script>
+    <script async type="text/javascript" src="/static/js/get-request.js" th:src="@{js/get-request.js}"></script>
+    <script async type="text/javascript" src="/static/js/table.js" th:src="@{js/table.js}"></script>
+    <script async type="text/javascript" src="/static/js/search.js" th:src="@{js/search.js}"></script>
+    <script defer type="text/javascript" src="/static/js/modal-person.js" th:src="@{js/modal-person.js}"></script>
+    <script async type="module" src="/static/js/index.js" th:src="@{js/index.js}"></script>
+    
     <title>Title</title>
 </head>
 <body>
@@ -59,8 +61,9 @@
         <div class="modal-person" id="modal-id">
             <div class="modal-person__content">
                 <div class="modal-person__close">
-                    <p class="modal-person__content-back">&#60; back</p>
-                    <span class="modal__close">&times;</span>
+                    <p class="modal-person__back">&#60; back</p>
+                    <p class="modal-person__title">Person info</p>
+                    <span class="modal-person__cross">&times;</span>
                 </div>
                 <div class="modal-person__info">
                     <div class="modal-person__chart">
@@ -78,8 +81,8 @@
             </div>
         </div>
     </section>
-    
-    
+
+
 
 </body>
 

@@ -15,16 +15,16 @@
   src: url(../../fonts/Montserrat-LightItalic.ttf);
 }
 .modal-person {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+  display: none;
+  position: fixed;
+  z-index: 1;
   left: 0;
   top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: scroll; /* Enable scroll if needed */
+  width: 100%;
+  height: 100%;
+  overflow: scroll;
   overscroll-behavior: contain;
-  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.4);
 }
 .modal-person__content {
@@ -33,17 +33,14 @@
   justify-content: center;
   border-radius: 30px;
   background-color: #fefefe;
-  margin: 15% auto; /* 15% from the top and centered */
+  margin: 15% auto 15% auto; /* 15% from the top and centered */
   padding: 60px;
   border: 1px solid #888;
+  width: 60%;
+  height: 25rem;
 }
-.modal-person__card {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-}
-.modal-person__card-text {
-  display: block;
+.modal-person__content-back:hover {
+  color: #403F3D;
 }
 .modal-person__close {
   display: flex;
@@ -54,18 +51,47 @@
   display: flex;
   margin: 0 auto;
   flex-direction: column;
+  justify-content: space-between;
+  width: 80%;
+  font-size: 1rem;
+  font-family: boldMonserat, sans-serif;
+  color: #403F3D;
+  margin-top: 2rem;
 }
-.modal-person__info-img {
-  width: 100%;
-  max-width: 20rem;
+@media (min-width: 768px) {
+  .modal-person__info {
+    flex-direction: row;
+  }
 }
-.modal-person__info-desc {
+.modal-person__back {
+  font-size: 1rem;
+  font-family: boldMonserat, sans-serif;
+  color: #403F3D;
   margin-top: 0;
+  cursor: pointer;
+}
+.modal-person__title {
+  font-size: 1rem;
+  font-family: boldMonserat, sans-serif;
+  color: #403F3D;
+  margin-top: 0;
+  font-size: 2rem;
+}
+.modal-person__cross {
+  margin-top: 0;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+.modal-person__back:hover {
+  color: #f4c430;
+}
+.modal-person__cross:hover {
+  color: #f4c430;
 }
 
 .diagram {
-  width: 300px;
-  height: 300px;
+  width: 500px;
 }
 
 .table {
