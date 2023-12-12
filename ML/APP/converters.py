@@ -1,7 +1,6 @@
-import json
 from typing import List
 import pandas as pd
-from .data_structures import UsersProbability
+from .schemas import UsersProbability
 
 
 def convert_dataframe_to_json(df: pd.DataFrame | pd.Series) -> List[UsersProbability]:

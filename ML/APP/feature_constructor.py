@@ -1,4 +1,3 @@
-from sklearn.preprocessing import LabelEncoder, OrdinalEncoder
 import pandas as pd
 from joblib import Parallel, delayed
 
@@ -10,9 +9,9 @@ def numeric_transform(df, col):
 
 def feature_constructor(calc_type='simple'):
     def feature_construct(df: pd.DataFrame) -> pd.DataFrame:
-        df.index = df.index.astype('int')
-        for col in df.columns:
-            df = numeric_transform(df, col)
+        # df.index = df.index.astype('int')
+        # for col in df.columns:
+        #     df = numeric_transform(df, col)
         return df.dropna()
 
     def multi_feature_construct(df: pd.DataFrame, chunk_size: int = 1000) -> pd.DataFrame:

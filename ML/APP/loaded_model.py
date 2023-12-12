@@ -1,7 +1,7 @@
 from sklearn.metrics import recall_score, f1_score, precision_score
 from sklearn.model_selection import train_test_split
-from .data_processing import get_feature_indexes, get_importance
-from .data_structures import FeatureImportance, Score
+from .processing import get_feature_indexes, get_importance
+from .schemas import Score
 import pandas as pd
 import numpy as np
 import traceback
@@ -14,7 +14,7 @@ class MLModel:
     files = {}
     file_names = ['bin_f', 'count_f', 'num_f', 'cols_to_drop']
     for name in file_names:
-        files[name] = joblib.load(os.path.abspath('data/' + name))
+        files[name] = joblib.load(os.path.abspath('APP/data/' + name))
 
     def __init__(self, path: str):
         # Загрузка модель из файла
@@ -77,19 +77,4 @@ class MLModel:
             else:
                 features = pd.concat([bin_f_imp, count_f_imp, num_f_imp]).sort_values(by=['importance'])
                 return list(features.tail(7).index)
-                # # Индекс конца датасета
-                # last_ind_b = len(bin_f_imp)
-                # last_ind_c = len(count_f_imp)
-                # last_ind_n = len(num_f_imp)
-                #
-                # # Топ 2 признака для каждого типа
-                # top_bin = bin_f_imp.iloc[last_ind_b - 2:last_ind_b]
-                # top_count = count_f_imp.iloc[last_ind_c - 2:last_ind_c]
-                # to_num = num_f_imp.iloc[last_ind_n - 2:last_ind_n]
-                #
-                # # Формируем отчет
-                # feature_names = list(top_bin.index) + list(top_count.index) + list(to_num.index)
-                # feature_importance = list(top_bin.values.ravel()) + list(top_count.values.ravel()) + list(
-                #     to_num.values.ravel())
-                #
-                # return FeatureImportance(features=feature_names, importance=feature_importance)
+
