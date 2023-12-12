@@ -10,56 +10,59 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+//TODO на данный момент с фронта приходит Json в котором значения всех полей - строки
+// Однако, при согласовании Api были утверждены иные типы, пока перепишу на String, потом переделать как надо
+
 public class EmployeeData {
-    private int id;
+    private String id;
     @JsonProperty("Group")
     private String group;
     @JsonProperty("SentMessages")
-    private int sentMessages;
+    private String sentMessages;
     @JsonProperty("ReceivedMessages")
-    private int receivedMessages;
+    private String receivedMessages;
     @JsonProperty("MessagesOutsideWorkHours")
-    private int messagesOutsideWorkHours;
+    private String messagesOutsideWorkHours;
     @JsonProperty("SentFrequency")
-    private int SentFrequency;
+    private String SentFrequency;
     @JsonProperty("ReceivedFrequency")
-    private int ReceivedFrequency;
+    private String ReceivedFrequency;
     @JsonProperty("sent_received_ratio")
-    private double sentReceivedRatio;
+    private String sentReceivedRatio;
     @JsonProperty("UniqueRecipients")
-    private int uniqueRecipients;
+    private String uniqueRecipients;
     @JsonProperty("hidden_copy")
-    private int hiddenCopy;
+    private String hiddenCopy;
     @JsonProperty("carbon_copy")
-    private int carbonCopy;
+    private String carbonCopy;
     @JsonProperty("text_length")
-    private int textLength;
+    private String textLength;
     @JsonProperty("BytesSentReceivedRatio")
-    private double bytesSentReceivedRatio;
+    private String bytesSentReceivedRatio;
     @JsonProperty("question_marks")
-    private int questionMarks;
+    private String questionMarks;
     @JsonProperty("response_time")
-    private int responseTime;
+    private String responseTime;
     @JsonProperty("MessagesReadLater")
-    private int messagesReadLater;
+    private String messagesReadLater;
     @JsonProperty("DaysBetweenReceivedAndRead")
-    private int daysBetweenReceivedAndRead;
+    private String daysBetweenReceivedAndRead;
     @JsonProperty("answered_messages")
-    private int answeredMessages;
+    private String answeredMessages;
     @JsonProperty("unanswered_messages")
-    private int unansweredMessages;
+    private String unansweredMessages;
     @JsonProperty("unreplied_messages")
-    private int unrepliedMessages;
+    private String unrepliedMessages;
     @JsonProperty("mention_colleagues")
-    private int mentionColleagues;
+    private String mentionColleagues;
     @JsonProperty("MoodType")
-    private int moodType;
+    private String moodType;
     @JsonProperty("StressKeywordsPresent")
-    private int stressKeywordsPresent;
+    private String stressKeywordsPresent;
     @JsonProperty("SalaryChangeMentioned")
-    private int salaryChangeMentioned;
+    private String salaryChangeMentioned;
     @JsonProperty("VacationMentioned")
-    private int vacationMentioned;
+    private String vacationMentioned;
     @JsonProperty("polite_message")
-    private int politeMessage;
+    private String politeMessage;
 }
