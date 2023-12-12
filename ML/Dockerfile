@@ -12,7 +12,6 @@ RUN /venv/bin/pip install --no-cache-dir -r requirements.txt
 FROM python:3.11
 
 COPY /APP /APP
-COPY /utils /utils
 COPY /models /models
 COPY app.py .
 

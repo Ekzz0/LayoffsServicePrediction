@@ -7,7 +7,7 @@ from .feature_constructor import feature_constructor
 from .loaded_model import MLModel
 
 from http import HTTPStatus
-from typing import Any, List
+from typing import List
 from fastapi import APIRouter
 import os
 
@@ -21,15 +21,16 @@ feature_construct: feature_constructor
 
 # Загрузка модели при старте приложение
 @router.on_event("startup")
-def startup_event(model_path: str = os.path.abspath('models/XGBoost.pkl')):
+def startup_event(path: str = os.path.abspath('models/XGBoost.pkl')):
     global model, feature_construct
-    model = load_model(model_path)
+    model = load_model(path)
     feature_construct = load_feature_constructor()
 
 
-# GET запрос для предикта Any = Body(None)
+# Запрос для предикта Any = Body(None)
 @router.post("/predict", response_model=ResponsePredict)
 def predict_prob(request: List[PersonData]):
+    global model, feature_construct
     # Конвертируем List[PersonData] в pd.DataFrame
     X = convert_json_to_dataframe(request)
 
@@ -53,9 +54,10 @@ def predict_prob(request: List[PersonData]):
     return {'status': HTTPStatus.OK, 'data': response}
 
 
-# GET запрос для конструирования признаков
+# Запрос для конструирования признаков
 @router.post("/fit", response_model=ResponseFit)
 def model_fit(request: List[PersonDataTrain]):
+    global model, feature_construct
     # Конвертируем List[PersonDataTrain] в pd.DataFrame
     df = convert_json_to_dataframe(request)
 
@@ -64,13 +66,24 @@ def model_fit(request: List[PersonDataTrain]):
 
     # Разделим на X, y
     X, y = split_to_x_y(df, 'Resigned')
-    print(X)
-    print(y)
+
+    # Обучение модели
     score = model.fit(X, y)
+
     return {'status': HTTPStatus.OK, 'data': score}
 
 
-# GET запрос для сохранения обученной модели
-@router.get("/save_model")
-def model_save(path: str):
+# Запрос для сохранения обученной модели
+@router.post("/save_model")
+def save_model(path: str):
+    global model, feature_construct
     model.save_model(path)
+    return {'status': HTTPStatus.OK, 'data': ''}
+
+
+# Запрос для загрузки обученной модели
+@router.post("/load_model")
+def load_model(path: str):
+    global model, feature_construct
+    model = load_model(path)
+    return {'status': HTTPStatus.OK, 'data': ''}
