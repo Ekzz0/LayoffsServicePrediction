@@ -1,68 +1,45 @@
+// import {diagram} from './chart.js' 
+modal_person() // тест
+
+// diagram(['10.1.2000','17.1.2000'],['10','20'],'modal-chart')
 function modal_person(){
     persons = document.getElementsByClassName('table__body-id')
     modal = document.getElementById('modal-id')
     persons = Array.from(persons)
-
+    
     for (const index in persons){
         persons[index].addEventListener('click', open_modal)
-    }
 
+    }
     function open_modal(event){
         modal.style.display = "block"
         attachModalEvents()
-        get_person(event)
+        construct_person(event)   
     }
 
-
-    function get_person(event){
+    function construct_person(event){
         data = event.target.parentElement
-        get_id(data)
-        get_variable(data)
-        get_group(data)
-        get_feature(data)
-
+        person_info = new constructor_modal()
+        person_info.construct(data,'.table__body-id', 'person-id')
+        person_info.construct(data,'.table__body-prob', 'person-variable')
+        person_info.construct(data,'.table__body-group', 'person-group')
+        person_info.construct(data,'.table__body-feature', 'person-feature')
     }
 
-    function get_id(data){
-        id = data.querySelector('.table__body-id');
-        set_id(id)
+    class constructor_modal{
+        construct(data, table_сell, model_cell) {
+            let table_value = data.querySelector(table_сell)
+            this.set_value(table_value,model_cell)
+        }
+        set_value(table_value, model_cell){
+            let modal_content = document.getElementById(model_cell)
+            modal_content.textContent = table_value.textContent
+        }
     }
-    function set_id(id){
-        idModal = document.getElementById('person-id')
-        idModal.textContent = id.textContent
-    }
-    function get_variable(variable){
-        variable = variable.querySelector('.table__body-prob');
-        variable = variable.textContent;
-        set_variable(variable);
-    }
-    function set_variable(variable){
-        variable_modal = document.getElementById('person-variable')
-        variable_modal.textContent = variable
-
-    }
-    function get_group(group){
-        group = group.querySelector('.table__body-group');
-        group = group.textContent;
-        set_group(group)
-    }
-    function set_group(group){
-        descriptionModal = document.getElementById('person-group');
-        descriptionModal.textContent = group;
-    }
-    function get_feature(card){
-        feature = card.querySelector('.table__body-feature');
-        feature = feature.textContent;
-        set_feature(feature)
-    }
-    function set_feature(feature){
-        feature_modal = document.getElementById('person-feature')
-        feature_modal.textContent = feature
-    }
-
+    
     function attachModalEvents(){
-        modal.querySelector(".modal-person__content-back").addEventListener('click', closeModal)
-        modal.querySelector(".modal__close").addEventListener('click', closeModal)
+        modal.querySelector(".modal-person__back").addEventListener('click', closeModal)
+        modal.querySelector(".modal-person__cross").addEventListener('click', closeModal)
         document.addEventListener('keydown', handleEscape)
         modal.addEventListener('click', handleClickCLose)
     }
@@ -86,7 +63,8 @@ function modal_person(){
 
 
     function removeModalEvents(){
-        modal.querySelector(".close").removeEventListener('click', closeModal)
+        modal.querySelector(".modal-person__back").removeEventListener('click', closeModal)
+        modal.querySelector(".modal-person__cross").removeEventListener('click', closeModal)
         document.removeEventListener('keydown', handleEscape)
         modal.removeEventListener('click', handleClickCLose)
     }

@@ -1,3 +1,4 @@
+
 button = document.getElementById('processCsv')
 button.addEventListener('click', handleCSV)
 
@@ -19,6 +20,7 @@ function handleCSV() {
 }
 
 function postRequest(json){
+    
     fetch('http://localhost:8081/api/send-data' ,{
         method: 'POST',
         body: JSON.stringify(json),
