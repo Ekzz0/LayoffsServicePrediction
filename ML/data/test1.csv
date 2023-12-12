@@ -1,0 +1,2 @@
+id,SentMessages,ReceivedMessages,MessagesOutsideWorkHours,SentFrequency,ReceivedFrequency,sent_received_ratio,UniqueRecipients,hidden_copy,carbon_copy,text_length,BytesSentReceivedRatio,question_marks,response_time,MessagesReadLater,DaysBetweenReceivedAndRead,answered_messages,unanswered_messages,unreplied_messages,mention_colleagues,MoodType,StressKeywordsPresent,SalaryChangeMentioned,VacationMentioned,polite_message,Group
+2801,51,114,0,9,41,2.1923076923076925,6,3,1,138,0.9945796349917594,0,0,6,0,22,1,6,0,0,0,0,1,0,Development Department
