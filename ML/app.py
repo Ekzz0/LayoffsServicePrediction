@@ -5,7 +5,7 @@ from fastapi import FastAPI, Body
 from APP.schemas import Score, PersonData, ResponsePredict
 from APP.feature_constructor import feature_constructor
 from APP.loaded_model import MLModel
-from APP.ml_api import load_model, load_feature_constructor
+from APP.ml_service import load_model, load_feature_constructor
 from APP.converters import convert_dataframe_to_json, convert_json_to_dataframe
 from APP.processing import create_feature_importance_columns
 from typing import Any, List
