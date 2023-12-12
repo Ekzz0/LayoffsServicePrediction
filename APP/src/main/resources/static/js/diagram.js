@@ -1,5 +1,8 @@
-function diagram(dates, probability){
-  const ctx = document.getElementById('myChart');
+
+
+function set_diagram(dates, probability, chart){
+  console.log(chart)
+  const ctx = document.getElementById(chart);
   
   const probability = probability;
 

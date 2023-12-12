@@ -45,6 +45,12 @@
                     </tr>
                 </thead>
                 <tbody class="table__body" id="table-body">
+                    <tr>
+                        <td class="table__body-id">${info[0]}</td>
+                        <td class="table__body-prob">${(info[1])}</td>
+                        <td class="table__body-group">${info[3]}</td>
+                        <td class="table__body-feature">${info[2]}</td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -53,15 +59,20 @@
         <div class="modal-person" id="modal-id">
             <div class="modal-person__content">
                 <div class="modal-person__close">
-                    <p class="modal-person__content-back">&#60; вернуться к товарам</p>
+                    <p class="modal-person__content-back">&#60; back</p>
                     <span class="modal__close">&times;</span>
                 </div>
                 <div class="modal-person__info">
-                    <div class="">
-                        <h2 class="" id="person-id">id</h2>
-                        <p class="" id="person-variable">variable</p>
-                        <span class=""  id="person-group" >group</span>
-                        <p id="person-feature">feauture</p>
+                    <div class="modal-person__chart">
+                        <div class="diagram">
+                            <canvas id="modal-chart"></canvas>
+                        </div>
+                    </div>
+                    <div class="modal-person__text">
+                        <p class="modal-person__id" id="person-id">id</p>
+                        <p class="modal-person__variable" id="person-variable">variable</p>
+                        <p class="modal-person__group"  id="person-group" >group</p>
+                        <p class="modal-person__feature" id="person-feature">feauture</p>
                     </div>
                 </div>
             </div>

@@ -10,6 +10,7 @@ function open_modal(event){
     modal.style.display = "block"
     attachModalEvents()
     get_person(event)
+    set_diagram(["10.1.2000","17.1.2000"], ["5","10"],"modal-chart")
 }
 
 
@@ -51,7 +52,7 @@ function set_group(group){
 }
 function get_feature(card){
     feature = card.querySelector('.table__body-feature');
-    feature = _feature.textContent;
+    feature = feature.textContent;
     setTitleModal(feature)
 }
 function setTitleModal(feature){
