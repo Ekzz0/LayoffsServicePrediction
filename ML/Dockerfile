@@ -1,16 +1,28 @@
-# Используем базовый образ Python
-FROM python:3.11
-
-ENV PYTHONUNBUFFERED=1
+# Этап сборки зависимостей
+FROM python:3.11 AS builder
 
 # Копируем файл зависимостей и устанавливаем их
 COPY requirements.txt .
-COPY app/ .
+
+# Установка зависимостей
+RUN python -m venv /venv
+RUN /venv/bin/pip install --no-cache-dir -r requirements.txt
+
+# Этап финальной сборки приложения
+FROM python:3.11
+
+COPY setup.py .
+COPY APP/ .
 COPY utils/ .
 COPY models/ .
+COPY app.py .
 
-# Устанавливаем все зависимости
-RUN pip install -r requirements.txt
+# Копируем установленную виртуальную среду с зависимостями из предыдущего этапа
+COPY --from=builder /venv /venv
+
+# Указываем путь к интерпретатору Python из виртуальной среды
+ENV PATH="/venv/bin:$PATH"
+ENV PYTHONUNBUFFERED=1
 
 # Запускаем uvicorn сервер
-CMD ["uvicorn", "app.app:app", "--host", "0.0.0.0", "--port", "8889"]
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8889"]

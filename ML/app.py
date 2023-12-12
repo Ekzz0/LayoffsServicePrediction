@@ -2,12 +2,12 @@ import os
 from http import HTTPStatus
 
 from fastapi import FastAPI, Body
-from utils.data_structures import Score, PersonData, ResponsePredict
-from utils.feature_constructor import feature_constructor
-from utils.loaded_model import MLModel
-from utils.ml_api import load_model, load_feature_constructor
-from utils.json_scripts import convert_dataframe_to_json, convert_json_to_dataframe
-from utils.data_processing import create_feature_importance_columns
+from APP.schemas import Score, PersonData, ResponsePredict
+from APP.feature_constructor import feature_constructor
+from APP.loaded_model import MLModel
+from APP.ml_api import load_model, load_feature_constructor
+from APP.converters import convert_dataframe_to_json, convert_json_to_dataframe
+from APP.processing import create_feature_importance_columns
 from typing import Any, List
 
 model: MLModel
@@ -17,7 +17,7 @@ app = FastAPI()
 
 # Загрузка модели при старте приложение
 @app.on_event("startup")
-def startup_event(model_path: str = os.path.abspath('models/XGBoost.pkl')):
+def startup_event(model_path: str = os.path.abspath('ML/models/XGBoost.pkl')):
     global model, feature_construct
     model = load_model(model_path)
     feature_construct = load_feature_constructor()
@@ -31,7 +31,7 @@ def index() -> dict[str, str]:
 
 # GET запрос для предикта Any = Body(None)
 @app.post("/predict", response_model=ResponsePredict)
-def predict_prob(request: List[PersonData]) -> ResponsePredict:
+def predict_prob(request: List[PersonData]):
     # Конвертируем List[PersonData] в pd.DataFrame
     X = convert_json_to_dataframe(request)
 
