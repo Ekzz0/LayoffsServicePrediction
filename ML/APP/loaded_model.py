@@ -14,7 +14,7 @@ class MLModel:
     files = {}
     file_names = ['bin_f', 'count_f', 'num_f', 'cols_to_drop']
     for name in file_names:
-        files[name] = joblib.load(os.path.abspath('ML/APP/data/' + name))
+        files[name] = joblib.load(os.path.abspath('APP/data/' + name))
 
     def __init__(self, path: str):
         # Загрузка модель из файла

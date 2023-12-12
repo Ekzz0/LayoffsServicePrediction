@@ -17,7 +17,7 @@ app = FastAPI()
 
 # Загрузка модели при старте приложение
 @app.on_event("startup")
-def startup_event(model_path: str = os.path.abspath('ML/models/XGBoost.pkl')):
+def startup_event(model_path: str = os.path.abspath('models/XGBoost.pkl')):
     global model, feature_construct
     model = load_model(model_path)
     feature_construct = load_feature_constructor()
