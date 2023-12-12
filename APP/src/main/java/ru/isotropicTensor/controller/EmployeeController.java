@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.isotropicTensor.model.ApiResponse;
+import ru.isotropicTensor.model.EmployeeData;
 import ru.isotropicTensor.model.EmployeePredictionData;
 import ru.isotropicTensor.service.EmployeeService;
 
@@ -22,8 +23,8 @@ public class EmployeeController {
     }
 
     @PostMapping("/send-data")
-    public ResponseEntity<List<EmployeePredictionData>> getPredict(@RequestBody String jsonData) {
-        ApiResponse apiResponse = employeeService.getEmployeePredict(jsonData);
+    public ResponseEntity<List<EmployeePredictionData>> getPredict(@RequestBody List<EmployeeData> dataList) {
+        ApiResponse apiResponse = employeeService.getEmployeePredict(dataList);
 
         // Проверить статус
         if (apiResponse.getStatus() == HttpStatus.OK.value()) {
