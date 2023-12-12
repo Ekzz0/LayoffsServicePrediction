@@ -24,6 +24,7 @@ public class EmployeeController {
 
     @PostMapping("/send-data")
     public ResponseEntity<List<EmployeePredictionData>> getPredict(@RequestBody List<EmployeeData> dataList) {
+        //TODO Убирать пустую строку из передаваемого Json
         ApiResponse apiResponse = employeeService.getEmployeePredict(dataList);
 
         // Проверить статус
