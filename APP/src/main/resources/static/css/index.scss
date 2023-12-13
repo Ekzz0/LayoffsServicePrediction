@@ -2,25 +2,19 @@
 @import './components';
 @import './layout';
 
-body{
-    width: 100%;
-    height: 100%;
-}
-// .table-design{
-//     @include table-design();
-// }
-// .t-title{
-//     @include t-title();
-// }
-section{
-    width: 100%;
-    margin: auto;
-    
-}
-.wrapper{
-    width: 80%;
-    margin: 0 auto;
-}
+
+
 .oninput-button{
     @include oninput-button();
+}
+.section-list{
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+    margin-left: 2rem;
+
+}
+.hr-line{
+    width: 30rem;
+    margin-left: 0;
 }

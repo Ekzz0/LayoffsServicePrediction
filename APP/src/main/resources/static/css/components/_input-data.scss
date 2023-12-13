@@ -9,6 +9,7 @@
         width: 14rem;
         position: relative;
         cursor: pointer;
+        transition: all 0.3s ease;
     }
     &__value{
         position: absolute;
@@ -17,6 +18,7 @@
     }
     &__submit{
         @include button();
+        transition: all 0.3s ease;
     }
     &__search{
         display: none;

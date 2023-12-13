@@ -48,3 +48,21 @@
     background-color: $textDark;
     color: $textAccent;
 }
+@mixin section{
+    width: 100%;
+    max-width: 1600px;
+    margin: auto;
+    &-wrapper{
+        width: 90%;
+        max-width: 1500px;
+        margin: auto;
+    }
+    &-content{
+        margin-top: 2rem;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        
+    }
+}
