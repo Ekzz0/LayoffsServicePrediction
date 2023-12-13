@@ -79,7 +79,7 @@ def model_fit(request: List[PersonDataTrain]):
 @router.post("/save_model", response_model=BaseResponse)
 def save(path: str):
     global new_model
-    model.save_model(path)
+    new_model.save_model(path)
     return {'status': HTTPStatus.OK, 'data': ''}
 
 
