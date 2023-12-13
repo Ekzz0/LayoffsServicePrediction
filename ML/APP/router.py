@@ -47,7 +47,7 @@ def predict_prob(request: List[PersonData]):
         pred[col] = X[col].values
 
     # Конвертируем pd.DataFrame в List[UsersProbability]
-    response = convert_dataframe_to_json(pred)
+    response = convert_dataframe_to_json(pred.sort_values(by=['probability'])[::-1])
 
     # Добавим названия ТОП 7-х признаков, которые повлияли на прогноз для каждого пользователя:
     for user_dict in response:
