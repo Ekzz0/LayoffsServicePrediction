@@ -56,8 +56,9 @@ def predict_prob(request: List[PersonData]):
 
 # Запрос для конструирования признаков
 @router.post("/fit", response_model=ResponseFit)
-def model_fit(request: List[PersonDataTrain]):
-    global model, feature_construct
+def model_fit(request: List[PersonDataTrain], path: str = os.path.abspath('models/XGBoost.pkl')):
+    global feature_construct
+    new_model = load_model(path)
     # Конвертируем List[PersonDataTrain] в pd.DataFrame
     df = convert_json_to_dataframe(request)
 
@@ -68,7 +69,7 @@ def model_fit(request: List[PersonDataTrain]):
     X, y = split_to_x_y(df, 'Resigned')
 
     # Обучение модели
-    score = model.fit(X, y)
+    score = new_model.fit(X, y)
 
     return {'status': HTTPStatus.OK, 'data': score}
 
