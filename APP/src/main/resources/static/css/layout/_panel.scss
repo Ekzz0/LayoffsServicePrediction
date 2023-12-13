@@ -1,0 +1,11 @@
+.panel{
+    @include section();
+    &-content{
+        justify-content: flex-start;
+        
+    }
+    &-submit{
+        width: 14rem;
+        margin-right: 2rem;
+    }
+}

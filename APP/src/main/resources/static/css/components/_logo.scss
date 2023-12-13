@@ -5,6 +5,7 @@
     width: 2rem;
     &__title{
         @include t-title();
+        
     }
     &__img{
         

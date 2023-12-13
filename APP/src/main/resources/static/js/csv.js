@@ -39,6 +39,7 @@ function postRequest(json){
     .then(data =>{
         data = JSON.parse(data)
         setTable(data)
+        // diagram(data) 
     })
     .catch(console.error)
 

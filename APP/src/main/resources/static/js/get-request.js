@@ -1,4 +1,4 @@
-getRequest('http://localhost:8081/')
+getRequest('localhost/3131')
 function getRequest(link){
     
     let info = fetch(link,{

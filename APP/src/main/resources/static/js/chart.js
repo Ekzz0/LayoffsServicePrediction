@@ -1,3 +1,5 @@
+diagram(["10.1.2000","17.1.2000"],[10,20],'modal-chart')//тест
+diagram(["10.1.2000","17.1.2000"],[10,20],'my-chart')
 function diagram(dates, probability, id){
   console.log(id)
   
