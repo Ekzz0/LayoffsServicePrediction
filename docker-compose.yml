@@ -16,4 +16,13 @@ services:
       - "8889:8889"
     depends_on:
       - postgres
+  app:
+    build:
+      context: ./APP
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    depends_on:
+      - postgres
+    container_name: app_container
 
