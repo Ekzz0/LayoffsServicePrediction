@@ -16,14 +16,16 @@ router = APIRouter(
 )
 
 model: MLModel
+new_model: MLModel
 feature_construct: feature_constructor
 
 
 # Загрузка модели при старте приложение
 @router.on_event("startup")
 def startup_event(path: str = os.path.abspath('models/XGBoost.pkl')):
-    global model, feature_construct
+    global model, new_model, feature_construct
     model = load_model(path)
+    new_model = load_model(path)
     feature_construct = load_feature_constructor()
 
 
@@ -56,9 +58,8 @@ def predict_prob(request: List[PersonData]):
 
 # Запрос для конструирования признаков
 @router.post("/fit", response_model=ResponseFit)
-def model_fit(request: List[PersonDataTrain], path: str = os.path.abspath('models/XGBoost.pkl')):
-    global feature_construct
-    new_model = load_model(path)
+def model_fit(request: List[PersonDataTrain]):
+    global feature_construct, new_model
     # Конвертируем List[PersonDataTrain] в pd.DataFrame
     df = convert_json_to_dataframe(request)
 
@@ -77,7 +78,7 @@ def model_fit(request: List[PersonDataTrain], path: str = os.path.abspath('model
 # Запрос для сохранения обученной модели
 @router.post("/save_model", response_model=BaseResponse)
 def save(path: str):
-    global model, feature_construct
+    global new_model
     model.save_model(path)
     return {'status': HTTPStatus.OK, 'data': ''}
 
@@ -85,6 +86,6 @@ def save(path: str):
 # Запрос для загрузки обученной модели
 @router.post("/load_model", response_model=BaseResponse)
 def load(path: str):
-    global model, feature_construct
+    global model
     model = load_model(path)
     return {'status': HTTPStatus.OK, 'data': ''}
