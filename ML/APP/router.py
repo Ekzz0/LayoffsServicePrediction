@@ -75,7 +75,7 @@ def model_fit(request: List[PersonDataTrain]):
 
 # Запрос для сохранения обученной модели
 @router.post("/save_model", response_model=BaseResponse)
-def save_model(path: str):
+def save(path: str):
     global model, feature_construct
     model.save_model(path)
     return {'status': HTTPStatus.OK, 'data': ''}
@@ -83,7 +83,7 @@ def save_model(path: str):
 
 # Запрос для загрузки обученной модели
 @router.post("/load_model", response_model=BaseResponse)
-def load_model(path: str):
+def load(path: str):
     global model, feature_construct
     model = load_model(path)
     return {'status': HTTPStatus.OK, 'data': ''}
