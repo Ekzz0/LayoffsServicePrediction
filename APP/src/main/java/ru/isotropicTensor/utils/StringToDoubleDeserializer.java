@@ -10,7 +10,7 @@ import java.io.IOException;
 public class StringToDoubleDeserializer extends JsonDeserializer<Double> {
 
     @Override
-    public Double deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JacksonException {
+    public Double deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
         String value = jsonParser.getValueAsString();
         try {
             return Double.parseDouble(value);
