@@ -1,68 +1,118 @@
 package ru.isotropicTensor.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import ru.isotropicTensor.utils.StringToDoubleDeserializer;
+import ru.isotropicTensor.utils.StringToIntegerDeserializer;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-//TODO на данный момент с фронта приходит Json в котором значения всех полей - строки
-// Однако, при согласовании Api были утверждены иные типы, пока перепишу на String, потом переделать как надо
 
 public class EmployeeData {
-    private String id;
+    @JsonDeserialize(using = StringToIntegerDeserializer.class)
+    private int id;
+
     @JsonProperty("Group")
     private String group;
+
     @JsonProperty("SentMessages")
-    private String sentMessages;
+    @JsonDeserialize(using = StringToIntegerDeserializer.class)
+    private int sentMessages;
+
     @JsonProperty("ReceivedMessages")
-    private String receivedMessages;
+    @JsonDeserialize(using = StringToIntegerDeserializer.class)
+    private int receivedMessages;
+
     @JsonProperty("MessagesOutsideWorkHours")
-    private String messagesOutsideWorkHours;
+    @JsonDeserialize(using = StringToIntegerDeserializer.class)
+    private int messagesOutsideWorkHours;
+
     @JsonProperty("SentFrequency")
-    private String SentFrequency;
+    @JsonDeserialize(using = StringToIntegerDeserializer.class)
+    private int SentFrequency;
+
     @JsonProperty("ReceivedFrequency")
-    private String ReceivedFrequency;
+    private int ReceivedFrequency;
+
     @JsonProperty("sent_received_ratio")
-    private String sentReceivedRatio;
+    @JsonDeserialize(using = StringToDoubleDeserializer.class)
+    private double sentReceivedRatio;
+
     @JsonProperty("UniqueRecipients")
-    private String uniqueRecipients;
+    @JsonDeserialize(using = StringToIntegerDeserializer.class)
+    private int uniqueRecipients;
+
     @JsonProperty("hidden_copy")
-    private String hiddenCopy;
+    @JsonDeserialize(using = StringToIntegerDeserializer.class)
+    private int hiddenCopy;
+
     @JsonProperty("carbon_copy")
-    private String carbonCopy;
+    @JsonDeserialize(using = StringToIntegerDeserializer.class)
+    private int carbonCopy;
+
     @JsonProperty("text_length")
-    private String textLength;
+    @JsonDeserialize(using = StringToIntegerDeserializer.class)
+    private int textLength;
+
     @JsonProperty("BytesSentReceivedRatio")
-    private String bytesSentReceivedRatio;
+    @JsonDeserialize(using = StringToDoubleDeserializer.class)
+    private double bytesSentReceivedRatio;
+
     @JsonProperty("question_marks")
-    private String questionMarks;
+    @JsonDeserialize(using = StringToIntegerDeserializer.class)
+    private int questionMarks;
+
     @JsonProperty("response_time")
-    private String responseTime;
+    @JsonDeserialize(using = StringToIntegerDeserializer.class)
+    private int responseTime;
+
     @JsonProperty("MessagesReadLater")
-    private String messagesReadLater;
+    @JsonDeserialize(using = StringToIntegerDeserializer.class)
+    private int messagesReadLater;
+
     @JsonProperty("DaysBetweenReceivedAndRead")
-    private String daysBetweenReceivedAndRead;
+    @JsonDeserialize(using = StringToIntegerDeserializer.class)
+    private int daysBetweenReceivedAndRead;
+
     @JsonProperty("answered_messages")
-    private String answeredMessages;
+    @JsonDeserialize(using = StringToIntegerDeserializer.class)
+    private int answeredMessages;
+
     @JsonProperty("unanswered_messages")
-    private String unansweredMessages;
+    @JsonDeserialize(using = StringToIntegerDeserializer.class)
+    private int unansweredMessages;
+
     @JsonProperty("unreplied_messages")
-    private String unrepliedMessages;
+    @JsonDeserialize(using = StringToIntegerDeserializer.class)
+    private int unrepliedMessages;
+
     @JsonProperty("mention_colleagues")
-    private String mentionColleagues;
+    @JsonDeserialize(using = StringToIntegerDeserializer.class)
+    private int mentionColleagues;
+
     @JsonProperty("MoodType")
-    private String moodType;
+    @JsonDeserialize(using = StringToIntegerDeserializer.class)
+    private int moodType;
+
     @JsonProperty("StressKeywordsPresent")
-    private String stressKeywordsPresent;
+    @JsonDeserialize(using = StringToIntegerDeserializer.class)
+    private int stressKeywordsPresent;
+
     @JsonProperty("SalaryChangeMentioned")
-    private String salaryChangeMentioned;
+    @JsonDeserialize(using = StringToIntegerDeserializer.class)
+    private int salaryChangeMentioned;
+
     @JsonProperty("VacationMentioned")
-    private String vacationMentioned;
+    @JsonDeserialize(using = StringToIntegerDeserializer.class)
+    private int vacationMentioned;
+
     @JsonProperty("polite_message")
-    private String politeMessage;
+    @JsonDeserialize(using = StringToIntegerDeserializer.class)
+    private int politeMessage;
 }
