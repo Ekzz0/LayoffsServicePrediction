@@ -11,7 +11,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 
 @Getter
@@ -27,7 +27,7 @@ public class EmployeeReport {
     @ManyToOne
     private Employee employee;
     private String department;
-    private Date date;
+    private LocalDateTime date;
     private int sentMessages;
     private int receivedMessages;
     private int messagesOutsideWorkHours;

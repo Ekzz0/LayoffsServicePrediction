@@ -12,7 +12,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -27,8 +27,7 @@ public class EmployeePrediction {
     private int id;
     @ManyToOne
     private Employee employee;
-    //Todo Переделать на timestamp
-    private Date date;
+    private LocalDateTime date;
     private float probability;
     private List<String> topFeatures;
 }
