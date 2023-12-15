@@ -1,10 +1,10 @@
 package ru.isotropicTensor.service;
 
-import ru.isotropicTensor.model.ApiResponse;
-import ru.isotropicTensor.model.EmployeeData;
+import ru.isotropicTensor.dto.ApiResponse;
+import ru.isotropicTensor.utils.EmployeeReportSerializer;
 
 import java.util.List;
 
 public interface EmployeeService {
-    ApiResponse getEmployeePredict(List<EmployeeData> dataList);
+    ApiResponse getEmployeePredict(List<EmployeeReportSerializer> dataList);
 }

@@ -1,9 +1,10 @@
-package ru.isotropicTensor.model;
+package ru.isotropicTensor.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import ru.isotropicTensor.utils.EmployeePredictionSerializer;
 
 import java.util.List;
 
@@ -13,5 +14,5 @@ import java.util.List;
 @NoArgsConstructor
 public class ApiResponse {
     private int status;
-    private List<EmployeePredictionData> data;
+    private List<EmployeePredictionSerializer> data;
 }

@@ -1,25 +1,25 @@
-package ru.isotropicTensor.model;
+package ru.isotropicTensor.utils;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import ru.isotropicTensor.utils.StringToDoubleDeserializer;
-import ru.isotropicTensor.utils.StringToIntegerDeserializer;
+import ru.isotropicTensor.utils.serializers.StringToDoubleDeserializer;
+import ru.isotropicTensor.utils.serializers.StringToIntegerDeserializer;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-
-public class EmployeeData {
+public class EmployeeReportSerializer {
     @JsonDeserialize(using = StringToIntegerDeserializer.class)
     private int id;
 
     @JsonProperty("Group")
-    private String group;
+    private String department;
 
     @JsonProperty("SentMessages")
     @JsonDeserialize(using = StringToIntegerDeserializer.class)
@@ -38,6 +38,7 @@ public class EmployeeData {
     private int SentFrequency;
 
     @JsonProperty("ReceivedFrequency")
+    @JsonDeserialize(using = StringToIntegerDeserializer.class)
     private int ReceivedFrequency;
 
     @JsonProperty("sent_received_ratio")
