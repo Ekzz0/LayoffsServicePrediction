@@ -1,7 +1,7 @@
-from sklearn.metrics import recall_score, f1_score, precision_score
+from sklearn.metrics import recall_score, f1_score, precision_score, classification_report
 from sklearn.model_selection import train_test_split
 from .processing import get_feature_indexes, get_importance
-from .schemas import Score
+from .schemas import Score, ClassificationReport
 import pandas as pd
 import numpy as np
 import traceback
@@ -29,7 +29,7 @@ class MLModel:
         pred['id'] = pred.index.astype('int')
         return pred[['id', 'probability']]
 
-    def fit(self, X: pd.DataFrame, y: pd.Series) -> Score:
+    def fit(self, X: pd.DataFrame, y: pd.Series) -> ClassificationReport:
         # Разделение на train и test выборки
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
         X_train = X_train if type(X_train) == np.ndarray else X_train.values
@@ -40,12 +40,27 @@ class MLModel:
 
         # Валидация модели
         predictions = self.model.predict(X_test.values)
+        report = classification_report(y_true=y_test, y_pred=predictions, output_dict=True)
 
-        recall = recall_score(y_true=y_test.values.ravel(), y_pred=predictions, average='weighted')
-        f1 = f1_score(y_true=y_test.values.ravel(), y_pred=predictions, average='weighted')
-        precision = precision_score(y_true=y_test.values.ravel(), y_pred=predictions, average='weighted')
+        report['first'] = report['0']
+        report['second'] = report['1']
+        report['macro_avg'] = report['macro avg']
+        report['weighted_avg'] = report['weighted avg']
 
-        return Score(recall=recall, f1=f1, precision=precision)
+        report['weighted_avg']['f1'] = report['weighted_avg']['f1-score']
+        report['macro_avg']['f1'] = report['macro_avg']['f1-score']
+        report['first']['f1'] = report['first']['f1-score']
+        report['second']['f1'] = report['second']['f1-score']
+
+        del report['0'], report['1'], report['macro avg'], report['weighted avg']
+        del report['second']['f1-score'], report['first']['f1-score']
+        del report['macro_avg']['f1-score'], report['weighted_avg']['f1-score']
+
+        return ClassificationReport(first=report['first'],
+                                    second=report['second'],
+                                    macro_avg=report['macro_avg'],
+                                    weighted_avg=report['weighted_avg'],
+                                    accuracy=report['accuracy'])
 
     def save_model(self, path: str):
         joblib.dump(self.model, path)
@@ -73,4 +88,3 @@ class MLModel:
             else:
                 features = pd.concat([bin_f_imp, count_f_imp, num_f_imp]).sort_values(by=['importance'])
                 return list(features.tail(7).index)
-
