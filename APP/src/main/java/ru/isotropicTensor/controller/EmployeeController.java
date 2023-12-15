@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.isotropicTensor.model.ApiResponse;
-import ru.isotropicTensor.model.EmployeeData;
-import ru.isotropicTensor.model.EmployeePredictionData;
+import ru.isotropicTensor.dto.ApiResponse;
+import ru.isotropicTensor.utils.EmployeeReportSerializer;
+import ru.isotropicTensor.utils.EmployeePredictionSerializer;
 import ru.isotropicTensor.service.EmployeeService;
 
 import java.util.List;
@@ -23,7 +23,7 @@ public class EmployeeController {
     }
 
     @PostMapping("/send-data")
-    public ResponseEntity<List<EmployeePredictionData>> getPredict(@RequestBody List<EmployeeData> dataList) {
+    public ResponseEntity<List<EmployeePredictionSerializer>> getPredict(@RequestBody List<EmployeeReportSerializer> dataList) {
         //TODO Убирать пустую строку из передаваемого Json
         ApiResponse apiResponse = employeeService.getEmployeePredict(dataList);
 
