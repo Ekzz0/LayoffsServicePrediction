@@ -3,7 +3,8 @@ function handle_data(data, link){
         set_table_main(data)
     }
     else{
-        set_table_admin(data)
+        console.log(link);
+        set_table_admin(data);
     }
 }
 
@@ -24,20 +25,33 @@ function set_table_main(data){
 }
 
 function set_table_admin(data){
-    table = document.getElementById('table-body-admin');
-    metrics =  ['class 0', 'class 1', 'accuracy', 'macro avg', 'weighted avg'];
-    let index = 0;
-    for (let item of data){
+    let table = document.getElementById('table-body-admin');
+    const metrics = ['first', 'second', 'macro_avg','weighted_avg'];
+    for (let metric of metrics){
         table.insertAdjacentHTML('beforeend', `<tr>
-        <td class="table__body-admin">${metrics[index]}</td>
-        <td class="table__body-admin"> ${item['precision']}%</td>
-        <td class="table__body-admin"> ${item['recall']}</td>
-        <td class="table__body-admin"> ${item['f1-score']}</td>
-        <td class="table__body-admin"> ${item['support']}</td>
+        <td class="table__body-admin">${metric}</td>
+        <td class="table__body-admin">${data[`${metric}`]['precision']}</td>
+        <td class="table__body-admin"> ${data[`${metric}`]['recall']}</td>
+        <td class="table__body-admin"> ${data[`${metric}`]['f1']}</td>
+        <td class="table__body-admin"> ${data[`${metric}`]['support']}</td>
         </tr>`);
-        index ++;
+        
 
         
     }
+    table.insertAdjacentHTML('beforeend', `<tr>
+    <td class="table__body-admin">accuracy</td>
+        <td class="table__body-admin">${data['accuracy']}</td>
+    </tr>`)
+    button_fit.addEventListener('click', handle_csv)
+    set_button_save()
+    
+    
 
+
+}
+
+function set_button_save(){
+    button_save = document.getElementById('process-save')
+    button_save.classList.toggle('active')
 }

@@ -1,6 +1,6 @@
 // get_request('localhost/3131')
 function get_request(link, id){
-
+    
     fetch(link,{
         method: "GET",
     })
