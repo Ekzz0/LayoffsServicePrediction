@@ -1,4 +1,4 @@
-package ru.isotropicTensor.utils;
+package ru.isotropicTensor.utils.serializers;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
