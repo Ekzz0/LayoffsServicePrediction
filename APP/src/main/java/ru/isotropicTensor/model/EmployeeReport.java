@@ -30,8 +30,8 @@ public class EmployeeReport {
     private int sentMessages;
     private int receivedMessages;
     private int messagesOutsideWorkHours;
-    private int SentFrequency;
-    private int ReceivedFrequency;
+    private int sentFrequency;
+    private int receivedFrequency;
     private double sentReceivedRatio;
     private int uniqueRecipients;
     private int hiddenCopy;
