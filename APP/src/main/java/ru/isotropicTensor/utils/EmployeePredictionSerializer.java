@@ -1,4 +1,4 @@
-package ru.isotropicTensor.model;
+package ru.isotropicTensor.utils;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -12,11 +12,11 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class EmployeePredictionData {
+public class EmployeePredictionSerializer {
     private int id;
     private float probability;
     @JsonProperty("Group")
-    private String group;
+    private String department;
     @JsonProperty("TopFeatures")
     private List<String> topFeatures;
 }
