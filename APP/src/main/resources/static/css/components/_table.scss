@@ -1,9 +1,13 @@
 .table{
-    width: 30rem;
+    width: 100%;
+    max-width: 30rem;
     border-collapse: collapse;
     border-radius: 50px;
     text-align: center;
     margin: 0 auto;
+    @media ($tablet) {
+        margin: 0;
+    }
     &__head{
         width: 100%;
         @include table-design();    
@@ -18,6 +22,10 @@
         }
         &-group{
             width: 50%;
+            height: 60px;
+        }
+        &-admin{
+            width: 20%;
             height: 60px;
         }
     }

@@ -1,7 +1,11 @@
 .input-data{
     width: 20rem;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    
+    @media ($phone) {
+        flex-direction: row;
+    }
     justify-content: space-between;
     &__block{
         display: block;
@@ -19,6 +23,7 @@
     &__submit{
         @include button();
         transition: all 0.3s ease;
+        cursor: pointer;
     }
     &__search{
         display: none;
@@ -31,5 +36,5 @@
         background-color: $textDark;
         color: $textAccent;
     }
-
+    
 }

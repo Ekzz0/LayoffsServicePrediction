@@ -1,4 +1,38 @@
 .header{
     @include section();
-    
+    z-index: 1;
+    position: relative;
+    &-wrapper{
+        position:relative;
+        z-index: 1;
+
+    }
+    &-content{
+        position: relative;
+        &__hackathon{
+            display: none;
+            @media ($tablet) {
+                display: block;
+            }
+        }
+        &__task{
+            display: none;
+            @media ($phone) {
+                display: block;
+            }
+        }
+        &__logo{
+            margin: 0 auto;
+            @media ($phone) {
+                margin: 0;
+            }
+        }
+    }
+    &-img{
+        position: relative;
+        z-index: 99;
+        top: 0;
+        left: 69%;
+        height: 0;
+    }
 }

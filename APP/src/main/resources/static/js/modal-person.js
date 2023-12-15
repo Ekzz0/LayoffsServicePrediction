@@ -1,5 +1,5 @@
 // import {diagram} from './chart.js' 
-modal_person() // тест
+ // тест
 
 // diagram(['10.1.2000','17.1.2000'],['10','20'],'modal-chart')
 function modal_person(){
@@ -14,7 +14,8 @@ function modal_person(){
     function open_modal(event){
         modal.style.display = "block"
         attachModalEvents()
-        construct_person(event)   
+        construct_person(event)
+        
     }
 
     function construct_person(event){
@@ -29,14 +30,23 @@ function modal_person(){
     class constructor_modal{
         construct(data, table_сell, model_cell) {
             let table_value = data.querySelector(table_сell)
-            this.set_value(table_value,model_cell)
-        }
-        set_value(table_value, model_cell){
             let modal_content = document.getElementById(model_cell)
             modal_content.textContent = table_value.textContent
+            // if (model_cell == 'person-id'){
+            //     data = get_request(`http://localhost:8081/api/persons/${table_value.textContent}`)
+            //     diagram(data, 'modal-chart')
+            // }
+            if (model_cell == 'person-id'){  // test
+                    let id = modal_content.textContent;
+                    console.log(`http://localhost:8081/api/persons/${table_value.textContent}`);
+                    get_request(`http://localhost:8081/api/persons/${id}`, id);
+                    // data = {dates:['10.10.2000',], probability:["10",]}
+                    
+            }
+
         }
     }
-    
+
     function attachModalEvents(){
         modal.querySelector(".modal-person__back").addEventListener('click', closeModal)
         modal.querySelector(".modal-person__cross").addEventListener('click', closeModal)
@@ -60,7 +70,6 @@ function modal_person(){
         modal.style.display = "none"
         removeModalEvents()
     }
-
 
     function removeModalEvents(){
         modal.querySelector(".modal-person__back").removeEventListener('click', closeModal)

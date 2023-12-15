@@ -1,7 +1,8 @@
 .download{
     @include section();
+    z-index: 1;
     &-content{
-        margin-top: 6rem;
+        margin-top: 3rem;
          
     }
 }

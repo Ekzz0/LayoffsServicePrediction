@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Isotropic tenor</title>
+    <title>Isotropic Tensor</title>
     <link rel="stylesheet" type="text/css" href="/static/css/index.css" th:href="@{css/index.css}">
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/images/atom.ico" th:href="@{images/atom.ico}">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/images/atom.ico" th:href="@{images/atom.ico}">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
     <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
     <script async type="text/javascript" src="/static/js/chart.js" th:src="@{js/chart.js}"></script>
@@ -13,7 +15,8 @@
     <script async type="text/javascript" src="/static/js/table.js" th:src="@{js/table.js}"></script>
     <script async type="text/javascript" src="/static/js/search.js" th:src="@{js/search.js}"></script>
     <script defer type="text/javascript" src="/static/js/modal-person.js" th:src="@{js/modal-person.js}"></script>
-    <script async type="module" src="/static/js/index.js" th:src="@{js/index.js}"></script>
+    <!-- <script async type="module" src="/static/js/index.js" th:src="@{js/index.js}"></script> -->
+    <script async type="module" src="/static/js/panel.js" th:src="@{js/panel.js}"></script>
 </head>
 <body>
     <header class="header">
@@ -21,7 +24,10 @@
                 <div class="header-content">
                     <div class="logo header-content__logo">
                         <img class="logo__img" src="../static/images/atom.svg" th:src="@{images/atom.svg}" alt="atom">
-                        <h2 class="logo__title">Isotropic<span class="logo__title-accent">Tensor</span></h2>
+                        <div>
+                            <h2 class="logo__title">Isotropic<span class="logo__title-accent">Tensor</span></h2>
+                        </div>
+                        <!-- <h2 class="logo__title">Isotropic<span class="logo__title-accent">Tensor</span></h2> -->
                     </div>
                     <div class="header-content__hackathon">
                         <h2 class="logo__title">Service Prediction Layoffs</h2>
@@ -32,14 +38,19 @@
                 </div>
                 <hr>
             </div>
+            <div class="header-img">
+                <img src="../static/images/kolmar.jpg" th:src="@{images/kolmar.jpg}" style="width: 25rem;" alt="kolmar">
+            </div>
     </header>
     <main>
         <div class="section-list">
             <section class="panel">
                 <div class="panel-wrapper">
                     <div class="panel-content">
-                        <button class="input-data__submit  panel-submit">main panel</button>
-                        <button class="input-data__submit panel-submit">admin panel</button>
+                        <div class="panel-buttons">
+                            <button class="input-data__submit  panel-submit active" id="main-panel">main panel</button>
+                            <button class="input-data__submit panel-submit" id="admin-panel">admin panel</button>
+                        </div>
                     </div>
                     <hr class="hr-line">
                 </div>
@@ -49,10 +60,11 @@
                     <div class="download-content">
                         <div class="input-data">
                             <label class="input-data__block" id="label-input">
-                                <input class="input-data__search" type="file" name="fileCsv" accept=".csv" id="csvFileInput" >
+                                <input class="input-data__search" type="file" name="fileCsv" accept=".csv" id="csv-file-input" >
                                 <span class="input-data__value" id="csv-value">Search file</span>
                             </label>
-                            <button class="input-data__submit" id="processCsv">Submit</button>
+                            <button class="input-data__submit" id="process-csv">Submit</button>
+                            <button class="input-data__submit hidden" id="process-fit">Fit</button>
                         </div>
                     </div>
                 </div>
@@ -60,8 +72,8 @@
             <section class="dashboard">
                 <div class="dashboard-wrapper">
                     <div class="dashboard-content">
-                        <div class="dashboard-table">
-                            <table id="table" class="table">
+                        <div class="dashboard-table" >
+                            <table class="table" id="table-main">
                                 <thead class="table__head">
                                     <tr class="table__head-container">
                                         <th class="table__head-id">Id</th>
@@ -69,25 +81,44 @@
                                         <th class="table__head-group">Group</th>
                                     </tr>
                                 </thead>
-                                <tbody class="table__body" id="table-body">
-                                    <tr>
-                                        <td class="table__body-id">id: 1024</td>
-                                        <td class="table__body-prob">probability: 10%</td>
-                                        <td class="table__body-group">Group: Marketing</td>
-                                        <td class="table__body-feature">TopFeatures: "unanswered_messages",
-                                            "ReceivedMessages",
-                                            "VacationMentioned",
-                                            "SalaryChangeMentioned",
-                                            "MessagesReadLater",
-                                            "unreplied_messages",
-                                            "carbon_copy"</td>
+                                <tbody class="table__body" id="table-body-main">
+                                </tbody>
+                            </table>
+                            <table class="table hidden" id="table-admin">
+                                <thead class="table__head">
+                                    <tr class="table__head-container">
+                                        <th class="table__head-admin"></th>
+                                        <th class="table__head-admin">precision</th>
+                                        <th class="table__head-admin">recall</th>
+                                        <th class="table__head-admin">f1-score</th>
+                                        <th class="table__head-admin">support</th>
                                     </tr>
+                                </thead>
+                                <tbody class="table__body hidden" id="table-body-admin">
                                 </tbody>
                             </table>
                         </div>
-                        <div class="dashboard-diagram">
+                        <div class="dashboard-diagram" id="diagram-main">
                             <div class="diagram">
                                 <canvas id="my-chart"></canvas>
+                            </div>
+                        </div>
+                        <div class="dashboard-text">
+                            <div class="dashboard-text-main">
+                                <h2>Главная страница:</h2>
+                                <p>Нужна для получения прогноза вероятности увольнения сотрудника</p>
+                                <p>1. Search file – для загрузки csv файла</p>
+                                <p>2. Submit – для получения прогноза вероятности увольнения по загруженному файлу</p>
+                                <p>3. При нажатии на уникальное ID в таблице появится информация по выбранному сотруднику</p>
+                            </div>
+                            <div class="dashboard-text-admin">
+                                <h2>Админ панель:</h2>
+                                <p>Нужна для доработки модели машинного обучения</p>
+                                <p>1. Search file – для загрузки csv файла</p>
+                                <p>2. Fit – для обучения модели на загруженном файле</p>
+                                <p>3. После обучения есть возможность оценить качество модели и сохранить ее для дальнейшего использования</p>
+                                <p>4. save - сохранить обученную модель</p>
+                                <p>5. update model - обновить используемую модель на новую</p>
                             </div>
                         </div>
                     </div>
@@ -108,10 +139,10 @@
                                 </div>
                             </div>
                             <div class="modal-person__text">
-                                <p class="modal-person__id" id="person-id">id</p>
-                                <p class="modal-person__variable" id="person-variable">variable</p>
-                                <p class="modal-person__group"  id="person-group" >group</p>
-                                <p class="modal-person__feature" id="person-feature">feauture</p>
+                                <div class="modal-person__text-item"><p>Id:&nbsp;</p><p class="modal-person__id" id="person-id">id</p></div>
+                                <div class="modal-person__text-item"><p>Variable:&nbsp;</p><p class="modal-person__variable" id="person-variable">variable</p></div>
+                                <div class="modal-person__text-item"><p>Group:&nbsp;</p><p class="modal-person__group"  id="person-group" >group</p></div>
+                                <div class="modal-person__text-item"><p style="width: 18rem;">Топ причин:&nbsp;</p><p class="modal-person__feature" id="person-feature">feauture</p></div>
                             </div>
                         </div>
                     </div>
