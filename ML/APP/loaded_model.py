@@ -42,22 +42,22 @@ class MLModel:
         predictions = self.model.predict(X_test.values)
         report = classification_report(y_true=y_test, y_pred=predictions, output_dict=True)
 
-        report['first'] = report['0']
-        report['second'] = report['1']
+        report['not_resign'] = report['0']
+        report['resign'] = report['1']
         report['macro_avg'] = report['macro avg']
         report['weighted_avg'] = report['weighted avg']
 
         report['weighted_avg']['f1'] = report['weighted_avg']['f1-score']
         report['macro_avg']['f1'] = report['macro_avg']['f1-score']
-        report['first']['f1'] = report['first']['f1-score']
-        report['second']['f1'] = report['second']['f1-score']
+        report['not_resign']['f1'] = report['not_resign']['f1-score']
+        report['resign']['f1'] = report['resign']['f1-score']
 
         del report['0'], report['1'], report['macro avg'], report['weighted avg']
-        del report['second']['f1-score'], report['first']['f1-score']
+        del report['resign']['f1-score'], report['not_resign']['f1-score']
         del report['macro_avg']['f1-score'], report['weighted_avg']['f1-score']
 
-        return ClassificationReport(first=report['first'],
-                                    second=report['second'],
+        return ClassificationReport(not_resign=report['not_resign'],
+                                    resign=report['resign'],
                                     macro_avg=report['macro_avg'],
                                     weighted_avg=report['weighted_avg'],
                                     accuracy=report['accuracy'])

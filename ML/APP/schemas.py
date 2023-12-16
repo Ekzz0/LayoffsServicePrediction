@@ -53,8 +53,8 @@ class Score(BaseModel):
 
 
 class ClassificationReport(BaseModel):
-    first: Score
-    second: Score
+    not_resign: Score
+    resign: Score
     macro_avg: Score
     weighted_avg: Score
     accuracy: float
