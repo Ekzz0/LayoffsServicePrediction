@@ -15,11 +15,13 @@ function get_request(link, id){
         throw(`Failed in get link ${link} fetch`)
     })
     .then(data => {
-        if(link == `http://localhost:8081/api/persons?=${id}`){
+        if(link == `http://localhost:8081/api/persons?id=${id}`){
             console.log(data)
             diagram(data, 'modal-chart')
         }
-        console.log(data.data)
+        console.log(data)
+        console.log(link)
+        console.log(`http://localhost:8081/api/persons?=${id}`)
     })
     .catch(console.error)
 
