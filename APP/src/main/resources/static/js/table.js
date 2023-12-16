@@ -10,7 +10,7 @@ function handle_data(data, link){
 
 function set_table_main(data){
     table = document.getElementById('table-body-main')
-    table.innerHTML = '';
+    // table.innerHTML = '';
     for (let item of data){
         top_features = String(item['TopFeatures'])
         top_features = top_features.replace(/,/g,', ')
@@ -28,7 +28,7 @@ function set_table_main(data){
 function set_table_admin(data){
     let table = document.getElementById('table-body-admin');
     const metrics = ['resign', 'not_resign', 'macro_avg','weighted_avg'];
-    table.innerHTML = '';
+    // table.innerHTML = '';
     for (let metric of metrics){
         table.insertAdjacentHTML('beforeend', `<tr>
         <td class="table__body-admin">${metric}</td>
