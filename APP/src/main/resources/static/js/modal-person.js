@@ -35,7 +35,7 @@ function modal_person(){
             if (model_cell == 'person-id'){
                 let id = modal_content.textContent;
                 console.log(`http://localhost:8081/api/persons/${id}`);
-                get_request(`http://localhost:8081/api/persons?${id}`, id);
+                get_request(`http://localhost:8081/api/persons?id=${id}`, id);
             }
             // if (model_cell == 'person-id'){  // test
             //         let id = modal_content.textContent;
