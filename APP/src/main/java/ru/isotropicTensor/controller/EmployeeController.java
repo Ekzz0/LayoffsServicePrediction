@@ -2,11 +2,9 @@ package ru.isotropicTensor.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.isotropicTensor.dto.ApiResponse;
+import ru.isotropicTensor.dto.EmployeePredictsDto;
 import ru.isotropicTensor.utils.EmployeeReportSerializer;
 import ru.isotropicTensor.utils.EmployeePredictionSerializer;
 import ru.isotropicTensor.service.EmployeeService;
@@ -36,4 +34,15 @@ public class EmployeeController {
             return ResponseEntity.status(apiResponse.getStatus()).body(null);
         }
     }
+    @GetMapping("/persons")
+    public ResponseEntity<EmployeePredictsDto> getPredictsById(@RequestParam(name = "id") int id) {
+        EmployeePredictsDto employeePredictsDto = employeeService.getEmployeePredictsById(id);
+        if (employeePredictsDto == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        } else {
+            return ResponseEntity.ok(employeePredictsDto);
+        }
+    }
+
+
 }
