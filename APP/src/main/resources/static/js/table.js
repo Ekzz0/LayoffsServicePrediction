@@ -64,8 +64,8 @@ function set_history_tables(data){
     history = document.getElementById("history_tables");
     history.innerHTML = '';
     for (let item of data){
-        history.insertAdjacentHTML(
-            <option>`${item}`</option>
+        history.insertAdjacentHTML('beforeend',
+            `<option>${item}</option>`
         )
     }
     button_open = document.getElementById('open_table')
