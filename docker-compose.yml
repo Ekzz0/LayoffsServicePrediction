@@ -1,9 +1,12 @@
 version: '3'
 services:
   postgres:
+    networks:
+      - "boba"     
     build:
       context: ./DATABASE
       dockerfile: Dockerfile
+    hostname: postgres
     container_name: employee_db_container
     ports:
       - "5433:5432"
@@ -17,6 +20,8 @@ services:
     depends_on:
       - postgres
   app:
+    networks:
+      - boba 
     build:
       context: ./APP
       dockerfile: Dockerfile
@@ -25,4 +30,6 @@ services:
     depends_on:
       - postgres
     container_name: app_container
+networks:
+  boba: 
 
