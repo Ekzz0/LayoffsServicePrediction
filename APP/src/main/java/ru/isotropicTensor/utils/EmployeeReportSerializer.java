@@ -116,4 +116,33 @@ public class EmployeeReportSerializer {
     @JsonProperty("polite_message")
     @JsonDeserialize(using = StringToIntegerDeserializer.class)
     private int politeMessage;
+
+    @Override
+    public String toString() {
+        return  "sentMessages=" + sentMessages +
+                ", receivedMessages=" + receivedMessages +
+                ", messagesOutsideWorkHours=" + messagesOutsideWorkHours +
+                ", SentFrequency=" + SentFrequency +
+                ", ReceivedFrequency=" + ReceivedFrequency +
+                ", sentReceivedRatio=" + sentReceivedRatio +
+                ", uniqueRecipients=" + uniqueRecipients +
+                ", hiddenCopy=" + hiddenCopy +
+                ", carbonCopy=" + carbonCopy +
+                ", textLength=" + textLength +
+                ", bytesSentReceivedRatio=" + bytesSentReceivedRatio +
+                ", questionMarks=" + questionMarks +
+                ", responseTime=" + responseTime +
+                ", messagesReadLater=" + messagesReadLater +
+                ", daysBetweenReceivedAndRead=" + daysBetweenReceivedAndRead +
+                ", answeredMessages=" + answeredMessages +
+                ", unansweredMessages=" + unansweredMessages +
+                ", unrepliedMessages=" + unrepliedMessages +
+                ", mentionColleagues=" + mentionColleagues +
+                ", moodType=" + moodType +
+                ", stressKeywordsPresent=" + stressKeywordsPresent +
+                ", salaryChangeMentioned=" + salaryChangeMentioned +
+                ", vacationMentioned=" + vacationMentioned +
+                ", politeMessage=" + politeMessage +
+                ';';
+    }
 }
