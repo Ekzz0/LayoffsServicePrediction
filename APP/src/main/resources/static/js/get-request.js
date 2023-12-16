@@ -1,5 +1,6 @@
 // get_request('localhost/3131')
-function get_request(link, id){
+get_request('http://localhost:8081/api/get-history')
+function get_request(link, id=undefined){
 
     fetch(link,{
         method: "GET",
@@ -19,9 +20,12 @@ function get_request(link, id){
             console.log(data)
             diagram(data, 'modal-chart')
         }
-        console.log(data)
-        console.log(link)
-        console.log(`http://localhost:8081/api/persons?=${id}`)
+        else if(link == 'http://localhost:8081/api/get-history'){
+            set_history_tables(data)
+        }
+        // console.log(data)
+        // console.log(link)
+        // console.log(`http://localhost:8081/api/persons?=${id}`)
     })
     .catch(console.error)
 

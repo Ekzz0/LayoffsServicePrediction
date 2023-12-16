@@ -23,6 +23,7 @@ function set_table_main(data){
         </tr>`)
     }
     modal_person();
+    get_request('http://localhost:8081/api/get-history');
 }
 
 function set_table_admin(data){
@@ -57,4 +58,15 @@ function set_button_save(){
     button_save.classList.toggle('hidden')
     button_save.addEventListener('click', handle_csv)
 
+}
+
+function set_history_tables(data){
+    history = document.getElementById("history_tables");
+    history.innerHTML = '';
+    for (let item of data){
+        history.insertAdjacentHTML(
+            <option>`${item}`</option>
+        )
+    }
+    button_open = document.getElementById('open_table')
 }
