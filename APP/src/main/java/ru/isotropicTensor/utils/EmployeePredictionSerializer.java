@@ -19,4 +19,5 @@ public class EmployeePredictionSerializer {
     private String department;
     @JsonProperty("TopFeatures")
     private List<String> topFeatures;
+    private String details;
 }
