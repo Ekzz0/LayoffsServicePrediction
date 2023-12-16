@@ -14,7 +14,7 @@ class MLModel:
     files = {}
     file_names = ['bin_f', 'count_f', 'num_f', 'cols_to_drop']
     for name in file_names:
-        files[name] = joblib.load(os.path.abspath('APP/data/' + name))
+        files[name] = joblib.load(os.path.join('APP/data/', name))
 
     def __init__(self, path: str):
         # Загрузка модель из файла
@@ -69,7 +69,7 @@ class MLModel:
         try:
             fi = self.model.feature_importances_
         except Exception as e:
-            print('Модель еще не обучена.')
+            return []
         else:
             # Получим индексы для всех типов признаков
             bin_f_ind = get_feature_indexes(df.columns, self.files['bin_f'])
