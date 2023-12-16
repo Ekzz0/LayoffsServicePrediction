@@ -16,8 +16,8 @@ function get_request(link, id){
     })
     .then(data => {
         if(link == `http://localhost:8081/api/persons/${id}`){
-            
-            diagram(data.data, 'modal-chart')
+            console.log(data)
+            diagram(data, 'modal-chart')
         }
         console.log(data.data)
     })

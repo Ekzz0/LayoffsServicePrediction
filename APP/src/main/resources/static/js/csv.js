@@ -93,11 +93,11 @@ function post_request(json, link){
     })
     .then(data =>{
         console.log(data)
-        console.log(data.data)
+        
         if (link == 'http://localhost:8081/api/save'){
 
         }else{
-            handle_data(data.data, link)
+            handle_data(data, link)
             // if (link == 'http://localhost:8081/api/send-data'){
             //     console.log(data.dates)
             //     diagram(data.dates,'my-chart')
