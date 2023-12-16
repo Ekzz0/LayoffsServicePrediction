@@ -27,7 +27,7 @@ function set_table_main(data){
 
 function set_table_admin(data){
     let table = document.getElementById('table-body-admin');
-    const metrics = ['first', 'second', 'macro_avg','weighted_avg'];
+    const metrics = ['resign', 'not_resign', 'macro_avg','weighted_avg'];
     table.innerHTML = '';
     for (let metric of metrics){
         table.insertAdjacentHTML('beforeend', `<tr>
