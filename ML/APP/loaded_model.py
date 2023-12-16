@@ -69,7 +69,7 @@ class MLModel:
         try:
             fi = self.model.feature_importances_
         except Exception as e:
-            print('Модель еще не обучена.')
+            return []
         else:
             # Получим индексы для всех типов признаков
             bin_f_ind = get_feature_indexes(df.columns, self.files['bin_f'])
