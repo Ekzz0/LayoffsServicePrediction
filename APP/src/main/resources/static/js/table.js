@@ -19,8 +19,8 @@ function set_table_main(data){
         <td class="table__body-prob">${(item['probability']*100).toFixed(1)}%</td>
         <td class="table__body-group">${item['Group']}</td>
         <td class="table__body-feature">${top_features}</td>
+        <td class="table__body-feature">${item['details']}</td>
         </tr>`)
-        
     }
     modal_person();
 }
@@ -37,9 +37,6 @@ function set_table_admin(data){
         <td class="table__body-admin"> ${data[`${metric}`]['f1']}</td>
         <td class="table__body-admin"> ${data[`${metric}`]['support']}</td>
         </tr>`);
-
-
-        
     }
     table.insertAdjacentHTML('beforeend', `<tr>
     <td class="table__body-admin">accuracy</td>
