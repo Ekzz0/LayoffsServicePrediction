@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import ru.isotropicTensor.dto.ApiResponse;
 import ru.isotropicTensor.dto.EmployeePredictsDto;
+import ru.isotropicTensor.dto.PredictsDto;
 import ru.isotropicTensor.model.Employee;
 import ru.isotropicTensor.model.EmployeePrediction;
 import ru.isotropicTensor.model.EmployeeReport;
@@ -16,6 +17,7 @@ import ru.isotropicTensor.utils.EmployeeReportSerializer;
 import ru.isotropicTensor.service.EmployeeService;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -51,6 +53,22 @@ public class EmployeeServiceImpl implements EmployeeService {
 
             return new EmployeePredictsDto(dates, probability);
         }
+    }
+
+    @Override
+    public PredictsDto getRecentPredicts() {
+        List<LocalDateTime> predictions = employeePredictionRepository.findAllByDate();
+        if (!predictions.isEmpty()) {
+            PredictsDto predictsDto = new PredictsDto();
+            predictsDto.setData(predictions
+                    .stream()
+                    .map(LocalDateTime::toString)
+                    .collect(Collectors.toList()));
+            return predictsDto;
+        } else {
+            return null;
+        }
+
     }
 
     @Override
@@ -144,6 +162,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
         return employees;
     }
+
 
     private EmployeePrediction buildTransientPrediction(EmployeePredictionSerializer serializer,
                                                         Employee employee, LocalDateTime timeStamp) {

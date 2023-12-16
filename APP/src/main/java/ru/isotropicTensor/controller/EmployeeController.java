@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.isotropicTensor.dto.ApiResponse;
 import ru.isotropicTensor.dto.EmployeePredictsDto;
+import ru.isotropicTensor.dto.PredictsDto;
 import ru.isotropicTensor.utils.EmployeeReportSerializer;
 import ru.isotropicTensor.utils.EmployeePredictionSerializer;
 import ru.isotropicTensor.service.EmployeeService;
@@ -41,6 +42,15 @@ public class EmployeeController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         } else {
             return ResponseEntity.ok(employeePredictsDto);
+        }
+    }
+    @GetMapping("/get-history")
+    public ResponseEntity<PredictsDto> getRecentPredicts() {
+        PredictsDto recentPredicts = employeeService.getRecentPredicts();
+        if (recentPredicts == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        } else {
+            return ResponseEntity.ok(recentPredicts);
         }
     }
 
