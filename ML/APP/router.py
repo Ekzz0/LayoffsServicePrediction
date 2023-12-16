@@ -22,10 +22,10 @@ feature_construct: feature_constructor
 
 # Загрузка модели при старте приложение
 @router.on_event("startup")
-def startup_event(path: str = os.path.abspath('models/XGBoost.pkl')):
+def startup_event(name: str = 'XGBoost'):
     global model, new_model, feature_construct
-    model = load_model(path)
-    new_model = load_model(path)
+    model = load_model(os.path.join('./models', name + '.pkl'))
+    new_model = load_model(os.path.join('./models', name + '.pkl'))
     feature_construct = load_feature_constructor()
 
 
@@ -77,15 +77,19 @@ def model_fit(request: List[PersonDataTrain]):
 
 # Запрос для сохранения обученной модели
 @router.post("/save_model", response_model=BaseResponse)
-def save(path: str):
+def save(name: str):
     global new_model
-    new_model.save_model(path)
+    new_model.save_model(os.path.join('./models', name + '.pkl'))
     return {'status': HTTPStatus.OK, 'data': ''}
 
 
 # Запрос для загрузки обученной модели
 @router.post("/load_model", response_model=BaseResponse)
-def load(path: str):
+def load(name: str):
     global model
-    model = load_model(path)
-    return {'status': HTTPStatus.OK, 'data': ''}
+    try:
+        model = load_model(os.path.join('./models', name + '.pkl'))
+    except FileNotFoundError:
+        return {'status': HTTPStatus.BAD_REQUEST, 'data': ''}
+    else:
+        return {'status': HTTPStatus.OK, 'data': ''}
