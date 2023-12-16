@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -54,6 +55,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public ApiResponse getEmployeePredict(List<EmployeeReportSerializer> dataList) {
+        Map<Integer, EmployeeReportSerializer> detailsMap = dataList.stream()
+                .collect(Collectors.toMap(EmployeeReportSerializer::getId, obj -> obj));
+
         //Получение списка сотрудников в репорте
         Map<Integer, Employee> employees = findOrSaveEmployeesById(dataList);
 
@@ -81,6 +85,11 @@ public class EmployeeServiceImpl implements EmployeeService {
             List<EmployeePrediction> transientPredictions = getTransientPredictionsFromSerializer(apiResponse.getData(),
                     employees, timeStamp);
             List<EmployeePrediction> persistantPredictions = employeePredictionRepository.saveAll(transientPredictions);
+        }
+
+        List<EmployeePredictionSerializer> serializers = apiResponse.getData();
+        for (EmployeePredictionSerializer serializer : serializers) {
+            serializer.setDetails(detailsMap.get(serializer.getId()).toString());
         }
 
 
