@@ -29,9 +29,9 @@ function modal_person(){
 
     class constructor_modal{
         construct(data, table_сell, model_cell) {
-            let table_value = data.querySelector(table_сell)
-            let modal_content = document.getElementById(model_cell)
-            modal_content.textContent = table_value.textContent
+            let table_value = data.querySelector(table_сell);
+            let modal_content = document.getElementById(model_cell);
+            modal_content.textContent = table_value.textContent;
             if (model_cell == 'person-id'){
                 let id = modal_content.textContent;
                 console.log(`http://localhost:8081/api/persons/${id}`);
