@@ -68,4 +68,10 @@
     &__cross:hover{
         color: $textAccent;
     }
+    &__text{
+        &-item{
+            display: flex;
+            flex-direction: row;
+        }
+    }
 }

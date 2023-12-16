@@ -34,15 +34,20 @@
     color: $textAccent;
 }
 @mixin button{
+    width: 100%;
     width: 5rem;
     height: 1.5rem;
     border-radius: 5px;
     background-color: $textAccent;
     color: $textDark;
     border: none;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     font-family: $titleFont;
-    
+    margin-top: 1rem;
+    @media ($phone) {
+        margin-top:0;
+        font-size: 0.9rem;
+    }
 }
 @mixin oninput-button{
     background-color: $textDark;
