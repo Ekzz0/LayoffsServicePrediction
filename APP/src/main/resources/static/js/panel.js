@@ -33,7 +33,10 @@ function toggle_panel(){
     .classList.toggle('hidden')
     document.getElementById('table-main')
     .classList.toggle('hidden')
-    
+    document.getElementById('history_tables')
+    .classList.toggle('hidden')
+    document.getElementById('model_tables')
+    .classList.toggle('hidden')
 
 }
 
