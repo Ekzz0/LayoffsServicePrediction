@@ -6,16 +6,15 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 
 @Getter
 @Setter
+@EqualsAndHashCode(exclude = "id")
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -31,8 +30,8 @@ public class EmployeeReport {
     private int sentMessages;
     private int receivedMessages;
     private int messagesOutsideWorkHours;
-    private int SentFrequency;
-    private int ReceivedFrequency;
+    private int sentFrequency;
+    private int receivedFrequency;
     private double sentReceivedRatio;
     private int uniqueRecipients;
     private int hiddenCopy;
