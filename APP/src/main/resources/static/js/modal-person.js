@@ -32,17 +32,18 @@ function modal_person(){
             let table_value = data.querySelector(table_сell)
             let modal_content = document.getElementById(model_cell)
             modal_content.textContent = table_value.textContent
-            // if (model_cell == 'person-id'){
-            //     data = get_request(`http://localhost:8081/api/persons/${table_value.textContent}`)
-            //     diagram(data, 'modal-chart')
-            // }
-            if (model_cell == 'person-id'){  // test
-                    let id = modal_content.textContent;
-                    console.log(`http://localhost:8081/api/persons/${table_value.textContent}`);
-                    get_request(`http://localhost:8081/api/persons/${id}`, id);
-                    // data = {dates:['10.10.2000',], probability:["10",]}
-                    
+            if (model_cell == 'person-id'){
+                let id = modal_content.textContent;
+                console.log(`http://localhost:8081/api/persons/${id}`);
+                get_request(`http://localhost:8081/api/persons?${id}`, id);
             }
+            // if (model_cell == 'person-id'){  // test
+            //         let id = modal_content.textContent;
+            //         console.log(`http://localhost:8081/api/persons/${table_value.textContent}`);
+            //         get_request(`http://localhost:8081/api/persons/${id}`, id);
+            //         // data = {dates:['10.10.2000',], probability:["10",]}
+                    
+            // }
 
         }
     }

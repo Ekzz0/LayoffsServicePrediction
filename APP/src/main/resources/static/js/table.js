@@ -10,6 +10,7 @@ function handle_data(data, link){
 
 function set_table_main(data){
     table = document.getElementById('table-body-main')
+    table.innerHTML = '';
     for (let item of data){
         top_features = String(item['TopFeatures'])
         top_features = top_features.replace(/,/g,', ')
@@ -27,6 +28,7 @@ function set_table_main(data){
 function set_table_admin(data){
     let table = document.getElementById('table-body-admin');
     const metrics = ['first', 'second', 'macro_avg','weighted_avg'];
+    table.innerHTML = '';
     for (let metric of metrics){
         table.insertAdjacentHTML('beforeend', `<tr>
         <td class="table__body-admin">${metric}</td>
@@ -35,7 +37,7 @@ function set_table_admin(data){
         <td class="table__body-admin"> ${data[`${metric}`]['f1']}</td>
         <td class="table__body-admin"> ${data[`${metric}`]['support']}</td>
         </tr>`);
-        
+
 
         
     }
@@ -52,6 +54,10 @@ function set_table_admin(data){
 }
 
 function set_button_save(){
+    
     button_save = document.getElementById('process-save')
-    button_save.classList.toggle('active')
+    console.log(button_save)
+    button_save.classList.toggle('hidden')
+    button_save.addEventListener('click', handle_csv)
+
 }
