@@ -4,6 +4,7 @@ import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import ru.isotropicTensor.dto.ApiResponse;
+import ru.isotropicTensor.dto.EmployeePredictsDto;
 import ru.isotropicTensor.model.Employee;
 import ru.isotropicTensor.model.EmployeePrediction;
 import ru.isotropicTensor.model.EmployeeReport;
@@ -34,13 +35,27 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
+    public EmployeePredictsDto getEmployeePredictsById(int id) {
+
+        List<EmployeePrediction> predictions = employeeRepository.getById(id).getPredictions();
+        if (predictions.isEmpty()) {
+            return null;
+        } else {
+            List<LocalDateTime> dates = new ArrayList<>();
+            List<Float> probability = new ArrayList<>();
+            for (EmployeePrediction prediction : predictions) {
+                dates.add(prediction.getDate());
+                probability.add(prediction.getProbability());
+            }
+
+            return new EmployeePredictsDto(dates, probability);
+        }
+    }
+
+    @Override
     public ApiResponse getEmployeePredict(List<EmployeeReportSerializer> dataList) {
         //Получение списка сотрудников в репорте
         Map<Integer, Employee> employees = findOrSaveEmployeesById(dataList);
-        //Получение списка репортов
-        List<EmployeeReport> transientReports = getTransientReportsFromSerializer(dataList, employees);
-        //Сохранение в базу данных
-        List<EmployeeReport> persistantReports = employeeReportRepository.saveAll(transientReports);
 
         // Построение запроса к Ml сервису
         HttpHeaders headers = new HttpHeaders();
@@ -56,8 +71,15 @@ public class EmployeeServiceImpl implements EmployeeService {
         ApiResponse apiResponse = response.getBody(); // Получение ответа
 
         if (apiResponse.getStatus() == HttpStatus.OK.value()) {
+
+            LocalDateTime timeStamp = LocalDateTime.now();
+            //Получение списка репортов
+            List<EmployeeReport> transientReports = getTransientReportsFromSerializer(dataList, employees, timeStamp);
+            //Сохранение в базу данных
+            List<EmployeeReport> persistantReports = employeeReportRepository.saveAll(transientReports);
+            // Сохранение предиктов в Бд, если всё хорошо
             List<EmployeePrediction> transientPredictions = getTransientPredictionsFromSerializer(apiResponse.getData(),
-                    employees);
+                    employees, timeStamp);
             List<EmployeePrediction> persistantPredictions = employeePredictionRepository.saveAll(transientPredictions);
         }
 
@@ -67,11 +89,12 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     private List<EmployeePrediction> getTransientPredictionsFromSerializer(List<EmployeePredictionSerializer> data,
-                                                                             Map<Integer, Employee> employees) {
+                                                                             Map<Integer, Employee> employees,
+                                                                           LocalDateTime timeStamp) {
         List<EmployeePrediction> predictions = new ArrayList<>();
         for (EmployeePredictionSerializer serializer : data) {
             int employeeId = serializer.getId();
-            predictions.add(buildTransientPrediction(serializer, employees.get(employeeId)));
+            predictions.add(buildTransientPrediction(serializer, employees.get(employeeId), timeStamp));
         }
         return predictions;
     }
@@ -79,11 +102,16 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 
     private List<EmployeeReport> getTransientReportsFromSerializer(List<EmployeeReportSerializer> dataList,
-                                                                   Map<Integer, Employee> employeeMap) {
+                                                                   Map<Integer, Employee> employeeMap,
+                                                                   LocalDateTime timeStamp) {
         List<EmployeeReport> employeeReports = new ArrayList<>();
         for (EmployeeReportSerializer employeeReportSerializer : dataList) {
             int employeeId = employeeReportSerializer.getId();
-            employeeReports.add(buildTransientEmployeeReport(employeeReportSerializer, employeeMap.get(employeeId)));
+            employeeReports.add(buildTransientEmployeeReport(
+                                    employeeReportSerializer,
+                                    employeeMap.get(employeeId),
+                                    timeStamp
+                            ));
         }
         return employeeReports;
     }
@@ -108,21 +136,22 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employees;
     }
 
-    private EmployeePrediction buildTransientPrediction(EmployeePredictionSerializer serializer, Employee employee) {
+    private EmployeePrediction buildTransientPrediction(EmployeePredictionSerializer serializer,
+                                                        Employee employee, LocalDateTime timeStamp) {
         return EmployeePrediction.builder()
                 .employee(employee)
-                .date(LocalDateTime.now())
+                .date(timeStamp)
                 .probability(serializer.getProbability())
                 .topFeatures(serializer.getTopFeatures())
                 .build();
     }
 
     private EmployeeReport buildTransientEmployeeReport(EmployeeReportSerializer employeeReportSerializer,
-                                                        Employee employee) {
+                                                        Employee employee, LocalDateTime timeStamp) {
         return EmployeeReport.builder()
                 .employee(employee)
                 .department(employeeReportSerializer.getDepartment())
-                .date(LocalDateTime.now())
+                .date(timeStamp)
                 .sentMessages(employeeReportSerializer.getSentMessages())
                 .receivedMessages(employeeReportSerializer.getReceivedMessages())
                 .messagesOutsideWorkHours(employeeReportSerializer.getMessagesOutsideWorkHours())
