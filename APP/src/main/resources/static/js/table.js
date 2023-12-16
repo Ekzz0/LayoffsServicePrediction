@@ -61,10 +61,11 @@ function set_button_save(){
 }
 
 function set_history_tables(data){
-    history = document.getElementById("history_tables");
-    history.innerHTML = '';
-    for (let item of data){
-        history.insertAdjacentHTML('beforeend',
+    historyElement = document.getElementById("history_tables");
+    historyElement.innerHTML = '';
+    console.log(data)
+    for (let item of data.data){
+        historyElement.insertAdjacentHTML('beforeend',
             `<option>${item}</option>`
         )
     }
