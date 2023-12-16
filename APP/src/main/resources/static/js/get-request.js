@@ -5,7 +5,7 @@ function get_request(link, id){
         method: "GET",
     })
     .then(response => {
-        if(!response.ok){
+        if(response.ok){
             return response.json()
         }
         // if(!response.ok){  // test
@@ -15,7 +15,7 @@ function get_request(link, id){
         throw(`Failed in get link ${link} fetch`)
     })
     .then(data => {
-        if(link == `http://localhost:8081/api/persons/${id}`){
+        if(link == `http://localhost:8081/api/persons?=${id}`){
             console.log(data)
             diagram(data, 'modal-chart')
         }
