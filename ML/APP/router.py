@@ -77,7 +77,7 @@ def model_fit(request: List[PersonDataTrain]):
 
 # Запрос для сохранения обученной модели
 @router.post("/save_model", response_model=BaseResponse)
-def save(name: str):
+def save(name: str = 'XGBoost'):
     global new_model
     new_model.save_model(os.path.join('./models', name + '.pkl'))
     return {'status': HTTPStatus.OK, 'data': ''}
@@ -85,7 +85,7 @@ def save(name: str):
 
 # Запрос для загрузки обученной модели
 @router.post("/load_model", response_model=BaseResponse)
-def load(name: str):
+def load(name: str = 'XGBoost'):
     global model
     try:
         model = load_model(os.path.join('./models', name + '.pkl'))
