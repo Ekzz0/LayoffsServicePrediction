@@ -15,4 +15,7 @@ public interface EmployeePredictionRepository extends JpaRepository<EmployeePred
     @Query("SELECT ep FROM EmployeePrediction ep WHERE ep.date = :date")
     List<EmployeePrediction> findByDate(@Param("date") LocalDateTime date);
 
+    @Query("SELECT ep FROM EmployeePrediction ep WHERE ep.date = (SELECT MAX(e.date) FROM EmployeePrediction e)")
+    List<EmployeePrediction> findLatestPrediction();
+
 }
