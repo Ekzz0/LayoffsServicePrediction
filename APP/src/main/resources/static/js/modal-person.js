@@ -33,6 +33,9 @@ function modal_person(){
             let table_value = data.querySelector(table_сell);
             let modal_content = document.getElementById(model_cell);
             modal_content.textContent = table_value.textContent;
+            console.log(data)
+            console.log(modal_content.textContent)
+            console.log(table_value.textContent)
             if (model_cell == 'person-id'){
                 let id = modal_content.textContent;
                 console.log(`http://localhost:8081/api/persons/${id}`);

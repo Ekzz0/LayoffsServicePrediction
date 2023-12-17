@@ -64,7 +64,7 @@ function set_history_tables(data){
     history_select = document.getElementById("history_tables");
     history_select.innerHTML = '';
     for (let item of data.data){
-        history.insertAdjacentHTML('beforeend',
+        history_select.insertAdjacentHTML('beforeend',
             `<option>${item}</option>`
         )
     }
