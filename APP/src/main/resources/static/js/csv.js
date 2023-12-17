@@ -17,14 +17,14 @@ function handle_csv(event) {
     //   const trimJson = json.slice(0,-1)
     //   console.log(trimJson)
       if(event.target == button_submit){
-        post_request(json, 'http://localhost:8081/api/send-data')
+        post_request(json, 'http://45.9.25.230:8081/api/send-data')
         send_report()
       }
       else if(event.target == button_fit) {
-        post_request(json, 'http://localhost:8081/api/fit')
+        post_request(json, 'http://45.9.25.230:8081/api/fit')
       }
       else{
-        post_request(file.name, 'http://localhost:8081/api/save')
+        post_request(file.name, 'http://45.9.25.230:8081/api/save')
       }
       
     }
@@ -43,12 +43,12 @@ function send_report(){
   function report(){
     button_send_report.classList.toggle('hidden')
     alert('Отправка данных на почту')
-    get_request('http://localhost:8081/api/send-report')
+    get_request('http://45.9.25.230:8081/api/send-report')
   }
 }
 
 function post_request(json, link){
-    if (link == 'http://localhost:8081/api/fit'){
+    if (link == 'http://45.9.25.230:8081/api/fit'){
         button_fit.removeEventListener('click', handle_csv);
     }
     fetch(link ,{
@@ -68,18 +68,18 @@ function post_request(json, link){
     })
     .then(data =>{
         console.log(data)
-        if (link == 'http://localhost:8081/api/save'){
+        if (link == 'http://45.9.25.230:8081/api/save'){
 
         }else{
             handle_data(data, link)
-            // if (link == 'http://localhost:8081/api/send-data'){
+            // if (link == 'http://45.9.25.230:8081/api/send-data'){
             //     console.log(data.dates)
             //     diagram(data.dates,'my-chart')
             // }
         
         }
         // handle_data(data.data, link)
-        // if (link == 'http://localhost:8081/api/send-data'){
+        // if (link == 'http://45.9.25.230:8081/api/send-data'){
         //     console.log(data.dates)
         //     diagram(data.dates,'my-chart')
         // }
