@@ -20,6 +20,7 @@ function get_request(link, id=undefined){
             set_history_tables(data)
         }
         else if(link == `http://localhost:8081/api/get-predict-by-date?selected_table=${id}`){
+            console.log(id)
             set_table_main(data)
         }
     })
