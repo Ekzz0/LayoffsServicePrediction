@@ -13,15 +13,15 @@ function get_request(link, id=undefined){
     })
     .then(data => {
         if(link == `http://localhost:8081/api/persons?id=${id}`){
-            console.log(data)
             diagram(data, 'modal-chart')
         }
         else if(link == 'http://localhost:8081/api/get-history'){
             set_history_tables(data)
         }
         else if(link == `http://localhost:8081/api/get-predict-by-date?selected_table=${id}`){
-            console.log(id)
             set_table_main(data.data)
+        }else if(link == 'http://localhost:8081/api/send-report'){
+            alert('Данные отправлены на почту')
         }
     })
     .catch(console.error)

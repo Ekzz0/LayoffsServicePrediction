@@ -18,6 +18,7 @@ function handle_csv(event) {
     //   console.log(trimJson)
       if(event.target == button_submit){
         post_request(json, 'http://localhost:8081/api/send-data')
+        send_report()
       }
       else if(event.target == button_fit) {
         post_request(json, 'http://localhost:8081/api/fit')
@@ -33,6 +34,15 @@ function handle_csv(event) {
     };
     reader.readAsText(file);
     
+}
+
+function send_report(){
+  button_send_report = document.getElementById('send_report')
+  button_send_report.classList.toggle('hidden')
+  button_send_report.addEventListener('click', report)
+  function report(){
+    get_request('http://localhost:8081/api/send-report')
+  }
 }
 
 function post_request(json, link){
@@ -56,7 +66,6 @@ function post_request(json, link){
     })
     .then(data =>{
         console.log(data)
-        
         if (link == 'http://localhost:8081/api/save'){
 
         }else{
