@@ -68,8 +68,7 @@ function set_history_tables(data){
             `<option>${item}</option>`
         )
     }
-    button_open = document.getElementById('open_table')
-    .addEventListener('click', open_table)
+    
 }
 
 function open_table(){
