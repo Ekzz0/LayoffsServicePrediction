@@ -14,9 +14,6 @@
   font-family: "lightItalic";
   src: url(../../fonts/Montserrat-LightItalic.ttf);
 }
-body{
-  overflow-x: hidden;
-}
 .modal-person {
   display: none;
   position: fixed;
@@ -211,7 +208,7 @@ body{
 }
 
 .input-data {
-  width: 20rem;
+  width: 30rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -262,6 +259,8 @@ body{
   margin-top: 1rem;
   transition: all 0.3s ease;
   cursor: pointer;
+  width: 6rem;
+  margin-left: 0.5rem;
 }
 @media (min-width: 381px) {
   .input-data__submit {
@@ -297,7 +296,7 @@ body{
   flex-direction: row;
   justify-content: space-between;
   margin-top: 1rem;
-  width: 26rem;
+  width: 30rem;
 }
 .history-option {
   color: white;
