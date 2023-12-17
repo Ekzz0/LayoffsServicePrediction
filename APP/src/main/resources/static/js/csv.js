@@ -41,6 +41,8 @@ function send_report(){
   button_send_report.classList.toggle('hidden')
   button_send_report.addEventListener('click', report)
   function report(){
+    button_send_report.classList.toggle('hidden')
+    alert('Отправка данных на почту')
     get_request('http://localhost:8081/api/send-report')
   }
 }
