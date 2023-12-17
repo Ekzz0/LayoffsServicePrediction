@@ -33,10 +33,10 @@ function set_table_admin(data){
     for (let metric of metrics){
         table.insertAdjacentHTML('beforeend', `<tr>
         <td class="table__body-admin">${metric}</td>
-        <td class="table__body-admin">${data[`${metric}`]['precision']}</td>
-        <td class="table__body-admin"> ${data[`${metric}`]['recall']}</td>
-        <td class="table__body-admin"> ${data[`${metric}`]['f1']}</td>
-        <td class="table__body-admin"> ${data[`${metric}`]['support']}</td>
+        <td class="table__body-admin">${data[`${metric}`]['precision'].toFixed(2)}</td>
+        <td class="table__body-admin"> ${data[`${metric}`]['recall'].toFixed(2)}</td>
+        <td class="table__body-admin"> ${data[`${metric}`]['f1'].toFixed(2)}</td>
+        <td class="table__body-admin"> ${data[`${metric}`]['support'].toFixed(2)}</td>
         </tr>`);
     }
     table.insertAdjacentHTML('beforeend', `<tr>
@@ -45,9 +45,6 @@ function set_table_admin(data){
     </tr>`)
     button_fit.addEventListener('click', handle_csv)
     set_button_save()
-    
-    
-
 
 }
 
@@ -74,10 +71,8 @@ function set_history_tables(data){
 function open_table(){
     button_open = document.getElementById('history_tables')
     button_open = button_open.options[button_open.selectedIndex]
-  // Получаем выбранный элемент
+    
     selected_table = button_open.textContent
-
-  // Получаем текстовое содержимое выбранного элемента
     
     get_request(`http://localhost:8081/api/get-predict-by-date?selected_table=${selected_table}`, selected_table)
   // Выводим текстовое содержимое в консоль (или делаем с ним что-то еще)
