@@ -40,6 +40,5 @@ function toggle_panel(){
     document.getElementById('send_report')
     .classList.toggle('hidden')
     
-
 }
 

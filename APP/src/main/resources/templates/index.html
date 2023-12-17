@@ -44,7 +44,7 @@
     </header>
     <main>
         <div class="section-list">
-            <section class="panel">
+            <div class="panel">
                 <div class="panel-wrapper">
                     <div class="panel-content">
                         <div class="panel-buttons">
@@ -54,8 +54,8 @@
                     </div>
                     <hr class="hr-line">
                 </div>
-            </section>
-            <section class="download">
+            </div>
+            <div class="download">
                 <div class="download-wrapper">
                     <div class="download-content">
                         <div class="input-data">
@@ -70,8 +70,9 @@
                         </div>
                         <div class="history-list" id="table-list">
                             <form>
-                                <label for="tables"></label>
+                                <!-- <label for="tables" id="tables"></label> -->
                                 <select class="history" name="tables" id="history_tables">
+                                    
                                 </select>
                             </form>
                             <button onclick="open_table()" class="input-data__submit" id="open_table">Open</button>
@@ -79,7 +80,6 @@
                         </div>
                         <div class="history-list hidden" id="model-list">
                             <form>
-                                <label for="tables"></label>
                                 <select name="tables" id="history_models">
                                 </select>
                                 <button class="input-data__submit">Update</button>
@@ -87,8 +87,8 @@
                         </div>
                     </div>
                 </div>
-            </section>
-            <section class="dashboard">
+            </div>
+            <div class="dashboard">
                 <div class="dashboard-wrapper">
                     <div class="dashboard-content">
                         <div class="dashboard-table" >
@@ -145,8 +145,8 @@
                         </div>
                     </div>
                 </div>
-            </section>
-            <section>
+            </div>
+            <div>
                 <div class="modal-person" id="modal-id">
                     <div class="modal-person__content">
                         <div class="modal-person__close">
@@ -170,7 +170,7 @@
                         <div class="modal-person-details"><p>Details:&nbsp;</p><p class="modal-person__details"  id="person-details" >details</p></div>
                     </div>
                 </div>
-            </section>
+            </div>
         </div>
 
 
