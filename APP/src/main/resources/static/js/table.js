@@ -83,5 +83,5 @@ function open_table(){
 
   // Выводим текстовое содержимое в консоль (или делаем с ним что-то еще)
   console.log(selected_table);
-
+    get_request(`http://localhost:8081/api/get-predict-by-date?${selected_table}`, selected_table)
 }

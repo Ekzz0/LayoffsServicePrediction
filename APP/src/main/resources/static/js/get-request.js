@@ -23,6 +23,9 @@ function get_request(link, id=undefined){
         else if(link == 'http://localhost:8081/api/get-history'){
             set_history_tables(data)
         }
+        else if(link == `http://localhost:8081/api/get-predict-by-date?${id}`){
+            set_table_main(data)
+        }
         // console.log(data)
         // console.log(link)
         // console.log(`http://localhost:8081/api/persons?=${id}`)
