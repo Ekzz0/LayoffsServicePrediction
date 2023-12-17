@@ -1,5 +1,5 @@
 .input-data{
-    width: 20rem;
+    width: 30rem;
     display: flex;
     flex-direction: column;
     
@@ -24,6 +24,8 @@
         @include button();
         transition: all 0.3s ease;
         cursor: pointer;
+        width: 6rem;
+        margin-left: 0.5rem;
     }
     &__search{
         display: none;
