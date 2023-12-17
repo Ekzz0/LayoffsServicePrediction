@@ -18,10 +18,7 @@ import ru.isotropicTensor.service.EmployeeService;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -110,7 +107,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             serializer.setDetails(detailsMap.get(serializer.getId()).toString());
         }
 
-
+        Collections.sort(serializers, Comparator.comparing(EmployeePredictionSerializer::getProbability).reversed());
         // TODO: Почитать что RestTemplate возвращает, обработать исключения и так далее.
         return apiResponse; // Отправка результатов предикта в контроллер
     }
@@ -140,6 +137,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
                 serializers.add(serializer);
             }
+            Collections.sort(serializers, Comparator.comparing(EmployeePredictionSerializer::getProbability).reversed());
             apiResponse.setData(serializers);
             apiResponse.setStatus(HttpStatus.OK.value());
             return apiResponse;
