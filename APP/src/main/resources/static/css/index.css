@@ -93,6 +93,11 @@
   display: flex;
   flex-direction: row;
 }
+.modal-person_deteails {
+  font-size: 1rem;
+  font-family: boldMonserat, sans-serif;
+  color: #403F3D;
+}
 
 .diagram {
   width: 500px;

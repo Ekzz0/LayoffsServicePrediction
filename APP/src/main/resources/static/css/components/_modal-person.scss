@@ -74,4 +74,7 @@
             flex-direction: row;
         }
     }
+    &_deteails{
+        @include t-table-header();
+    }
 }
