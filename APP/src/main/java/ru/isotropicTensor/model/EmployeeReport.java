@@ -51,4 +51,35 @@ public class EmployeeReport {
     private int salaryChangeMentioned;
     private int vacationMentioned;
     private int politeMessage;
+
+    @Override
+    public String toString() {
+        return
+                "employee=" + employee.getId() +
+                ", department='" + department + '\'' +
+                ", sentMessages=" + sentMessages +
+                ", receivedMessages=" + receivedMessages +
+                ", messagesOutsideWorkHours=" + messagesOutsideWorkHours +
+                ", sentFrequency=" + sentFrequency +
+                ", receivedFrequency=" + receivedFrequency +
+                ", sentReceivedRatio=" + sentReceivedRatio +
+                ", uniqueRecipients=" + uniqueRecipients +
+                ", hiddenCopy=" + hiddenCopy +
+                ", carbonCopy=" + carbonCopy +
+                ", textLength=" + textLength +
+                ", bytesSentReceivedRatio=" + bytesSentReceivedRatio +
+                ", questionMarks=" + questionMarks +
+                ", responseTime=" + responseTime +
+                ", messagesReadLater=" + messagesReadLater +
+                ", daysBetweenReceivedAndRead=" + daysBetweenReceivedAndRead +
+                ", answeredMessages=" + answeredMessages +
+                ", unansweredMessages=" + unansweredMessages +
+                ", unrepliedMessages=" + unrepliedMessages +
+                ", mentionColleagues=" + mentionColleagues +
+                ", moodType=" + moodType +
+                ", stressKeywordsPresent=" + stressKeywordsPresent +
+                ", salaryChangeMentioned=" + salaryChangeMentioned +
+                ", vacationMentioned=" + vacationMentioned +
+                ", politeMessage=" + politeMessage;
+    }
 }
