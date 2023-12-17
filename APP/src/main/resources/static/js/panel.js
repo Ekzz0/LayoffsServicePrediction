@@ -37,6 +37,10 @@ function toggle_panel(){
     .classList.toggle('hidden')
     document.getElementById('model_tables')
     .classList.toggle('hidden')
+    if (!document.getElementById('send_report').contains('hidden')){
+        document.getElementById('send_report')
+        .classList.toggle('hidden')
+    }
 
 }
 
