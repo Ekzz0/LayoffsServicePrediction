@@ -176,6 +176,9 @@
 .table__body-feature {
   display: none;
 }
+.table__body-details {
+  display: none;
+}
 
 .logo {
   display: flex;
@@ -265,6 +268,44 @@
 .input-data__submit:hover {
   background-color: #403F3D;
   color: #f4c430;
+}
+
+.history {
+  width: 20rem;
+  display: block;
+  font-size: 1rem;
+  font-family: boldMonserat, sans-serif;
+  color: #f4c430;
+  background-color: #403F3D;
+  border-radius: 0.6rem;
+  border-color: inherit;
+  text-align: center;
+}
+.history-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 1rem;
+  width: 26rem;
+}
+.history-option {
+  color: white;
+  background-color: #403F3D;
+}
+
+.history option {
+  padding: 0.5em;
+}
+
+.history:hover {
+  color: #403F3D;
+  background-color: #f4c430;
+  outline: none;
+}
+
+.history:hover option {
+  color: #403F3D;
+  background-color: #f4c430;
 }
 
 .header {
@@ -399,6 +440,9 @@
 }
 .download-content {
   margin-top: 3rem;
+}
+.download-content {
+  flex-direction: column;
 }
 
 .panel {
