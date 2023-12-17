@@ -1,7 +1,9 @@
-from sklearn.metrics import recall_score, f1_score, precision_score, classification_report
+from sklearn.metrics import classification_report
 from sklearn.model_selection import train_test_split
+
+from .const import feature_names
 from .processing import get_feature_indexes, get_importance
-from .schemas import Score, ClassificationReport
+from .schemas import ClassificationReport
 import pandas as pd
 import numpy as np
 import traceback
@@ -87,4 +89,9 @@ class MLModel:
                 print(traceback.format_exc())
             else:
                 features = pd.concat([bin_f_imp, count_f_imp, num_f_imp]).sort_values(by=['importance'])
+
+                # Заменим название фичи на русское описание фичи
+                new_ind = [feature_names[i] for i in list(features.index)]
+                features.index = new_ind
+
                 return list(features.tail(7).index)
