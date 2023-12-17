@@ -1,5 +1,5 @@
 function handle_data(data, link){
-    if (link == 'http://localhost:8081/api/send-data'){
+    if (link == 'http://45.9.25.230:8081/api/send-data'){
         set_table_main(data)
     }
     else{
@@ -23,7 +23,7 @@ function set_table_main(data){
         </tr>`)
     }
     modal_person();
-    get_request('http://localhost:8081/api/get-history');
+    get_request('http://45.9.25.230:8081/api/get-history');
 }
 
 function set_table_admin(data){
@@ -74,7 +74,7 @@ function open_table(){
     
     selected_table = button_open.textContent
     
-    get_request(`http://localhost:8081/api/get-predict-by-date?selected_table=${selected_table}`, selected_table)
+    get_request(`http://45.9.25.230:8081/api/get-predict-by-date?selected_table=${selected_table}`, selected_table)
   // Выводим текстовое содержимое в консоль (или делаем с ним что-то еще)
   console.log(selected_table);
 

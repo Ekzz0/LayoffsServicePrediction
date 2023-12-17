@@ -38,8 +38,8 @@ function modal_person(){
             console.log(table_value.textContent)
             if (model_cell == 'person-id'){
                 let id = modal_content.textContent;
-                console.log(`http://localhost:8081/api/persons/${id}`);
-                get_request(`http://localhost:8081/api/persons?id=${id}`, id);
+                console.log(`http://45.9.25.230:8081/api/persons/${id}`);
+                get_request(`http://45.9.25.230:8081/api/persons?id=${id}`, id);
             }
         }
     }
