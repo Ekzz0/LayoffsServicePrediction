@@ -10,6 +10,7 @@ import ru.isotropicTensor.utils.EmployeeReportSerializer;
 import ru.isotropicTensor.utils.EmployeePredictionSerializer;
 import ru.isotropicTensor.service.EmployeeService;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -53,6 +54,10 @@ public class EmployeeController {
             return ResponseEntity.ok(recentPredicts);
         }
     }
-
+    @GetMapping("/get-predict-by-date")
+    public ResponseEntity<ApiResponse> getPredictByDate(@RequestParam(name = "selected_table") LocalDateTime dateTime) {
+        ApiResponse apiResponse = employeeService.getPredictByDate(dateTime);
+        return ResponseEntity.status(HttpStatus.resolve(apiResponse.getStatus())).body(apiResponse);
+    }
 
 }
