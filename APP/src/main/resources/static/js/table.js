@@ -69,4 +69,19 @@ function set_history_tables(data){
         )
     }
     button_open = document.getElementById('open_table')
+    .addEventListener('click', open_table)
+}
+
+function open_table(){
+    button_open = document.getElementById('open_table')
+    button_open = button_open.options[button_open.selectedIndex]
+  // Получаем выбранный элемент
+    selected_table = button_open.textContent
+
+  // Получаем текстовое содержимое выбранного элемента
+  
+
+  // Выводим текстовое содержимое в консоль (или делаем с ним что-то еще)
+  console.log(selected_table);
+
 }
