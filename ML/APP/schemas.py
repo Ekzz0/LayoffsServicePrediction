@@ -31,7 +31,7 @@ class PersonData(BaseModel):
     VacationMentioned: int = Field(..., title="VacationMentioned")
     PoliteMessage: int = Field(..., title="PoliteMessage")
     Group: str = Field(..., title="Group")
-    details: None
+
 
 
 class PersonDataTrain(PersonData):
