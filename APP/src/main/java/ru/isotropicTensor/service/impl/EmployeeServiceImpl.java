@@ -115,6 +115,42 @@ public class EmployeeServiceImpl implements EmployeeService {
         return apiResponse; // Отправка результатов предикта в контроллер
     }
 
+    @Override
+    public ApiResponse getPredictByDate(LocalDateTime dateTime) {
+        ApiResponse apiResponse = new ApiResponse();
+        // Получили предикты
+        List<EmployeePrediction> predictions = employeePredictionRepository.findByDate(dateTime);
+        // Получили репорты
+        List<EmployeeReport> reports = employeeReportRepository.findByDate(dateTime);
+
+        if (!predictions.isEmpty() && !reports.isEmpty()) {
+            Map<Integer, String> reportMap  = reports.stream()
+                    .collect(Collectors.toMap(report -> report.getEmployee().getId(), EmployeeReport::toString));
+            Map<Integer,EmployeePrediction> predictionsMap = predictions.stream()
+                    .collect(Collectors.toMap(prediction -> prediction.getEmployee().getId(), prediction -> prediction));
+
+            List<EmployeePredictionSerializer> serializers = new ArrayList<>();
+            for (int key :reportMap.keySet()) {
+                EmployeePredictionSerializer serializer = new EmployeePredictionSerializer();
+                serializer.setId(key);
+                serializer.setProbability(predictionsMap.get(key).getProbability());
+                serializer.setDepartment(predictionsMap.get(key).getEmployee().getDepartment());
+                serializer.setTopFeatures(predictionsMap.get(key).getTopFeatures());
+                serializer.setDetails(reportMap.get(key));
+
+                serializers.add(serializer);
+            }
+            apiResponse.setData(serializers);
+            apiResponse.setStatus(HttpStatus.OK.value());
+            return apiResponse;
+
+        } else {
+            apiResponse.setStatus(HttpStatus.NOT_FOUND.value());
+            apiResponse.setData(null);
+            return apiResponse;
+        }
+    }
+
     private List<EmployeePrediction> getTransientPredictionsFromSerializer(List<EmployeePredictionSerializer> data,
                                                                              Map<Integer, Employee> employees,
                                                                            LocalDateTime timeStamp) {
