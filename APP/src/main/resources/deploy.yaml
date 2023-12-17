@@ -1,0 +1,12 @@
+server:
+  port: 8081
+
+spring:
+  datasource:
+    url: jdbc:postgresql://postgres:5432/employee_db
+    username: user
+    password: password
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
