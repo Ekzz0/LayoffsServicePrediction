@@ -73,7 +73,7 @@ function set_history_tables(data){
 }
 
 function open_table(){
-    button_open = document.getElementById('open_table')
+    button_open = document.getElementById('history_tables')
     button_open = button_open.options[button_open.selectedIndex]
   // Получаем выбранный элемент
     selected_table = button_open.textContent
