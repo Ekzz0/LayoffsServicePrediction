@@ -33,7 +33,6 @@ class PersonData(BaseModel):
     Group: str = Field(..., title="Group")
 
 
-
 class PersonDataTrain(PersonData):
     Resigned: int = Field(..., title="Resigned")
 
