@@ -41,7 +41,7 @@ public class EmployeeReportSerializer {
     @JsonDeserialize(using = StringToIntegerDeserializer.class)
     private int ReceivedFrequency;
 
-    @JsonProperty("sent_received_ratio")
+    @JsonProperty("SentReceivedRatio")
     @JsonDeserialize(using = StringToDoubleDeserializer.class)
     private double sentReceivedRatio;
 
@@ -49,15 +49,15 @@ public class EmployeeReportSerializer {
     @JsonDeserialize(using = StringToIntegerDeserializer.class)
     private int uniqueRecipients;
 
-    @JsonProperty("hidden_copy")
+    @JsonProperty("HiddenCopy")
     @JsonDeserialize(using = StringToIntegerDeserializer.class)
     private int hiddenCopy;
 
-    @JsonProperty("carbon_copy")
+    @JsonProperty("CarbonCopy")
     @JsonDeserialize(using = StringToIntegerDeserializer.class)
     private int carbonCopy;
 
-    @JsonProperty("text_length")
+    @JsonProperty("TextLength")
     @JsonDeserialize(using = StringToIntegerDeserializer.class)
     private int textLength;
 
@@ -65,11 +65,11 @@ public class EmployeeReportSerializer {
     @JsonDeserialize(using = StringToDoubleDeserializer.class)
     private double bytesSentReceivedRatio;
 
-    @JsonProperty("question_marks")
+    @JsonProperty("QuestionMarks")
     @JsonDeserialize(using = StringToIntegerDeserializer.class)
     private int questionMarks;
 
-    @JsonProperty("response_time")
+    @JsonProperty("ResponseTime")
     @JsonDeserialize(using = StringToIntegerDeserializer.class)
     private int responseTime;
 
@@ -81,19 +81,19 @@ public class EmployeeReportSerializer {
     @JsonDeserialize(using = StringToIntegerDeserializer.class)
     private int daysBetweenReceivedAndRead;
 
-    @JsonProperty("answered_messages")
+    @JsonProperty("AnsweredMessages")
     @JsonDeserialize(using = StringToIntegerDeserializer.class)
     private int answeredMessages;
 
-    @JsonProperty("unanswered_messages")
+    @JsonProperty("UnansweredMessages")
     @JsonDeserialize(using = StringToIntegerDeserializer.class)
     private int unansweredMessages;
 
-    @JsonProperty("unreplied_messages")
+    @JsonProperty("UnrepliedMessages")
     @JsonDeserialize(using = StringToIntegerDeserializer.class)
     private int unrepliedMessages;
 
-    @JsonProperty("mention_colleagues")
+    @JsonProperty("MentionColleagues")
     @JsonDeserialize(using = StringToIntegerDeserializer.class)
     private int mentionColleagues;
 
@@ -113,7 +113,7 @@ public class EmployeeReportSerializer {
     @JsonDeserialize(using = StringToIntegerDeserializer.class)
     private int vacationMentioned;
 
-    @JsonProperty("polite_message")
+    @JsonProperty("PoliteMessage")
     @JsonDeserialize(using = StringToIntegerDeserializer.class)
     private int politeMessage;
 
