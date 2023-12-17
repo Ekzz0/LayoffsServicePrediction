@@ -49,43 +49,6 @@ function post_request(json, link){
             alert('Ваш файл загружен')
             return response.json()
         }
-        // if (!response.ok){   //test
-        //     alert('Ваш файл загружен')
-        //     return {"status":200,"data":[{"id":2801,"probability":0.0003135796869173646,"Group":"Development Department","TopFeatures":["SentMessages","answered_messages","VacationMentioned","ReceivedMessages","unreplied_messages","text_length"]},{"id":2801,"probability":0.0003135796869173646,"Group":"Development Department","TopFeatures":["SentMessages","answered_messages","VacationMentioned","ReceivedMessages","unreplied_messages","text_length","MessagesReadLater"]}],"dates":{"dates": ['10.1.2000','12.1.2000'], "probability": ['10', '12']}}
-        // }
-        // if (!response.ok){   //test
-        //     alert('Ваш файл загружен');
-        //     return {
-        //         "status": 200,
-        //         "data": {
-        //           "first": {
-        //             "precision": 0.7368421052631579,
-        //             "recall": 0.875,
-        //             "f1": 0.7999999999999999,
-        //             "support": 16
-        //           },
-        //           "second": {
-        //             "precision": 0.8181818181818182,
-        //             "recall": 0.6428571428571429,
-        //             "f1": 0.7200000000000001,
-        //             "support": 14
-        //           },
-        //           "macro_avg": {
-        //             "precision": 0.777511961722488,
-        //             "recall": 0.7589285714285714,
-        //             "f1": 0.76,
-        //             "support": 30
-        //           },
-        //           "weighted_avg": {
-        //             "precision": 0.7748006379585327,
-        //             "recall": 0.7666666666666667,
-        //             "f1": 0.7626666666666667,
-        //             "support": 30
-        //           },
-        //           "accuracy": 0.7666666666666667
-        //         }
-        //       }
-        // }
         else{
             alert('Файл не был загружен');
             throw(`Failed in post ${link} fetch`);

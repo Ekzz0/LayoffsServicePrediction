@@ -19,7 +19,7 @@ function set_table_main(data){
         <td class="table__body-prob">${(item['probability']*100).toFixed(1)}%</td>
         <td class="table__body-group">${item['Group']}</td>
         <td class="table__body-feature">${top_features}</td>
-        <td class="table__body-feature">${item['details']}</td>
+        <td class="table__body-details">${item['details']}</td>
         </tr>`)
     }
     modal_person();
@@ -75,13 +75,8 @@ function set_history_tables(data){
 function open_table(){
     button_open = document.getElementById('history_tables')
     button_open = button_open.options[button_open.selectedIndex]
-  // Получаем выбранный элемент
+
     selected_table = button_open.textContent
-
-  // Получаем текстовое содержимое выбранного элемента
-  
-
-  // Выводим текстовое содержимое в консоль (или делаем с ним что-то еще)
-  console.log(selected_table);
+    
     get_request(`http://localhost:8081/api/get-predict-by-date?${selected_table}`, selected_table)
 }

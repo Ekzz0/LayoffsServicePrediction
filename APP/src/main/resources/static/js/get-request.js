@@ -9,10 +9,6 @@ function get_request(link, id=undefined){
         if(response.ok){
             return response.json()
         }
-        // if(!response.ok){  // test
-            
-        //     return {"status":200,"data":{"dates": ['10.1.2000','12.1.2000'], "probability": ['10', '12']}}
-        // }
         throw(`Failed in get link ${link} fetch`)
     })
     .then(data => {
@@ -26,9 +22,6 @@ function get_request(link, id=undefined){
         else if(link == `http://localhost:8081/api/get-predict-by-date?${id}`){
             set_table_main(data)
         }
-        // console.log(data)
-        // console.log(link)
-        // console.log(`http://localhost:8081/api/persons?=${id}`)
     })
     .catch(console.error)
 
