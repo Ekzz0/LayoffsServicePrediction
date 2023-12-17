@@ -74,7 +74,7 @@
             flex-direction: row;
         }
     }
-    &_deteails{
+    &__deteails{
         @include t-table-header();
     }
 }
