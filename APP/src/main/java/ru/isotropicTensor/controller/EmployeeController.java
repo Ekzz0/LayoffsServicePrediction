@@ -1,11 +1,13 @@
 package ru.isotropicTensor.controller;
 
+import jakarta.mail.MessagingException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.isotropicTensor.dto.ApiResponse;
 import ru.isotropicTensor.dto.EmployeePredictsDto;
 import ru.isotropicTensor.dto.PredictsDto;
+import ru.isotropicTensor.service.MailSenderService;
 import ru.isotropicTensor.utils.EmployeeReportSerializer;
 import ru.isotropicTensor.utils.EmployeePredictionSerializer;
 import ru.isotropicTensor.service.EmployeeService;
@@ -17,9 +19,11 @@ import java.util.List;
 @RequestMapping("/api")
 public class EmployeeController {
     private final EmployeeService employeeService;
+    private final MailSenderService mailSenderService;
 
-    public EmployeeController(EmployeeService employeeService) {
+    public EmployeeController(EmployeeService employeeService, MailSenderService mailSenderService) {
         this.employeeService = employeeService;
+        this.mailSenderService = mailSenderService;
     }
 
     @PostMapping("/send-data")
@@ -58,6 +62,17 @@ public class EmployeeController {
     public ResponseEntity<ApiResponse> getPredictByDate(@RequestParam(name = "selected_table") LocalDateTime dateTime) {
         ApiResponse apiResponse = employeeService.getPredictByDate(dateTime);
         return ResponseEntity.status(HttpStatus.resolve(apiResponse.getStatus())).body(apiResponse);
+    }
+
+    @GetMapping("/send-report")
+    private ResponseEntity<?> sendReportsToDirectors() {
+        try {
+            mailSenderService.sendReports();
+            return ResponseEntity.ok().build();
+        } catch (MessagingException e) {
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().build();
+        }
     }
 
 }
