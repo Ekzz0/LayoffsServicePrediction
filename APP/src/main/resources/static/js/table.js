@@ -72,14 +72,14 @@ function set_history_tables(data){
 }
 
 function open_table(){
-    button_open = document.getElementById('open_table')
+    button_open = document.getElementById('history_tables')
     button_open = button_open.options[button_open.selectedIndex]
   // Получаем выбранный элемент
     selected_table = button_open.textContent
 
   // Получаем текстовое содержимое выбранного элемента
-  
-
+    
+    get_request(`http://localhost:8081/api/get-predict-by-date?selected_table=${selected_table}`, selected_table)
   // Выводим текстовое содержимое в консоль (или делаем с ним что-то еще)
   console.log(selected_table);
 
