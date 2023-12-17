@@ -26,7 +26,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     private final EmployeeRepository employeeRepository;
     private final EmployeeReportRepository employeeReportRepository;
     private final EmployeePredictionRepository employeePredictionRepository;
-    private final String mlApiURL = "http://localhost:8889/api";
+    private final String mlApiURL = "http://fastapi_app:8889/api";
 
     public EmployeeServiceImpl(EmployeeRepository employeeRepository, EmployeeReportRepository employeeReportRepository, EmployeePredictionRepository employeePredictionRepository) {
         this.employeeRepository = employeeRepository;
