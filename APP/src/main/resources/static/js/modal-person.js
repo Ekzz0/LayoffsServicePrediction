@@ -25,6 +25,7 @@ function modal_person(){
         person_info.construct(data,'.table__body-prob', 'person-variable')
         person_info.construct(data,'.table__body-group', 'person-group')
         person_info.construct(data,'.table__body-feature', 'person-feature')
+        person_info.construct(data,'.table__body-details', 'person-details')
     }
 
     class constructor_modal{
@@ -37,14 +38,6 @@ function modal_person(){
                 console.log(`http://localhost:8081/api/persons/${id}`);
                 get_request(`http://localhost:8081/api/persons?id=${id}`, id);
             }
-            // if (model_cell == 'person-id'){  // test
-            //         let id = modal_content.textContent;
-            //         console.log(`http://localhost:8081/api/persons/${table_value.textContent}`);
-            //         get_request(`http://localhost:8081/api/persons/${id}`, id);
-            //         // data = {dates:['10.10.2000',], probability:["10",]}
-                    
-            // }
-
         }
     }
 
