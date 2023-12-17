@@ -1,0 +1,18 @@
+FROM maven:3.8.4-openjdk-17 AS build
+MAINTAINER Isotropic Tensor
+
+WORKDIR /app
+
+COPY pom.xml .
+COPY src ./src
+
+RUN mvn clean install
+
+# Этап запуска
+FROM openjdk:17-jdk-slim
+
+WORKDIR /app
+
+COPY --from=build /app/target/APP-1.0-SNAPSHOT.jar app.jar
+
+CMD ["java", "-jar", "app.jar"]

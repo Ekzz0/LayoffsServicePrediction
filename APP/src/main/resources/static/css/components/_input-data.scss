@@ -1,0 +1,42 @@
+.input-data{
+    width: 30rem;
+    display: flex;
+    flex-direction: column;
+    
+    @media ($phone) {
+        flex-direction: row;
+    }
+    justify-content: space-between;
+    &__block{
+        display: block;
+        @include button();
+        width: 14rem;
+        position: relative;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    &__value{
+        position: absolute;
+        top: 12%;
+        left: 8%;
+    }
+    &__submit{
+        @include button();
+        transition: all 0.3s ease;
+        cursor: pointer;
+        width: 7rem;
+        margin-left: 0.5rem;
+    }
+    &__search{
+        display: none;
+    }
+    &__block:hover{
+        background-color: $textDark;
+        color: $textAccent;
+    }
+    &__submit:hover{
+        background-color: $textDark;
+        color: $textAccent;
+    }
+    
+}

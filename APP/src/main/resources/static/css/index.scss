@@ -2,7 +2,30 @@
 @import './components';
 @import './layout';
 
-body{
-    width: 200px;
+
+
+.oninput-button{
+    @include oninput-button();
+}
+.section-list{
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+    // margin-left: 2rem;
+    max-width: 1600px;
+    width: 100%;
+    margin: 0 auto;
+}
+.hr-line{
+    width: 100%;
+    max-width: 30rem;
+    margin-left: 0;
+}
+.active{
+    background-color: $textDark;
+    color: $textAccent;
 }
 
+.hidden{
+    display: none;
+}

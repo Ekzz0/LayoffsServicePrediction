@@ -1,0 +1,39 @@
+.dashboard{
+    @include section();
+    z-index: 1;
+    &-content{
+        width: 100%;
+        flex-direction: column;
+        margin: 0 auto;
+        margin-top: 4rem;
+        @media ($tablet) {
+            flex-direction: row;
+        }
+    }
+    &-table{
+    
+        width: 100%;
+        @media ($tablet) {
+            width: 35%;
+            
+            
+        }
+    }
+    &-diagram{
+        width: 100%;
+        
+        margin: 0 auto;
+        
+        @media ($tablet) {
+            width: 30%;
+            
+            margin-left: 1rem;
+        }
+
+    }
+    &-text{
+        width: 29%;
+        @include t-table-header();
+    }
+
+}

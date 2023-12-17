@@ -1,0 +1,24 @@
+server:
+  port: 8081
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5433/employee_db
+    username: user
+    password: password
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: rassylsikp@gmail.com
+    password: crmc kfrb xzrw hnlm
+    test-connection: true
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true

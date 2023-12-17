@@ -1,0 +1,37 @@
+.history{
+    width: 20rem;
+    display: block;
+    @include t-table-body();
+    background-color: $textDark;
+    border-radius: 0.6rem;
+    border-color: inherit;
+    text-align: center;
+
+    &-list{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-top: 1rem;
+        width: 30rem;
+    }
+    &-option{
+        color: white;
+        background-color: $textDark;
+    }
+}
+
+.history option{
+    padding: 0.5em;
+}
+
+.history:hover{
+    color: $textDark;
+    background-color: $textAccent;
+    outline: none;
+}
+
+.history:hover option{
+    color: $textDark;
+    background-color: $textAccent;
+}
+

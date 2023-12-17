@@ -1,0 +1,73 @@
+@mixin t-title{
+    font-size: 1rem;
+    font-family: $titleFont;
+    color: $textDark;
+    &-accent{
+        color: $textAccent;
+        font-family: $titleAccent;
+    }
+}
+
+@mixin table-design{
+    background-color: $textAccent;
+    
+    &-id{
+        border-bottom: 1px solid $textAccent;
+        
+    }
+    &-prob{
+        border-bottom: 1px solid $textAccent;
+        
+    }
+    &-group{
+        border-bottom: 1px solid $textAccent;
+    }
+}
+@mixin t-table-header{
+    font-size: 1rem;
+    font-family: $titleFont;
+    color: $textDark;
+}
+@mixin t-table-body{
+    font-size: 1rem;
+    font-family: $titleFont;
+    color: $textAccent;
+}
+@mixin button{
+    width: 100%;
+    width: 5rem;
+    height: 1.5rem;
+    border-radius: 5px;
+    background-color: $textAccent;
+    color: $textDark;
+    border: none;
+    font-size: 0.8rem;
+    font-family: $titleFont;
+    margin-top: 1rem;
+    @media ($phone) {
+        margin-top:0;
+        font-size: 0.9rem;
+    }
+}
+@mixin oninput-button{
+    background-color: $textDark;
+    color: $textAccent;
+}
+@mixin section{
+    width: 100%;
+    max-width: 1600px;
+    margin: auto;
+    &-wrapper{
+        width: 90%;
+        max-width: 1500px;
+        margin: auto;
+    }
+    &-content{
+        margin-top: 2rem;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        
+    }
+}

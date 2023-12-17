@@ -5,46 +5,84 @@
     <link rel="stylesheet" type="text/css" href="/static/css/index.css" th:href="@{css/index.css}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
-    <script async src="/static/js/diagram.js" th:src="@{js/diagram.js}"></script>
-    <script async src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
-    <script async src="/static/js/csv.js" th:src="@{js/csv.js}"></script>
-    <script async src="/static/js/getData.js" th:src="@{js/getData.js}"></script>
+    <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <script async type="text/javascript" src="/static/js/chart.js" th:src="@{js/chart.js}"></script>
+    <script async type="text/javascript" src="/static/js/csv.js" th:src="@{js/csv.js}"></script>
+    <script async type="text/javascript" src="/static/js/get-request.js" th:src="@{js/get-request.js}"></script>
+    <script async type="text/javascript" src="/static/js/table.js" th:src="@{js/table.js}"></script>
+    <script async type="text/javascript" src="/static/js/search.js" th:src="@{js/search.js}"></script>
+    <script defer type="text/javascript" src="/static/js/modal-person.js" th:src="@{js/modal-person.js}"></script>
+    <script async type="module" src="/static/js/index.js" th:src="@{js/index.js}"></script>
+    
     <title>Title</title>
 </head>
 <body>
-    <h1>diagram</h1>
-    <div class="diagram">
-        <canvas id="myChart"></canvas>
-    </div>
-    <h1>table</h1>
-    <table id="table">
-        <thead>
-            <tr>
-                <th>id</th>
-                <th>probability</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>2</td>
-                <td>10</td>
-            </tr>
-            <tr>
-                <td>5</td>
-                <td>15</td>
-            </tr>
-            <tr>
-                <td>8</td>
-                <td>20</td>
-            </tr>
-            <tr>
-                <td>10</td>
-                <td>30</td>
-            </tr>
-        </tbody>
-    </table>
-    <input type="file" name="fileCsv" accept=".csv" id="csvFileInput">
-    <button id="processCsv">Обработать</button>
+    <section>
+        <div class="wrapper">
+            <h1>Логотип</h1>
+            <div class="logo">
+                <img class="logo__img" src="../static/images/atom.svg" th:src="@{images/atom.svg}" alt="atom">
+                <h2 class="logo__title">Isotropic<span class="logo__title-accent">Tensor</span></h2>
+            </div>
+            <h1>diagram</h1>
+            <div class="diagram">
+                <canvas id="myChart"></canvas>
+            </div>
+            <h1>Input-data</h1>
+            <div class="input-data">
+                <label class="input-data__block" id="label-input">
+                    <input class="input-data__search" type="file" name="fileCsv" accept=".csv" id="csvFileInput" >
+                    <span class="input-data__value" id="csv-value">Search file</span>
+                </label>
+                <button class="input-data__submit" id="processCsv">Submit</button>
+            </div>
+            
+            <h1>table</h1>
+            <table id="table" class="table">
+                <thead class="table__head">
+                    <tr class="table__head-container">
+                        <th class="table__head-id">Id</th>
+                        <th class="table__head-prob">Probability</th>
+                        <th class="table__head-group">Group</th>
+                    </tr>
+                </thead>
+                <tbody class="table__body" id="table-body">
+                    <tr>
+                        <td class="table__body-id">${info[0]}</td>
+                        <td class="table__body-prob">${(info[1])}</td>
+                        <td class="table__body-group">${info[3]}</td>
+                        <td class="table__body-feature">${info[2]}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <section>
+        <div class="modal-person" id="modal-id">
+            <div class="modal-person__content">
+                <div class="modal-person__close">
+                    <p class="modal-person__back">&#60; back</p>
+                    <p class="modal-person__title">Person info</p>
+                    <span class="modal-person__cross">&times;</span>
+                </div>
+                <div class="modal-person__info">
+                    <div class="modal-person__chart">
+                        <div class="diagram">
+                            <canvas id="modal-chart"></canvas>
+                        </div>
+                    </div>
+                    <div class="modal-person__text">
+                        <p class="modal-person__id" id="person-id">id</p>
+                        <p class="modal-person__variable" id="person-variable">variable</p>
+                        <p class="modal-person__group"  id="person-group" >group</p>
+                        <p class="modal-person__feature" id="person-feature">feauture</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
 
 </body>
 
