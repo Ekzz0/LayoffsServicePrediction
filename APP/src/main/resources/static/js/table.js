@@ -19,7 +19,7 @@ function set_table_main(data){
         <td class="table__body-prob">${(item['probability']*100).toFixed(1)}%</td>
         <td class="table__body-group">${item['Group']}</td>
         <td class="table__body-feature">${top_features}</td>
-        <td class="table__body-details">${item['details']}</td>
+        <td class="table__body-feature">${item['details']}</td>
         </tr>`)
     }
     modal_person();
@@ -61,11 +61,10 @@ function set_button_save(){
 }
 
 function set_history_tables(data){
-    historyElement = document.getElementById("history_tables");
-    historyElement.innerHTML = '';
-    console.log(data)
-    for (let item of data.data){
-        historyElement.insertAdjacentHTML('beforeend',
+    history = document.getElementById("history_tables");
+    history.innerHTML = '';
+    for (let item of data){
+        history.insertAdjacentHTML('beforeend',
             `<option>${item}</option>`
         )
     }
@@ -73,10 +72,15 @@ function set_history_tables(data){
 }
 
 function open_table(){
-    button_open = document.getElementById('history_tables')
+    button_open = document.getElementById('open_table')
     button_open = button_open.options[button_open.selectedIndex]
-
+  // Получаем выбранный элемент
     selected_table = button_open.textContent
-    
-    get_request(`http://localhost:8081/api/get-predict-by-date?${selected_table}`, selected_table)
+
+  // Получаем текстовое содержимое выбранного элемента
+  
+
+  // Выводим текстовое содержимое в консоль (или делаем с ним что-то еще)
+  console.log(selected_table);
+
 }
