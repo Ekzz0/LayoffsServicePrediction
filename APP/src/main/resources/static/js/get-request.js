@@ -21,6 +21,8 @@ function get_request(link, id=undefined){
         else if(link == `http://localhost:8081/api/get-predict-by-date?selected_table=${id}`){
             set_table_main(data.data)
         }else if(link == 'http://localhost:8081/api/send-report'){
+            document.getElementById('send_report')
+            .classList.toggle('hidden')
             alert('Данные отправлены на почту')
         }
     })
