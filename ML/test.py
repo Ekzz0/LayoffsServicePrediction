@@ -9,6 +9,15 @@ feature_construct = load_feature_constructor()
 
 
 df = pd.DataFrame([3, 2, 1, 4, 6, 5], columns=['val'])
-print(df.sort_values(by=['val'])[::-1])
-print(df.loc[[]])
+
+df.index = ['A', 'B', 'C', 'D', 'E', 'F']
+
+d = {'A': 'a', 'B': 'b', 'C': 'c', 'D': 'd', 'E': 'e', 'F': 'f'}
+ind = []
+for i in list(df.index):
+    ind.append(d[i])
+# print(ind)
+df.index = ind
+print(df.index)
+
 
