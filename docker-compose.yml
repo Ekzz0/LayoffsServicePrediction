@@ -11,6 +11,8 @@ services:
     ports:
       - "5433:5432"
   fastapi_app:
+    networks:
+      - boba    
     build:
       context: ./ML
       dockerfile: Dockerfile
