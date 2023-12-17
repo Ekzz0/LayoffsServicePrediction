@@ -19,7 +19,7 @@ function set_table_main(data){
         <td class="table__body-prob">${(item['probability']*100).toFixed(1)}%</td>
         <td class="table__body-group">${item['Group']}</td>
         <td class="table__body-feature">${top_features}</td>
-        <td class="table__body-feature">${item['details']}</td>
+        <td class="table__body-details">${item['details']}</td>
         </tr>`)
     }
     modal_person();
