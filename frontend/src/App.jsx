@@ -23,6 +23,16 @@ function App() {
     })
   }
   
+  function test(){
+    handleRequest('', 'GET')
+    .data(data => {
+      console.log(data)
+    })
+    .error(error => {
+      console.log(error)
+    })
+  }
+
   return (
     <div>
      <button onClick={test}>тест</button>
