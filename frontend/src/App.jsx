@@ -1,6 +1,5 @@
 
 
-
 function App() {
   async function handleRequest(link, request, json=undefined){
 
@@ -23,15 +22,16 @@ function App() {
     })
   }
   
-  function test(){
-    handleRequest('', 'GET')
-    .data(data => {
-      console.log(data)
-    })
-    .error(error => {
-      console.log(error)
-    })
+  function test() {
+    handleRequest('http://localhost:8081/api/get-history', 'GET')
+      .then(data => {
+        console.log(data);
+      })
+      .catch(error => {
+        console.error(error);
+      });
   }
+  
 
   return (
     <div>
