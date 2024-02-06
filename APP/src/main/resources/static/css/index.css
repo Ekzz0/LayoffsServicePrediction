@@ -14,9 +14,6 @@
   font-family: "lightItalic";
   src: url(../../fonts/Montserrat-LightItalic.ttf);
 }
-body{
-  overflow-x: hidden;
-}
 .modal-person {
   display: none;
   position: fixed;
