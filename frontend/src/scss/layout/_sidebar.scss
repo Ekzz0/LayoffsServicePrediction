@@ -1,0 +1,62 @@
+@import '../utils/index.scss';
+
+
+.sidebar{
+    position: sticky;
+    height: 100vh;
+    width: 108px;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    background-color: $goldBack;
+    padding: 7.7rem 1.7rem;
+    overflow: hidden;
+    transition: all 0.5s linear;
+    
+    @include t-sidebar();
+    
+}
+
+.sidebar:hover{
+    width: 223px;
+    
+}
+
+.nav{
+    height: 88%;
+    position: relative;
+    padding: 0;
+    overflow: hidden;
+    border-radius: 10px;
+    
+    
+    &-list{
+        
+        max-width: 159px;
+        overflow: hidden;
+        border-radius: 10px;
+        &__item{
+            
+            display: flex;
+            align-items: center;
+            
+            height: 55px;
+            padding: 0.5rem;
+            margin: 1rem 0;
+            border-radius: 10px;
+            transition: all 0.5s ease-in-out;
+            
+
+        }
+
+        &__item:hover,.active{
+            cursor: pointer;
+            background-color: $hoverColor;
+        }
+
+        &__text{
+            overflow: hidden;
+            margin-left: 0.5rem;
+        }
+    }
+}

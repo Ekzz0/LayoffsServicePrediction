@@ -1,0 +1,41 @@
+
+
+@mixin heading1($color: $goldText, $font: $mainFont, $size: 1.25rem, $weight: 400){
+    font-size: $size;
+    font-weight: $weight;
+    color: $color;
+    font-family: $font;
+}
+
+@mixin heading2(){
+
+}
+
+@mixin t-main($color: $blackText, $font: $mainFont, $size: 1.25rem, $weight: 400){
+    font-size: $size;
+    font-weight: $weight;
+    color: $color;
+    font-family: $font;
+}
+
+@mixin t-card(){
+    @include t-main($blackText, $mainFont, $size, $weight)
+}
+
+@mixin t-sidebar($color: $whiteText, $font: $interFont, $size: 1rem, $weight: 700){
+    font-size: $size;
+    font-weight: $weight;
+    color: $color;
+    font-family: $font;
+}
+
+@mixin flex($flex-der: row, $jus-cont: space-between){
+    display: flex;
+    flex-direction: $flex-der;
+    justify-content: $jus-cont;
+
+}
+
+@mixin goldBack(){
+    background-color: $goldBack;
+}
