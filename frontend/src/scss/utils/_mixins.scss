@@ -1,10 +1,11 @@
 
 
-@mixin heading1($color: $goldText, $font: $mainFont, $size: 1.25rem, $weight: 400){
+@mixin heading1($color: $goldText, $font: $secondaryFont, $size: 1.75rem, $weight: 500){
     font-size: $size;
     font-weight: $weight;
     color: $color;
     font-family: $font;
+    text-align: center;
 }
 
 @mixin heading2(){
@@ -18,7 +19,7 @@
     font-family: $font;
 }
 
-@mixin t-card(){
+@mixin t-card($size: 1.75rem, $weight: 400){
     @include t-main($blackText, $mainFont, $size, $weight)
 }
 
@@ -38,4 +39,14 @@
 
 @mixin goldBack(){
     background-color: $goldBack;
+}
+
+@mixin buttonFilter(){
+    height: 49px;
+    background-color: $goldBack;
+    border-radius: 1rem;
+    border: 1px $goldBack;
+    padding: 9px 14px;
+    @include t-sidebar();
+    
 }
