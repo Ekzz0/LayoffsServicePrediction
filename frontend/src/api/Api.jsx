@@ -1,5 +1,5 @@
 
-async function handleRequest(link, request, json=undefined){
+async function Api(link, request, json=undefined){
 
     return fetch(link, {
         method: request,
@@ -20,4 +20,4 @@ async function handleRequest(link, request, json=undefined){
     })
 }
 
-export { handleRequest }
+export { Api }
