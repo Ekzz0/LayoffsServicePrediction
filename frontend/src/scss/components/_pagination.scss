@@ -1,0 +1,25 @@
+
+.pagination{
+    margin-top: auto;
+    
+    @include t-main();
+    font-family: "askara";
+    font-size: 20px;
+    font-weight: 400;
+    color: $greyText;
+
+    &-vector{
+        fill: $goldBack;
+    }
+    &-rigth{
+        transform: rotate(90deg);
+        margin-left: 0.7rem;
+        margin-bottom: 0.15rem;
+    }
+    &-left{
+        margin-bottom: 0.15rem;
+        margin-right: 0.7rem;
+        transform: rotate(270deg);
+        
+    }
+}
