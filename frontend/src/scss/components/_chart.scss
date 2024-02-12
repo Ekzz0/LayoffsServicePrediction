@@ -1,0 +1,12 @@
+
+.chart{
+    width: 95%;
+    height: 301px;
+    &-title{
+        @include heading1();
+        
+    }
+    &-container{
+        height: 301px;
+    }
+}
