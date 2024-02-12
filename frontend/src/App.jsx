@@ -1,15 +1,24 @@
 import { Main } from "./layout/Main";
 import { Sidebar } from "./layout/Sidebar";
 import "./scss/index.scss"
+import React, { Component } from "react";
 
-function App() {
+class App extends Component {
+  
+  state = {
+    
+  }
+
+  render(){
+
   
   return (
-    <div className="container">
-      <Sidebar/>
-      <Main/>
-    </div>
-  );
+      <div className="container">
+        <Sidebar/>
+        <Main/>
+      </div>
+    );
+  }
 }
 
-export default App;
+export { App }
