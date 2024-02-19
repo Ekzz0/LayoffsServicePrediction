@@ -65,6 +65,13 @@ public class EmployeeController {
         return ResponseEntity.status(HttpStatus.resolve(apiResponse.getStatus())).body(apiResponse);
     }
 
+    @GetMapping("/predict-with-page")
+    public ResponseEntity<ApiResponse> getPredictByDateWithPage(@RequestParam(name = "selected_table") LocalDateTime dateTime,
+                                                                @RequestParam(name = "page") int pageNumber) {
+        ApiResponse apiResponse = employeeService.getPredictByDateWithPage(dateTime, pageNumber);
+        return ResponseEntity.status(HttpStatus.resolve(apiResponse.getStatus())).body(apiResponse);
+    }
+
     @GetMapping("/send-report")
     private ResponseEntity<?> sendReportsToDirectors() {
         try {
