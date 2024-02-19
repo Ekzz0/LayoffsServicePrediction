@@ -1,5 +1,6 @@
 package ru.isotropicTensor.service.impl;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -23,6 +24,8 @@ import java.util.stream.Collectors;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
+    @Value("${application.report-limit}")
+    private int repotLimit;
     private final EmployeeRepository employeeRepository;
     private final EmployeeReportRepository employeeReportRepository;
     private final EmployeePredictionRepository employeePredictionRepository;
@@ -149,6 +152,54 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
     }
 
+    @Override
+    public ApiResponse getPredictByDateWithPage(LocalDateTime dateTime, int page) {
+        ApiResponse apiResponse = new ApiResponse();
+        // Получили предикты
+        List<EmployeePrediction> predictions = employeePredictionRepository.findByDate(dateTime);
+        // Получили репорты
+        List<EmployeeReport> reports = employeeReportRepository.findByDate(dateTime);
+
+        if (!predictions.isEmpty() && !reports.isEmpty()) {
+            Map<Integer, String> reportMap  = reports.stream()
+                    .collect(Collectors.toMap(report -> report.getEmployee().getId(), EmployeeReport::toString));
+            Map<Integer,EmployeePrediction> predictionsMap = predictions.stream()
+                    .collect(Collectors.toMap(prediction -> prediction.getEmployee().getId(), prediction -> prediction));
+
+            List<EmployeePredictionSerializer> serializers = new ArrayList<>();
+            for (int key :reportMap.keySet()) {
+                EmployeePredictionSerializer serializer = new EmployeePredictionSerializer();
+                serializer.setId(key);
+                serializer.setProbability(predictionsMap.get(key).getProbability());
+                serializer.setDepartment(predictionsMap.get(key).getEmployee().getDepartment());
+                serializer.setTopFeatures(predictionsMap.get(key).getTopFeatures());
+                serializer.setDetails(reportMap.get(key));
+
+                serializers.add(serializer);
+            }
+            Collections.sort(serializers, Comparator.comparing(EmployeePredictionSerializer::getProbability).reversed());
+            serializers = serializers.stream()
+                    .skip(page*repotLimit)
+                    .limit(repotLimit)
+                    .collect(Collectors.toList());
+
+            if (serializers.isEmpty()) {
+                apiResponse.setStatus(HttpStatus.NOT_FOUND.value());
+                apiResponse.setData(null);
+                return apiResponse;
+            }
+
+            apiResponse.setData(serializers);
+            apiResponse.setStatus(HttpStatus.OK.value());
+            return apiResponse;
+
+        } else {
+            apiResponse.setStatus(HttpStatus.NOT_FOUND.value());
+            apiResponse.setData(null);
+            return apiResponse;
+        }
+    }
+
     private List<EmployeePrediction> getTransientPredictionsFromSerializer(List<EmployeePredictionSerializer> data,
                                                                              Map<Integer, Employee> employees,
                                                                            LocalDateTime timeStamp) {
@@ -171,8 +222,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             employeeReports.add(buildTransientEmployeeReport(
                                     employeeReportSerializer,
                                     employeeMap.get(employeeId),
-                                    timeStamp
-                            ));
+                                    timeStamp));
         }
         return employeeReports;
     }
