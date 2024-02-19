@@ -12,6 +12,6 @@ public interface EmployeeService {
     ApiResponse getEmployeePredict(List<EmployeeReportSerializer> dataList);
     ApiResponse getPredictByDate(LocalDateTime dateTime);
     ApiResponse getPredictByDateWithPage(LocalDateTime dateTime, int page);
-    EmployeePredictsDto getEmployeePredictsById(int id);
+    EmployeePredictsDto getEmployeePredictsByIdAndDate(int id, LocalDateTime date);
     PredictsDto getRecentPredicts();
 }
