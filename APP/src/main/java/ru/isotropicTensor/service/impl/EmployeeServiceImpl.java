@@ -42,7 +42,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         List<EmployeePrediction> predictions = employeeRepository.getById(id).getPredictions();
         String department = employeeRepository.getById(id).getDepartment();
-        float currentProbability = employeePredictionRepository.findByDateAndId(date, id).getProbability();
+        EmployeePrediction currentPrediction = employeePredictionRepository.findByDateAndId(date, id);
+        float currentProbability = currentPrediction.getProbability();
+        List<String> topFeatures = currentPrediction.getTopFeatures().stream().limit(3).toList();
         EmployeeReport report = employeeReportRepository.findByIdAndDate(id, date);
         if (predictions.isEmpty() && report != null) {
             return null;
@@ -54,7 +56,6 @@ public class EmployeeServiceImpl implements EmployeeService {
                 probability.add(prediction.getProbability());
             }
 
-
             return  EmployeePredictsDto.builder()
                     .employeeId(id)
                     .currentProbability(currentProbability)
@@ -62,6 +63,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                     .department(department)
                     .details(report.toString())
                     .probability(probability)
+                    .topFeatures(topFeatures)
                     .build();
         }
     }

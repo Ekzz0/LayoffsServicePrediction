@@ -17,4 +17,5 @@ public class EmployeePredictsDto {
     private float currentProbability;
     private String department;
     private String details;
+    private List<String> topFeatures;
 }
