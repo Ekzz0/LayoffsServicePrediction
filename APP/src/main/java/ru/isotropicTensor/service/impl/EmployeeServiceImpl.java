@@ -38,10 +38,13 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public EmployeePredictsDto getEmployeePredictsById(int id) {
+    public EmployeePredictsDto getEmployeePredictsByIdAndDate(int id, LocalDateTime date) {
 
         List<EmployeePrediction> predictions = employeeRepository.getById(id).getPredictions();
-        if (predictions.isEmpty()) {
+        String department = employeeRepository.getById(id).getDepartment();
+        float currentProbability = employeePredictionRepository.findByDateAndId(date, id).getProbability();
+        EmployeeReport report = employeeReportRepository.findByIdAndDate(id, date);
+        if (predictions.isEmpty() && report != null) {
             return null;
         } else {
             List<LocalDateTime> dates = new ArrayList<>();
@@ -51,7 +54,15 @@ public class EmployeeServiceImpl implements EmployeeService {
                 probability.add(prediction.getProbability());
             }
 
-            return new EmployeePredictsDto(dates, probability);
+
+            return  EmployeePredictsDto.builder()
+                    .employeeId(id)
+                    .currentProbability(currentProbability)
+                    .dates(dates)
+                    .department(department)
+                    .details(report.toString())
+                    .probability(probability)
+                    .build();
         }
     }
 
