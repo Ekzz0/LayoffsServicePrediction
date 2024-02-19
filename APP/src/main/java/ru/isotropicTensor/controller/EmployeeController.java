@@ -42,8 +42,9 @@ public class EmployeeController {
         }
     }
     @GetMapping("/persons")
-    public ResponseEntity<EmployeePredictsDto> getPredictsById(@RequestParam(name = "id") int id) {
-        EmployeePredictsDto employeePredictsDto = employeeService.getEmployeePredictsById(id);
+    public ResponseEntity<EmployeePredictsDto> getPredictsByIdAndDate(@RequestParam(name = "id") int id,
+                                                                      @RequestParam(name = "date") LocalDateTime date) {
+        EmployeePredictsDto employeePredictsDto = employeeService.getEmployeePredictsByIdAndDate(id, date);
         if (employeePredictsDto == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         } else {
