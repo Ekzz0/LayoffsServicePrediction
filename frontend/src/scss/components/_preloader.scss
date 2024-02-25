@@ -1,0 +1,15 @@
+
+.preloader{
+    margin-top: auto;
+    animation: twist 3s linear infinite;
+}
+
+@keyframes twist {
+    from{
+        transform: rotate(0deg);
+    }
+    to{
+        transform: rotate(360deg);
+    }
+
+}
