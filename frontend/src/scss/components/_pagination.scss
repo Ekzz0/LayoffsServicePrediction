@@ -7,10 +7,6 @@
     font-size: 20px;
     font-weight: 400;
     color: $greyText;
-
-    &-vector{
-        fill: $goldBack;
-    }
     &-rigth{
         transform: rotate(90deg);
         margin-left: 0.7rem;
@@ -22,4 +18,15 @@
         transform: rotate(270deg);
         
     }
+
+   
+}
+
+.rigth:hover{
+    fill: #000000;
+    cursor: pointer;
+}
+.left:hover{
+    fill: #000000;
+    cursor: pointer;
 }
