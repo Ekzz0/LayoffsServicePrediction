@@ -3,25 +3,71 @@ import { Filter } from "../components/Filter";
 import { Pagination } from "../components/Pagination"
 import { Instruction } from "../components/Instruction";
 import { Cards } from "../components/Cards";
+import { Preloader } from "../components/Preloader";
 import { Api } from "../api/Api";
 import React, { Component } from "react";
+import { Modal } from "../components/Modal";
 
 class Dashboard extends Component{
 
     state = {
-        cards: [],
-
+        currentDate: '',
+        currentPage: 1,
+        lastPage: 2,
+        cards: undefined,
+        modal: false,
+        personData: {},
     }
 
     componentDidMount(){
-        this.getCards()
+        if (this.props.currentDate){
+           this.setCurrenDate(this.props.currentDate)
+        } else {
+            this.getCurrentDate()
+        }
+    }
+
+    setCurrenDate = (newDate) => {
+        this.setState({currentDate: newDate}, () =>  this.getCards())
+    }
+
+    getLastDate = (data) => {
+        return String(data.data.slice(-1))
+    }
+
+    getCurrentDate(){
+        Api('http://localhost:8081/api/get-history','GET')
+        .then(data => {
+            this.setCurrenDate(this.getLastDate(data))
+        })
+        .catch(error => {
+            console.log(error)
+        })
+    }
+
+    getPersonData(id){
+        Api(`http://localhost:8081/api/persons?id=${id}&date=${this.state.currentDate}`,'GET')
+        .then(data => {
+            this.setState({personData: data})
+        })
+        .catch(error=>{
+            console.log(error)
+        }
+        )
+    }
+
+    openModal = (id) => {
+        this.getPersonData(id)
+        this.setState({ modal:true })
+    }
+    
+    closeModal = () => {
+        this.setState({ modal:false })
     }
 
     getCards(){
-        this.setState({cards: [{id: 1, probability:10, departament:'Маркетинг'}]})
-        Api(`http://45.9.25.230:8081/api/get-predict-by-date?selected_table=1`)
-        .then(data => { 
-            
+        Api(`http://localhost:8081/api/predict-with-page?selected_table=${this.state.currentDate}&page=${this.state.currentPage-1}`)
+        .then(data => {
             this.setState({cards: data.data})
         })
         .catch(error=>{
@@ -30,19 +76,33 @@ class Dashboard extends Component{
         )
     }
 
+    incrementPage = () => {
+        this.setState({currentPage: this.state.currentPage+1},() => {this.getCards()})
+        
+    }
+
+    decrementPage = () => {
+        this.setState({currentPage: this.state.currentPage-1}, () => {this.getCards()})
+        
+    }
+    
     render(){
-    const cards = this.state.cards
+    const {cards, currentPage, lastPage, modal, personData} = this.state
+
     return <div className="content">
         <div className="window">
             <Filter/>
-            {cards ? <Cards cards={cards}/>: <Instruction/>} 
-            <Pagination/>
+            {cards ? <Cards cards={cards} openModal={this.openModal}/>: <Preloader/>}
+            <Pagination currentPage={currentPage} lastPage={lastPage} incrementPage={this.incrementPage} decrementPage={this.decrementPage}/>
+            
         </div>
         <div className="window ">
-            <LineChart/>
+            <LineChart days={[]} probabilities={[]} title={'Общий график сотрудников'}/>
             <Instruction/>
         </div>
+        { modal ? <Modal personData={personData} closeModal={this.closeModal}/>: null}
     </div>
+    
 }
 }
 
