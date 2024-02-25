@@ -27,13 +27,14 @@ ChartJS.register(
 );
 
 
-function LineChart() {
+function LineChart({days, probabilities, title}) {
+  
   const data = {
-    labels: ['10.1.2000', '11.1.2000','12.1.2000','13.1.2000'],
+    labels: days,
     datasets: [
       {
         label: 'Вероятность увольнения в %',
-        data: [65, 59, 80, 81],
+        data: probabilities,
         fill: false,
         borderColor: '#F4C430',
         tension: 0.1
@@ -54,7 +55,7 @@ function LineChart() {
   
   return (
     <div className='chart'>
-      <h2 className='chart-title'>Общая вероятность увольнения</h2>
+      <h2 className='chart-title'>{title}</h2>
       <div className='chart-container'>
         <Line data={data} options={options} />
       </div>
