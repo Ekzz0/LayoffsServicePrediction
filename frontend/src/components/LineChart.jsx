@@ -1,7 +1,3 @@
-// import { Chart } from 'chart.js';
-// import { Line } from 'react-chartjs-2';
-// import { LinearScale, CategoryScale, PointElement, LineElement } from 'chart.js';
-
 
 import {
   Chart as ChartJS,
