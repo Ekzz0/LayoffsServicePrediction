@@ -1,13 +1,6 @@
 
 function Instruction(){
-    // return <div className="instruction">
-    //     <h2 className="instruction-title">Инстркция по ипользованию</h2>
-    //     <ol className="instruction-list">
-    //         {list.map((item) => 
-    //             <li>{item}</li>
-    //         )}
-    //     </ol>
-    // </div>
+    
     return <div className="instruction">
     <h2 className="instruction-title">Инстркция по ипользованию</h2>
     <ol className="instruction-list">
